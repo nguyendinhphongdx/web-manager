@@ -16,7 +16,7 @@ function Route(app){
     app.use('/objects',RouteObject);
     app.use('/',(req, res, next) =>{
         res.json({
-            message:'/ not declare'
+            message:'Welcome !'
         })
     });
 
