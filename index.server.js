@@ -6,9 +6,12 @@ const morgan = require('morgan');
 const cors = require('cors');
 const Route = require('./Route/Root');
 const { connect } = require('./config/database/connect');
+const fileUpload = require('express-fileupload');
 
 app.use(morgan('combined'));
 
+// default options
+app.use(fileUpload());
 // Allow access from another ports
 app.use(cors());
 // Enviroment variable

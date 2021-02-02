@@ -42,8 +42,6 @@ exports.requireLogin= (req, res, next) => {
         if(err){
             res.status(500).json({message:'token is invalid'})
         }
-        if(user){
-            next();
-        }
+        next();
     })
 }

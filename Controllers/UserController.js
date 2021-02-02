@@ -32,6 +32,6 @@ exports.Users = (req, res) =>{
     User.find({})
     .exec((err, users) =>{
         if(err) return res.status(400).json({err});
-        if(users) return res.status(201).json({users});
+        res.status(201).json({users});
     })
 }
