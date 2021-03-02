@@ -1,0 +1,27 @@
+.logo {
+    height: 50px;
+    .pic {
+        background-color: rgb(33, 92, 180);
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        flex-wrap: wrap;
+    }
+    .imglogo {
+        height: 80%;
+    }
+    .title-logo {
+        color: rgb(218, 205, 205);
+        font-size: 18px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        flex-wrap: wrap;
+        li {
+            width: 100%;
+            text-align: center;
+        }
+    }
+}

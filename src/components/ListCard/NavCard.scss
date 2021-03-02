@@ -1,0 +1,12 @@
+.row-carousel {
+    padding: 5px 5px 0px 5px;
+    .card-title {
+        text-align: left;
+        .ant-card-body {
+            padding: 10px;
+        }
+        .ant-card-head {
+            height: 40px;
+        }
+    }
+}

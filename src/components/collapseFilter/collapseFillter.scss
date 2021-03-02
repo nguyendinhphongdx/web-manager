@@ -1,0 +1,16 @@
+.collapseFilter {
+    background-color: white;
+    margin: 5px 0px !important;
+    padding: 20px 10px !important;
+    .columns-element {
+        padding: 0px 20px !important;
+    }
+    .row-btn {
+        display: flex;
+        justify-content: flex-end;
+        .btnFilter {
+            width: 120px;
+            margin: 0px 5px 0px !important;
+        }
+    }
+}

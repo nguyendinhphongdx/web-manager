@@ -1,0 +1,105 @@
+.ground-container {}
+
+@media (max-width: 768px) {
+    #col-login {
+        display: none !important;
+    }
+    .group-login button[type=button] {
+        width: 100%;
+    }
+    #container-login {
+        width: 500px !important;
+    }
+    #col-info {
+        width: 100% !important;
+    }
+}
+
+.root-login {
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    align-content: center;
+    flex-wrap: wrap;
+    background: aqua;
+}
+
+#container-login {
+    background-color: #1e304d;
+    color: aliceblue;
+    padding: 10px 10px;
+    flex-wrap: nowrap;
+    border-radius: 7px;
+    width: 600px;
+}
+
+.form-login {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding-top: 20px;
+}
+
+#col-login {
+    border-right: 5px solid #eceff3;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 0;
+    width: 35%;
+}
+
+#col-info {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 10px 0 0 0;
+    width: 65%;
+}
+
+.title-login {
+    font-size: 25px;
+    font-weight: 600;
+    width: 100%;
+}
+
+#row-login {
+    height: 100%;
+    text-align: center;
+}
+
+.picture-login {
+    width: 80%;
+    align-self: center;
+}
+
+.picture-login img {
+    width: 100%;
+}
+
+.group-login {
+    text-align: left;
+    width: 100%;
+    /* height: 60px; */
+}
+
+.group-login-fuc {
+    text-align: left;
+    width: 100%;
+}
+
+.group-login:last-child {
+    text-align: right;
+}
+
+.register {
+    text-align: left;
+    color: white;
+}
+
+.login-form #normal_login_password,
+#normal_login_username {
+    height: 26px;
+    padding-left: 10px;
+}
