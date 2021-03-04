@@ -3,6 +3,7 @@ import TextArea from "antd/lib/input/TextArea";
 import defaultlogo from "../../images/default.png";
 import {UploadOutlined, StarOutlined} from '@ant-design/icons';
 import './baseSetting.scss'
+import UploadAvatar from "./UploadAvatar";
 
 export default function BaseSetting(){
     return(

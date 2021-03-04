@@ -17,13 +17,13 @@ export default function TableClass(){
     };
     return(
         <div className="tabelPanel">
-            <Row className="add-student">
-                <Button type="primary" onClick={showModal}>Add Student</Button>
+            <Row className="add-class">
+                <Button type="primary" onClick={showModal}>Add Class</Button>
             </Row>
-            <Modal title="Add Student" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+            <Modal title="Add Class" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
                
             </Modal>
-            <Table dataSource={dataSource} columns={columns}></Table>
+            <Table dataSource={dataSource} columns={columns}  bordered></Table>
         </div>
         
     );

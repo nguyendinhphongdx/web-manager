@@ -24,7 +24,7 @@ export default function TabelStudent(){
             <Modal title="Add Student" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
                
             </Modal>
-            <Table dataSource={dataSource} columns={columns}></Table>
+            <Table dataSource={dataSource} columns={columns} bordered></Table>
         </div>
         
     );

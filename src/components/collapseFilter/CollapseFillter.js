@@ -1,4 +1,6 @@
 import { Button, Card, Col, DatePicker, Form, Input, Row, Select } from 'antd';
+import { useState } from 'react';
+import { DownOutlined, UpOutlined } from '@ant-design/icons';
 import './collapseFillter.scss';
 export default function CollapseFilter(props){
     let Collapse;
@@ -6,8 +8,9 @@ export default function CollapseFilter(props){
         case 'students': Collapse = <CollapseStudent/>; break;
         case 'schemal' : Collapse = <CollapseSchemal/>; break;
         case 'subject' : Collapse = <CollapseSubject/>; break;
-        case 'frofessor' : Collapse = <CollapseProfessor/>; break;
+        case 'professor' : Collapse = <CollapseProfessor/>; break;
         case 'class' : Collapse = <CollapseClass/>; break;
+        case 'file' : Collapse = <CollapseClass/>; break;
         default: Collapse = 'students'; break;
     }
    return(
@@ -38,13 +41,6 @@ function CollapseStudent(props){
                 </Col>   
             </Row>
             </Form>
-        // <QueryFilter defaultCollapsed>
-        //     <ProFormText name="name" label="应用名称"/>
-        //     <ProFormDatePicker name="createDate" label="创建时间"/>
-        //     <ProFormText name="status" label="应用状态"/>
-        //     <ProFormDatePicker name="replyDate" label="响应日期"/>
-        //     <ProFormDatePicker name="enddate" label="创建时间"/>
-        // </QueryFilter>
     );
 }
 function CollapseSchemal(props){
@@ -114,36 +110,80 @@ function CollapseSubject(props){
     );
 }
 function CollapseProfessor(props){
-    return(
-        <Form>
-            <Row>
-                <Col span={6} className="columns-element">
-                <Form.Item label="DatePicker">
-                    <DatePicker />
-                </Form.Item>
-                </Col>
-                <Col span={6} className="columns-element">
-                <Form.Item label="DatePicker">
-                    <DatePicker />
-                </Form.Item>
-                </Col>  
-                <Col span={5} className="columns-element">
-                <Form.Item label="Subject">
-                    <Select>
-                        <Select.Option>Môn Học 1</Select.Option>
-                        <Select.Option>Môn Học 2</Select.Option>
-                        <Select.Option>Môn Học 3</Select.Option>
-                    </Select>
-                </Form.Item>
-                </Col>
-                <Col span={7} className="columns-element">
-                    <Row className="row-btn">
-                        <Button type="" className="btnFilter">Reset</Button>
-                        <Button type="primary" className="btnFilter">Query</Button>
-                    </Row>
-                </Col>   
-            </Row>
-            </Form>
+    const [expand, setExpand] = useState(false);
+    const [form] = Form.useForm();
+  
+    const getFields = () => {
+      const count = expand ? 10 : 6;
+      const children = [];
+  
+      for (let i = 0; i < count; i++) {
+        children.push(
+          <Col span={8} key={i}>
+            <Form.Item
+              name={`field-${i}`}
+              label={`Field ${i}`}
+              rules={[
+                {
+                  required: true,
+                  message: 'Input something!',
+                },
+              ]}
+            >
+              <Input placeholder="placeholder" />
+            </Form.Item>
+          </Col>,
+        );
+      }
+  
+      return children;
+    };
+  
+    const onFinish = (values) => {
+      console.log('Received values of form: ', values);
+    };
+  
+    return (
+      <Form
+        form={form}
+        name="advanced_search"
+        className="ant-advanced-search-form"
+        onFinish={onFinish}
+      >
+        <Row gutter={24}>{getFields()}</Row>
+        <Row>
+          <Col
+            span={24}
+            style={{
+              textAlign: 'right',
+            }}
+          >
+            <Button type="primary" htmlType="submit">
+              Search
+            </Button>
+            <Button
+              style={{
+                margin: '0 8px',
+              }}
+              onClick={() => {
+                form.resetFields();
+              }}
+            >
+              Clear
+            </Button>
+            <a
+              style={{
+                fontSize: 12,
+              }}
+              onClick={() => {
+                setExpand(!expand);
+              }}
+            >
+              {expand ? <UpOutlined /> : <DownOutlined />} Collapse
+            </a>
+          </Col>
+        </Row>
+      </Form>
     );
 }
 function CollapseClass(props){
@@ -181,4 +221,40 @@ function CollapseClass(props){
         </div>
         
     );
+}
+function CollapseFile(props){
+  return(
+      <div className="collapseFile">
+          <Form>
+          <Row>
+              <Col span={6} className="columns-element">
+              <Form.Item label="DatePicker">
+                  <DatePicker />
+              </Form.Item>
+              </Col>
+              <Col span={6} className="columns-element">
+              <Form.Item label="DatePicker">
+                  <DatePicker />
+              </Form.Item>
+              </Col>  
+              <Col span={5} className="columns-element">
+              <Form.Item label="Subject">
+                  <Select>
+                      <Select.Option>Môn Học 1</Select.Option>
+                      <Select.Option>Môn Học 2</Select.Option>
+                      <Select.Option>Môn Học 3</Select.Option>
+                  </Select>
+              </Form.Item>
+              </Col>
+              <Col span={7} className="columns-element">
+                  <Row className="row-btn">
+                      <Button type="" className="btnFilter">Reset</Button>
+                      <Button type="primary" className="btnFilter">Query</Button>
+                  </Row>
+              </Col>   
+          </Row>
+          </Form>
+      </div>
+      
+  );
 }

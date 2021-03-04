@@ -6,7 +6,7 @@ import {
 } from '@ant-design/icons';
 import { Layout, Menu, BackTop  } from 'antd';
 import { useState } from 'react';
-import { Link, Route } from "react-router-dom";
+import { Link,NavLink, Route } from "react-router-dom";
 import { styleBackTop } from '../../Common/variable/var';
 import logo from '../../images/logo192.png';
 import page from '../../Router';
@@ -55,24 +55,24 @@ export default function LayoutComponent(){
             </div>
           <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
             <Menu.Item key="1" icon={<PieChartOutlined />}>
-              <Link to={'/home'}> HomePage</Link>
+              <NavLink to={'/home'}> HomePage</NavLink>
             </Menu.Item>
             <Menu.Item key="2" icon={<DesktopOutlined />}>
-            <Link to={'/schemal'}> SchemalPage</Link>
+            <NavLink to={'/schemal'}> SchemalPage</NavLink>
             </Menu.Item>
             <Menu.Item key="sub2" icon={<TeamOutlined />}>
-            <Link to={'/professor'}> Professor</Link>
+            <NavLink to={'/professor'}> Professor</NavLink>
             </Menu.Item>
             <Menu.Item key="3"  icon={<UserOutlined />}><Link to={'/students'}>Students</Link></Menu.Item>
             <SubMenu key="sub3" icon={<CalendarOutlined  />} title=" Subject">
-              <Menu.Item key="4"><Link to={'/subject?type=base'}> Base Subject</Link></Menu.Item>
-              <Menu.Item key="5"><Link to={'/subject?type=advanced'}> Advanced Subject</Link></Menu.Item>
+              <Menu.Item key="4"><NavLink to={'/subject?type=base'}> Base Subject</NavLink></Menu.Item>
+              <Menu.Item key="5"><NavLink to={'/subject?type=advanced'}> Advanced Subject</NavLink></Menu.Item>
             </SubMenu>
             <Menu.Item key="6" icon={<FileOutlined />}>
-              <Link to={'/class'}> Class</Link>
+              <NavLink to={'/class'}> Class</NavLink>
             </Menu.Item>
             <Menu.Item key="9" icon={<FileOutlined />}>
-              Files
+              <NavLink to={'/file'}> Files</NavLink>
             </Menu.Item>
           </Menu>
         </Sider>

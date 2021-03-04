@@ -1,5 +1,5 @@
 import { Card, Carousel, Col, Row } from "antd";
-import ContentCard from "./ContentCard";
+import ContentNavCard from "./ContentCard";
 import './NavCard.scss';
 export default function NavCard(){
     const contentStyle = {
@@ -16,22 +16,22 @@ export default function NavCard(){
                 <Row gutter={16} className="row-carousel">
                     <Col span={6}>
                         <Card title="Card title" bordered={true} className="card-title">
-                            <ContentCard/>
+                            <ContentNavCard/>
                         </Card>
                     </Col>
                     <Col span={6}>
                         <Card title="Card title" bordered={true} className="card-title">
-                            <ContentCard/>
+                            <ContentNavCard/>
                         </Card>
                     </Col>
                     <Col span={6}>
                         <Card title="Card title" bordered={true} className="card-title">
-                        <ContentCard/>
+                        <ContentNavCard/>
                         </Card>
                     </Col>
                     <Col span={6}>
                         <Card title="Card title" bordered={true} className="card-title">
-                        <ContentCard/>
+                        <ContentNavCard/>
                         </Card>
                     </Col>
                     </Row>
@@ -42,22 +42,22 @@ export default function NavCard(){
                 <Row gutter={16} className="row-carousel">
                     <Col span={6}>
                         <Card title="Card title" bordered={true} className="card-title">
-                            <ContentCard/>
+                            <ContentNavCard/>
                         </Card>
                     </Col>
                     <Col span={6}>
                         <Card title="Card title" bordered={true} className="card-title">
-                            <ContentCard/>
+                            <ContentNavCard/>
                         </Card>
                     </Col>
                     <Col span={6}>
                         <Card title="Card title" bordered={true} className="card-title">
-                        <ContentCard/>
+                        <ContentNavCard/>
                         </Card>
                     </Col>
                     <Col span={6}>
                         <Card title="Card title" bordered={true} className="card-title">
-                        <ContentCard/>
+                        <ContentNavCard/>
                         </Card>
                     </Col>
                     </Row>
@@ -68,22 +68,22 @@ export default function NavCard(){
                 <Row gutter={16} className="row-carousel">
                     <Col span={6}>
                         <Card title="Card title" bordered={true} className="card-title">
-                            <ContentCard/>
+                            <ContentNavCard/>
                         </Card>
                     </Col>
                     <Col span={6}>
                         <Card title="Card title" bordered={true} className="card-title">
-                            <ContentCard/>
+                            <ContentNavCard/>
                         </Card>
                     </Col>
                     <Col span={6}>
                         <Card title="Card title" bordered={true} className="card-title">
-                        <ContentCard/>
+                        <ContentNavCard/>
                         </Card>
                     </Col>
                     <Col span={6}>
                         <Card title="Card title" bordered={true} className="card-title">
-                        <ContentCard/>
+                        <ContentNavCard/>
                         </Card>
                     </Col>
                     </Row>
@@ -94,22 +94,22 @@ export default function NavCard(){
                 <Row gutter={16} className="row-carousel">
                     <Col span={6}>
                         <Card title="Card title" bordered={true} className="card-title">
-                            <ContentCard/>
+                            <ContentNavCard/>
                         </Card>
                     </Col>
                     <Col span={6}>
                         <Card title="Card title" bordered={true} className="card-title">
-                            <ContentCard/>
+                            <ContentNavCard/>
                         </Card>
                     </Col>
                     <Col span={6}>
                         <Card title="Card title" bordered={true} className="card-title">
-                        <ContentCard/>
+                        <ContentNavCard/>
                         </Card>
                     </Col>
                     <Col span={6}>
                         <Card title="Card title" bordered={true} className="card-title">
-                        <ContentCard/>
+                        <ContentNavCard/>
                         </Card>
                     </Col>
                     </Row>

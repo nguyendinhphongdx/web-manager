@@ -1,4 +1,5 @@
 import ClassPage from "./pages/Class/ClassPage";
+import UploadPage from "./pages/FIle/uploadPage";
 import HomePage from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
 import NotFount from "./pages/NotFount/NotFount";
@@ -48,6 +49,11 @@ const Routes = [
         path: '/profile',
         exact: true,
         main: ProfilePage,
+    },
+    {
+        path: '/file',
+        exact: true,
+        main: UploadPage,
     },
     // {
     //     path: '*',

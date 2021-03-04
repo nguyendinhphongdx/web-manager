@@ -1,7 +1,4 @@
-import { Popconfirm } from "antd";
-import { rowAction } from "../Common/variable/var";
-import {EditOutlined} from '@ant-design/icons';
-
+import ActionClass from "../components/Action/ActionClass";
 export const dataSource = [];
 for (let index = 0; index < 50; index++) {
     dataSource.push({
@@ -14,37 +11,50 @@ for (let index = 0; index < 50; index++) {
 }
 export const columns =[
     {
+        title: 'Index',
+        key: 'key',
+        dataIndex:'key',
+        width:'10%'
+    },
+    {
         title: 'Class Name',
         key: 'name',
-        dataIndex:'name'
+        dataIndex:'name',
+        sorter: {
+            compare: (a, b) => a.name.length - b.name.length
+          },
+        width:'20%'
     },
     {
         title: 'Subject',
         key: 'subject',
-        dataIndex:'subject'
+        dataIndex:'subject',
+        sorter: {
+            compare: (a, b) => a.subject.length - b.subject.length,
+            multiple: 3,
+          },
+        width:'20%'
     },
     {
         title: 'Total',
         key: 'total',
-        dataIndex:'total'
+        dataIndex:'total',
+        width:'15%',
+        sorter: {
+            compare: (a, b) => a.total - b.total,
+            multiple: 3,
+          },
     },
     {
         title: 'Frofessor',
         key: 'frofessor',
-        dataIndex:'frofessor'
+        dataIndex:'frofessor',
+        width:'15%'
     },
     {
         title: 'Action',
         key: 'operation',
-        render:(record)=>{
-            return(
-                <div style={rowAction}>
-                <EditOutlined style={{fontSize: '20px' }} />
-                    <Popconfirm title="Sure to delete?" onConfirm={() => console.log(record.name)}>
-                    <a>Delete</a>
-                 </Popconfirm>
-            </div>
-            );
-        }
+        width: '20%',
+        render:(record)=> <ActionClass record={record}/>
     }
 ];

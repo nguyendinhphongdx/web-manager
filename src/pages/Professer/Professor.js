@@ -1,12 +1,12 @@
 import CollapseFilter from "../../components/collapseFilter/CollapseFillter";
-import TabelStudent from "../Students/TableStudent";
+import TableFrofessor from './TableProfessor';
 
 
 export default function ProfessorPage(){
     return (
         <div className="studentPage">
-                <CollapseFilter type='students'></CollapseFilter>
-                <TabelStudent></TabelStudent>
+                <CollapseFilter type='professor'></CollapseFilter>
+                <TableFrofessor/>
         </div>
         
     );

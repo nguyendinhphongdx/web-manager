@@ -1,6 +1,6 @@
 import { Row } from "antd";
 
-export default function ContentCard(){
+export default function ContentNavCard(){
     return(
         <div className="contentCard">
             <Row>
