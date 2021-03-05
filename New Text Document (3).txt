@@ -1,0 +1,19 @@
+Một chương trình (program) sẽ trở thành tiến trình (process) chỉ khi nó được nạp lên bộ nhớ (memory) của máy tính (hay nói cách khác – được thực thi).
+Một tiến trình bao gồm :
+Trong bộ nhớ (memory) : 
+Text Section (Program code) : Chứa những đoạn mã chương trình đã được biên dịch bởi compiler.
+Data Section (khu vực dữ liệu) : Chứa các biến toàn cục (global variables) và các biến tĩnh (static variables) được khởi tạo trước khi hàm main được gọi.
+Heap : Dùng để lưu trữ các bộ nhớ được cấp phát động (như việc gọi new, delete, malloc, calloc, free,…).
+Stack : Dùng để lưu trữ các biến cục bộ (local variables). VD như lúc bạn khai báo trong C : int i = 0. Thì biến i sẽ được lưu trong bộ nhớ Stack của Process.
+Ngoài ra, trong process còn có : 
+Program Counter (PC).
+Process status word (PSW).
+Stack pointer (SP).
+Memory management registers.
+Tiến trình có các trạng thái sau :
+new : Tiến trình vừa được tạo.
+ready :Tiến trình đã có đủ tài nguyên, đang chờ được cấp CPU để chạy.
+running :Các lệnh của tiến trình đang được thực thi.
+waiting (hay blocked) : Tiến trình đợi I/O hoàn tất.
+terminated : Tiến trình đã kết thúc (đã thực thi xong).
+Vì sao nói con đường cách mạng vô sản do Lãnh tụ Nguyễn Ái Quốc lựa chọn và truyền bá về nước đầu thế kỷ XX phù hợp với xu thế phát triển của cách mạng Việt Nam
