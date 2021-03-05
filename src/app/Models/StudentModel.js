@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const ClassModel = require('./ClassModel');
 const bcrypt = require('bcrypt');
+const MarkStudent = require('./MarkStudent');
 const StudentSchema = new mongoose.Schema({
    name: {
        type: String,
@@ -21,7 +22,8 @@ const StudentSchema = new mongoose.Schema({
     phone:{type: String},
     image:{type: String},
     description:{type: String},
-    hash_password:{type: String,required:true}
+    hash_password:{type: String,required:true},
+    mark:{type: [MarkStudent.schema],default:[]}
 
 },{ timestamps:true });
 StudentSchema.virtual('password')
