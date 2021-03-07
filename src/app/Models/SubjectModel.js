@@ -20,7 +20,11 @@ const subjectSchema = new mongoose.Schema({
     type:{type: String,
     enum:['advanced','base'],
     default:'base'
-    }
+    },
+    unit:{type: String,
+        enum:['Dolar','VND'],
+        default:'VND'
+        }
 },{ timestamps:true });
 
 

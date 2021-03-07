@@ -8,7 +8,7 @@ Array.prototype.removeAt = function (index) {
 Array.prototype.removeWith = function (item) {
   const index = this.indexOf(item)
   this.removeAt(index)
-}
+}8
 
 Array.prototype.removeWithId = function (id) {
   console.log(`>>> id = ${id}`)
@@ -29,10 +29,13 @@ Array.prototype.replaceItemWithId = function (id, newValue) {
 
 Array.prototype.replaceItemWithValue = function (newValue) {
   const index = this.map(item => item._id).indexOf(newValue._id);
-
   if (index > -1) {
     this[index] = newValue
   }
+}
+Array.prototype.isExistWithId = function (id) {
+    const isExist = this.some(item => item._id===id );
+    return isExist
 }
 
 module.exports = Array;

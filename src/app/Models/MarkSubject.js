@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
-const MarkStudent = new mongoose.Schema({
+const SubjectModel = require('./SubjectModel');
+
+const MarkSubject = new mongoose.Schema({
     subject:{type: SubjectModel.schema,default:{}},
     test:{type: {
         mark: {type: Number},
@@ -14,6 +16,6 @@ const MarkStudent = new mongoose.Schema({
         date: {type: Date},
     }},
     total:{type: Number},
-},{ timestamps:true });
+});
 
-module.exports = mongoose.model('Mark',MarkStudent);
+module.exports = mongoose.model('Mark',MarkSubject);

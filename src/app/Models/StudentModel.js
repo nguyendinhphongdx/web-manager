@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const ClassModel = require('./ClassModel');
 const bcrypt = require('bcrypt');
-const MarkStudent = require('./MarkStudent');
+const MarkSubject = require('./MarkSubject');
 const StudentSchema = new mongoose.Schema({
    name: {
        type: String,
@@ -13,7 +13,7 @@ const StudentSchema = new mongoose.Schema({
        required: true,
     },
     email:{type: String},
-    class:{type: [ClassModel.schema],default:[]},
+    class:{type: [mongoose.Schema.Types.ObjectId],default:[]},
     status:{
         type: String,
         enum: ['actived','blocked'],
@@ -23,8 +23,7 @@ const StudentSchema = new mongoose.Schema({
     image:{type: String},
     description:{type: String},
     hash_password:{type: String,required:true},
-    mark:{type: [MarkStudent.schema],default:[]}
-
+    mark:{type: [MarkSubject.schema],default:[]}
 },{ timestamps:true });
 StudentSchema.virtual('password')
 .set(function(password){

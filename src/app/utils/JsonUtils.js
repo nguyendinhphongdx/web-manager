@@ -11,7 +11,24 @@ toJsonWithData = (message, data) => {
   let dataArr = []
 
   if (Array.isArray(data)) {
-    dataArr = data
+    dataArr = data.map((item,index) =>{
+      return {...item._doc,key:index}
+    })
+  } else {
+    dataArr.push(data)
+  }
+
+  return {
+    message: message,
+    totalResult: dataArr.length,
+    data: dataArr
+  };
+}
+toJsonWithArray = (message, data) => {
+  let dataArr = []
+
+  if (Array.isArray(data)) {
+    dataArr = data;
   } else {
     dataArr.push(data)
   }
@@ -31,4 +48,4 @@ jsonNoData = (message) => {
   }
 }
 
-module.exports = { toJsonWithData, jsonNoData };
+module.exports = { toJsonWithData, jsonNoData, toJsonWithArray };

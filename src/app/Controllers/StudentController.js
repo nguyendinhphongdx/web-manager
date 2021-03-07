@@ -3,42 +3,42 @@ const path = require('path');
 const fs = require('fs');
 const jsonInstance = require("../utils/JsonUtils");
 const responeInstance = require("../utils/ResponeUtils");
+const SubjectModel = require('../Models/SubjectModel');
+const StudentModel = require('../Models/StudentModel');
+const StudentService = require('../service/StudentService');
 const uploadStudent  =path.join('public/uploads/students/');
 exports.addStudent = (req, res, next) => {
-    let avatarStudent;
+    let avatarStudent = null;
     let uploadPath;
     let image;
-    if (req.files !== 0) {
+    if (req.files !== null) {
         avatarStudent = req.files.file; // name of file
         image = new Date().getTime()+path.extname(avatarStudent.name);
         uploadPath = uploadStudent + image;
     }
     Student.findOne({email: req.body.email})
-    .exec((err, student) => {
+    .exec(async (err, student) => {
         if(student){ 
             responeInstance.error400(res, jsonInstance.jsonNoData('Student already exists'));
             return 
         }
         // Use the mv() method to place the file somewhere on your server
         const {name,password,age,email,status,description} = req.body;
-        
         const __student = new Student({name,password,age,email,status,description,image});
         try {
-            avatarStudent.mv(uploadPath)
-            .then(() =>{
-                __student.save()
-                .then((student) =>{
-                    responeInstance.success200(res, jsonInstance.toJsonWithData('SUCCESS',student ));
-                    return 
-                })
-                .catch((error) =>{
-                    console.log('error addStudent',error.message);
-                    responeInstance.error400(res, jsonInstance.jsonNoData(error.message));
-                })
+            if(avatarStudent!==undefined){
+                await  avatarStudent.mv(uploadPath)
+            }
+            __student.save()
+            .then((student) =>{
+                responeInstance.success200(res, jsonInstance.toJsonWithData('SUCCESS',student ));
+                return 
             })
-            .catch(err =>{
-                throw new Error(err.message);
+            .catch((error) =>{
+                console.log('error addStudent',error.message);
+                responeInstance.error400(res, jsonInstance.jsonNoData(error.message));
             })
+          
         } catch (error) {
             throw new Error(error.message);
         }
@@ -140,5 +140,66 @@ exports.changeAvatar = (req, res, next) => {
     })
     .catch(err => {
         responeInstance.error400(res, jsonInstance.jsonNoData(err.message));
+    })
+}
+exports.gradeMark = (req, res, next) => {
+    const {_idSubject,_idStudent,type,mark} = req.body;
+    console.log(_idSubject,_idStudent,type,mark);
+    SubjectModel.findById(_idSubject)
+    .then(subject => {
+        if(!subject){
+            throw new Error('Subject not found')
+        }
+        StudentModel.findById(_idStudent)
+        .then(student =>{
+            if(student==null){
+                throw new Error('Student not found')
+            }
+            student.mark = StudentService.replaceArrayMark(student.mark,subject,type,mark); 
+            StudentModel.findByIdAndUpdate({_id:_idStudent},student,{new: true})
+            .then(newStudent =>{
+                responeInstance.success200(res, jsonInstance.toJsonWithData('updated',newStudent));
+            })      
+        })
+        .catch(error =>{
+            responeInstance.error400(res, jsonInstance.jsonNoData(error.message));
+        })
+    })
+    .catch(error=>{
+        responeInstance.error400(res, jsonInstance.jsonNoData(error.message));
+    })
+    // Student.findOne({_id:req.body._id})
+    // .then((student)=>{
+    //     if(student){
+    //         const _newStudent = {...student}
+    //         responeInstance.success200(
+    //             res,
+    //             jsonInstance.toJsonWithData(`SUCCESS`, student)
+    //           );
+    //     } else{
+    //         throw new Error('Student not found')
+    //     }
+    // })
+    // .catch(err => {
+    //     responeInstance.error400(res, jsonInstance.jsonNoData(err.message));
+    // })
+}
+exports.detailStudent = (req, res) => {
+    Student.findById(req.body._id)
+    .then(student => {
+        responeInstance.success200(res, jsonInstance.toJsonWithData('SUCCESS',student));
+    })
+    .catch(error=>{
+        responeInstance.error400(res, jsonInstance.jsonNoData(error.message));
+    })
+}
+exports.markStudent = (req, res) => {
+    Student.findById(req.body._id)
+    .then(student => {
+        const data = StudentService.avgMarkStudent(student)
+        responeInstance.success200(res, jsonInstance.toJsonWithData('SUCCESS',data));
+    })
+    .catch(error=>{
+        responeInstance.error400(res, jsonInstance.jsonNoData(error.message));
     })
 }

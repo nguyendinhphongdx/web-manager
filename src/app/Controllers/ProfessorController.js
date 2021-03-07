@@ -14,7 +14,7 @@ exports.addProfessor = (req, res, next) => {
         uploadPath = uploadProfessor + image;
     }
     ProfessorModel.findOne({email: req.body.email})
-    .exec((err, professor) => {
+    .exec(async (err, professor) => {
         if(professor){ 
             responeInstance.error400(res, jsonInstance.jsonNoData('professor already exists'));
             return 
@@ -24,20 +24,17 @@ exports.addProfessor = (req, res, next) => {
         
         const __professor = new ProfessorModel({name,age,email,status,description,phone,image});
         try {
-            avatar.mv(uploadPath)
-            .then(() =>{
-                __professor.save()
-                .then((professor) =>{
-                    responeInstance.success200(res, jsonInstance.toJsonWithData('SUCCESS',professor ));
-                    return 
-                })
-                .catch((error) =>{
-                    console.log('error addprofessor',error.message);
-                    responeInstance.error400(res, jsonInstance.jsonNoData(error.message));
-                })
+            if(avatar!==undefined){
+                await avatar.mv(uploadPath)
+            }
+            __professor.save()
+            .then((professor) =>{
+                responeInstance.success200(res, jsonInstance.toJsonWithData('SUCCESS',professor ));
+                return 
             })
-            .catch(err =>{
-                throw new Error(err.message);
+            .catch((error) =>{
+                console.log('error addprofessor',error.message);
+                responeInstance.error400(res, jsonInstance.jsonNoData(error.message));
             })
         } catch (error) {
             throw new Error(error.message);

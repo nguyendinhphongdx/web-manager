@@ -12,7 +12,7 @@ exports.login = (req, res, next) =>{
             const endTime = new Date(startTime);
             endTime.setMinutes(endTime.getMinutes()+5);
             // create token
-            const token = jwt.sign({user:user},process.env.JWT_SECRET,{expiresIn:'1h'});
+            const token = jwt.sign({user:user},process.env.JWT_SECRET,{expiresIn:'5h'});
             responeInstance.success200(res, jsonInstance.toJsonWithData('SUCCESS',{
                 token,
                 start: startTime,
