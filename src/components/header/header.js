@@ -1,9 +1,10 @@
-import { BellOutlined, SettingOutlined, UserOutlined, LogoutOutlined } from '@ant-design/icons';
+import { BellOutlined, LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
 import { Badge, Col, Drawer, Dropdown, Menu, message, Row } from "antd";
 import Search from "antd/lib/input/Search";
 import { useState } from "react";
 import { Link } from 'react-router-dom';
 import { MenuCss } from "../../Common/variable/var";
+import {  OnLogout } from '../../services/AuthService';
 import './header.css';
 export default function HeaderComponent() {
     const [current,setCurrent] = useState('mail');
@@ -18,13 +19,9 @@ export default function HeaderComponent() {
     const handleClick = e => {
        setCurrent(e.key);
       };
-      function handleMenuClick(e) {
-        message.info('Click on menu item.');
-        console.log('click', e);
-      }
       const menu = (
-        <Menu onClick={handleMenuClick}>
-          <Menu.Item key="1" icon={<LogoutOutlined /> }>
+        <Menu >
+          <Menu.Item key="1" icon={<LogoutOutlined /> } onClick={OnLogout}>
             Logout
           </Menu.Item>
           <Menu.Item key="2" icon={<UserOutlined />} >

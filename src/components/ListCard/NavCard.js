@@ -1,120 +1,43 @@
 import { Card, Carousel, Col, Row } from "antd";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { contentStyle } from "../../Common/variable/var";
+import { devideCard } from "../../helpers/uploadPreview";
+import { GetDataClass } from "../../services/ClassService";
 import ContentNavCard from "./ContentCard";
 import './NavCard.scss';
 export default function NavCard(){
-    const contentStyle = {
-        height: '180px',
-        color: '#fff',
-        lineHeight: '160px',
-        textAlign: 'center',
-        background: '#364d79',
-      };
-    return(
-        <Carousel autoplay >
+    const dispatch = useDispatch()
+    const listClass = useSelector(state=>state.Class.classes)
+    useEffect(()=>{
+        GetDataClass(dispatch)
+        .then(result =>console.log(result))
+    },[])
+    const listdevided = devideCard(listClass);
+    const elementCarousel = listdevided.map((group,index)=>{
+        const elementItem = group.map((item,index)=>{
+            return(
+                <Col span={6} key={item._id}>
+                        <Card title={item.name} bordered={true} className="card-title">
+                        <ContentNavCard item={item}/>
+                        </Card>
+                </Col>
+            );
+        })
+        return(
             <div >
                 <div style={contentStyle}>
                 <Row gutter={16} className="row-carousel">
-                    <Col span={6}>
-                        <Card title="Card title" bordered={true} className="card-title">
-                            <ContentNavCard/>
-                        </Card>
-                    </Col>
-                    <Col span={6}>
-                        <Card title="Card title" bordered={true} className="card-title">
-                            <ContentNavCard/>
-                        </Card>
-                    </Col>
-                    <Col span={6}>
-                        <Card title="Card title" bordered={true} className="card-title">
-                        <ContentNavCard/>
-                        </Card>
-                    </Col>
-                    <Col span={6}>
-                        <Card title="Card title" bordered={true} className="card-title">
-                        <ContentNavCard/>
-                        </Card>
-                    </Col>
-                    </Row>
+                    {elementItem}
+                </Row>
                 </div>
             </div>
-            <div>
-            <div style={contentStyle}>
-                <Row gutter={16} className="row-carousel">
-                    <Col span={6}>
-                        <Card title="Card title" bordered={true} className="card-title">
-                            <ContentNavCard/>
-                        </Card>
-                    </Col>
-                    <Col span={6}>
-                        <Card title="Card title" bordered={true} className="card-title">
-                            <ContentNavCard/>
-                        </Card>
-                    </Col>
-                    <Col span={6}>
-                        <Card title="Card title" bordered={true} className="card-title">
-                        <ContentNavCard/>
-                        </Card>
-                    </Col>
-                    <Col span={6}>
-                        <Card title="Card title" bordered={true} className="card-title">
-                        <ContentNavCard/>
-                        </Card>
-                    </Col>
-                    </Row>
-                </div>   
-            </div>
-            <div>
-            <div style={contentStyle}>
-                <Row gutter={16} className="row-carousel">
-                    <Col span={6}>
-                        <Card title="Card title" bordered={true} className="card-title">
-                            <ContentNavCard/>
-                        </Card>
-                    </Col>
-                    <Col span={6}>
-                        <Card title="Card title" bordered={true} className="card-title">
-                            <ContentNavCard/>
-                        </Card>
-                    </Col>
-                    <Col span={6}>
-                        <Card title="Card title" bordered={true} className="card-title">
-                        <ContentNavCard/>
-                        </Card>
-                    </Col>
-                    <Col span={6}>
-                        <Card title="Card title" bordered={true} className="card-title">
-                        <ContentNavCard/>
-                        </Card>
-                    </Col>
-                    </Row>
-                </div>
-            </div>
-            <div>
-            <div style={contentStyle}>
-                <Row gutter={16} className="row-carousel">
-                    <Col span={6}>
-                        <Card title="Card title" bordered={true} className="card-title">
-                            <ContentNavCard/>
-                        </Card>
-                    </Col>
-                    <Col span={6}>
-                        <Card title="Card title" bordered={true} className="card-title">
-                            <ContentNavCard/>
-                        </Card>
-                    </Col>
-                    <Col span={6}>
-                        <Card title="Card title" bordered={true} className="card-title">
-                        <ContentNavCard/>
-                        </Card>
-                    </Col>
-                    <Col span={6}>
-                        <Card title="Card title" bordered={true} className="card-title">
-                        <ContentNavCard/>
-                        </Card>
-                    </Col>
-                    </Row>
-                </div>
-            </div>
+        )
+    })
+    console.log(elementCarousel);
+    return(
+        <Carousel autoplay >
+            {elementCarousel}
         </Carousel> 
         
     );

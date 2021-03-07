@@ -35,20 +35,10 @@ export default function ActionFrofessor(props){
     );
 }
 export function AcitonDetailSubject(props) {
-    const content=() => {
-        return(
-            <div className="">
-            <p>content 1</p>
-            <p>content 1</p>
-            <p>content 1</p>
-            </div>
-           
-        );
-    }
     const {record} = props;
     return(
         <div className="">
-            <Popover placement="bottom" title={'Subjects'} content={TableDetailSubject} trigger="click">
+            <Popover placement="bottom" title={'Subjects'} content={<TableDetailSubject record={record}/>} trigger="click">
                 <WalletOutlined style={{fontSize: '20px' }}/>
             </Popover>
         </div>

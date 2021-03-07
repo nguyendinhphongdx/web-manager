@@ -1,5 +1,5 @@
 import '../Common/Css/Common.css';
-import ActionSubject from "../components/Action/ActionStudent";
+import ActionSubject from "../components/Action/ActionSubject";
 export const dataSource = []
 for(var i=0;i<50;i++){
     const status = i%2===0?'active':'active'
@@ -9,7 +9,7 @@ for(var i=0;i<50;i++){
         price:`${i*10} $`,
         description:`description ${i}`,
         totalSession:`${Math.round(Math.random()*5)}`,
-        startDate:`${new Date().toLocaleDateString()}`,
+        type:`type`,
         status:status,
     })
 }
@@ -36,22 +36,28 @@ export const columns =[
         width:'10%',
     },
     {
+        key: 'unit',
+        title: 'Unit',
+        dataIndex:'unit',
+        width:'10%',
+    },
+    {
         key: 'totalSession',
         title: 'TotalSession',
         dataIndex:'totalSession',
         width:'5%',
     },
-    {
-        key: 'startDate',
-        title: 'Start Date',
-        dataIndex:'startDate',
-        width:'10%',
-    },
+    // {
+    //     key: 'type',
+    //     title: 'Type',
+    //     dataIndex:'type',
+    //     width:'10%',
+    // },
     {
         key: 'description',
         title: 'description',
         dataIndex:'description',
-        width:'20%',
+        width:'15%',
     },
     {
         key: 'status',
@@ -61,8 +67,7 @@ export const columns =[
     {
         key: 'operation',
         title: 'Action',
-        dataIndex: 'operation',
-        render:(record)=> <ActionSubject record={record}/>
+        render:(record)=> <ActionSubject subject={record}/>
     },
 
 ]

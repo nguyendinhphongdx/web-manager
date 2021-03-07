@@ -114,7 +114,7 @@ function CollapseProfessor(props){
     const [form] = Form.useForm();
   
     const getFields = () => {
-      const count = expand ? 10 : 6;
+      const count = expand ? 3 : 0;
       const children = [];
   
       for (let i = 0; i < count; i++) {
@@ -135,7 +135,6 @@ function CollapseProfessor(props){
           </Col>,
         );
       }
-  
       return children;
     };
   
@@ -150,6 +149,27 @@ function CollapseProfessor(props){
         className="ant-advanced-search-form"
         onFinish={onFinish}
       >
+        <Row gutter={24}>
+            <Col span={8} className="columns-element">
+            <Form.Item label="DatePicker">
+                <DatePicker />
+            </Form.Item>
+            </Col>
+            <Col span={8} className="columns-element">
+            <Form.Item label="DatePicker">
+                <DatePicker />
+            </Form.Item>
+            </Col>  
+            <Col span={8} className="columns-element">
+            <Form.Item label="Subject">
+                <Select>
+                    <Select.Option>Môn Học 1</Select.Option>
+                    <Select.Option>Môn Học 2</Select.Option>
+                    <Select.Option>Môn Học 3</Select.Option>
+                </Select>
+            </Form.Item>
+            </Col>
+        </Row>
         <Row gutter={24}>{getFields()}</Row>
         <Row>
           <Col
@@ -171,7 +191,7 @@ function CollapseProfessor(props){
             >
               Clear
             </Button>
-            <a
+            <a href
               style={{
                 fontSize: 12,
               }}

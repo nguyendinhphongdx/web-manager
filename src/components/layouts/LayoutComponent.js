@@ -1,18 +1,18 @@
 import {
-  CalendarOutlined, DesktopOutlined,
+  AntDesignOutlined, CalendarOutlined, DesktopOutlined,
   FileOutlined, PieChartOutlined,
   TeamOutlined,
-  UserOutlined,AntDesignOutlined
+  UserOutlined
 } from '@ant-design/icons';
-import { Layout, Menu, BackTop  } from 'antd';
+import { BackTop, Layout, Menu } from 'antd';
 import { useState } from 'react';
-import { Link,NavLink, Route } from "react-router-dom";
+import { Link, NavLink, Route } from "react-router-dom";
 import { styleBackTop } from '../../Common/variable/var';
-import logo from '../../images/logo192.png';
 import page from '../../Router';
 import BreadcrumbComponent from '../breadcrumb/breadcrumb';
 import HeaderComponent from '../header/header';
 import './layout.scss';
+
 const { Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 
@@ -23,6 +23,7 @@ export default function LayoutComponent(){
     const handleChangeState=()=>{
         setState(state?false:true);
     }
+
     const showPage = (Page) => {
         var result = null;
         if (Page.length > 0) {
@@ -49,7 +50,6 @@ export default function LayoutComponent(){
            
               </Link> 
             </Menu.Item>
-           
           </div>
           </Menu>
             </div>

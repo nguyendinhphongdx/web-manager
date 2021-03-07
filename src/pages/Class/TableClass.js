@@ -1,9 +1,17 @@
 import { Button, Modal, Row, Table } from "antd";
-import { useState } from "react";
-import { columns, dataSource } from "../../contructData/Class";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { columns } from "../../contructData/Class";
+import { GetDataClass } from "../../services/ClassService";
 
 export default function TableClass(){
     const [isModalVisible, setIsModalVisible] = useState(false);
+    const listClass = useSelector(state=>state.Class.classes);
+    const dispatch = useDispatch();
+    useEffect(()=>{
+        GetDataClass(dispatch)
+        .then(result => console.log(result))
+    },[])
     const showModal = () => {
         setIsModalVisible(true);
     };
@@ -23,7 +31,7 @@ export default function TableClass(){
             <Modal title="Add Class" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
                
             </Modal>
-            <Table dataSource={dataSource} columns={columns}  bordered></Table>
+            <Table dataSource={listClass} columns={columns}  bordered></Table>
         </div>
         
     );

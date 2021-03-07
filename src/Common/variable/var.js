@@ -16,3 +16,24 @@ export const styleBackTop = {
     textAlign: 'center',
     fontSize: 14,
   };
+  export const styleButtonTopTable = {
+    margin: '10px 0'
+  };
+  export const contentStyle = {
+    height: '180px',
+    color: '#fff',
+    lineHeight: '160px',
+    textAlign: 'center',
+    background: '#364d79',
+  };
+  export const styleRowModal={
+    display: 'flex',
+    justifyContent:'space-between',
+  }
+  export const styleColumnModal={
+    padding:'0px 10px',
+  }
+  export const styleRowModalAction={
+    display: 'flex',
+    justifyContent:'flex-end',
+  }

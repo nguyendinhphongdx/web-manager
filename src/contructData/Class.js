@@ -28,7 +28,7 @@ export const columns =[
     {
         title: 'Subject',
         key: 'subject',
-        dataIndex:'subject',
+        dataIndex:'subject'||'Chưa có',
         sorter: {
             compare: (a, b) => a.subject.length - b.subject.length,
             multiple: 3,

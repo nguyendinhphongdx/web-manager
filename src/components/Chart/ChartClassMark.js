@@ -1,94 +1,95 @@
 import { Column } from '@ant-design/charts';
 import { Button } from 'antd';
+import { styleButtonTopTable } from '../../Common/variable/var';
 export default function ChartClassMark(){
     var data = [
         {
           name: 'London',
-          月份: 'Jan.',
-          月均降雨量: 18.9,
+          class: 'Jan.',
+          value: 18.9,
+        },
+        {
+          name: 'Berlin',
+          class: 'Jan.',
+          value: 12.4,
         },
         {
           name: 'London',
-          月份: 'Feb.',
-          月均降雨量: 28.8,
+          class: 'Feb.',
+          value: 28.8,
         },
         {
           name: 'London',
-          月份: 'Mar.',
-          月均降雨量: 39.3,
+          class: 'Mar.',
+          value: 39.3,
         },
         {
           name: 'London',
-          月份: 'Apr.',
-          月均降雨量: 50,
+          class: 'Apr.',
+          value: 50,
         },
         {
           name: 'London',
-          月份: 'May',
-          月均降雨量: 47,
+          class: 'May',
+          value: 47,
         },
         {
           name: 'London',
-          月份: 'Jun.',
-          月均降雨量: 20.3,
+          class: 'Jun.',
+          value: 20.3,
         },
         {
           name: 'London',
-          月份: 'Jul.',
-          月均降雨量: 24,
+          class: 'Jul.',
+          value: 24,
         },
         {
           name: 'London',
-          月份: 'Aug.',
-          月均降雨量: 35.6,
+          class: 'Aug.',
+          value: 35.6,
         },
         {
           name: 'Berlin',
-          月份: 'Jan.',
-          月均降雨量: 12.4,
+          class: 'Feb.',
+          value: 23.2,
         },
         {
           name: 'Berlin',
-          月份: 'Feb.',
-          月均降雨量: 23.2,
+          class: 'Mar.',
+          value: 34.5,
         },
         {
           name: 'Berlin',
-          月份: 'Mar.',
-          月均降雨量: 34.5,
+          class: 'Apr.',
+          value: 60,
         },
         {
           name: 'Berlin',
-          月份: 'Apr.',
-          月均降雨量: 60,
+          class: 'May',
+          value: 52.6,
         },
         {
           name: 'Berlin',
-          月份: 'May',
-          月均降雨量: 52.6,
+          class: 'Jun.',
+          value: 35.5,
         },
         {
           name: 'Berlin',
-          月份: 'Jun.',
-          月均降雨量: 35.5,
+          class: 'Jul.',
+          value: 37.4,
         },
         {
           name: 'Berlin',
-          月份: 'Jul.',
-          月均降雨量: 37.4,
-        },
-        {
-          name: 'Berlin',
-          月份: 'Aug.',
-          月均降雨量: 42.4,
+          class: 'Aug.',
+          value: 42.4,
         },
       ];
       var config = {
         height:450,
         data: data,
         isGroup: true,
-        xField: '月份',
-        yField: '月均降雨量',
+        xField: 'class',
+        yField: 'value',
         seriesField: 'name',
         label: {
           position: 'middle',
@@ -105,7 +106,7 @@ export default function ChartClassMark(){
       };
       return(
           <div className="">
-            <Button type="primary"  onClick={downloadImage}>Download</Button>
+            <Button type="primary" style={styleButtonTopTable} onClick={downloadImage}>Download</Button>
             <Column {...config} onReady={(chartInstance) => (chart = chartInstance)} />
           </div>
         

@@ -1,16 +1,17 @@
 import { Row } from "antd";
 
-export default function ContentNavCard(){
+export default function ContentNavCard(props){
+    const {item} = props;
     return(
         <div className="contentCard">
             <Row>
-                Professor : Professor 1
+                Professor : {item.professor[0] || 'defaultProfessor'}
             </Row>
             <Row>
-                Total : 22
+                Total : {item.member.length}
             </Row>
             <Row>
-                Professor : Professor 1
+                Subject : {item.subject[0] || 'defaultSubject'}
             </Row>
         </div>
     );

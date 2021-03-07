@@ -12,12 +12,15 @@ export default function ActionStudent(props){
     const onClose = () => {
       setVisible(false);
     };
-    const {record} = props;
+    const {subject} = props;
+    const handleDelete = () => {
+      console.log(subject);
+    }
     return(
         <div style={rowAction}>
             <WalletOutlined style={{fontSize: '20px' }} onClick={showDrawer}/>
             <EditOutlined style={{fontSize: '20px' }} />
-                <Popconfirm title="Sure to delete?" onConfirm={() => alert('Are you sure you want to delete'+record.name)}>
+                <Popconfirm title="Sure to delete?" onConfirm={handleDelete}>
                 <DeleteOutlined  style={{fontSize: '20px' }}/>
             </Popconfirm>
             <Drawer

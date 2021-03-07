@@ -1,7 +1,5 @@
-import ActionClass from "../components/Action/ActionClass";
 import ActionFrofessor, { AcitonDetailSubject } from "../components/Action/ActionProfessor";
 import ImageComponent from "../components/Image/Image";
-import defaultAvatar from '../images/default.png';
 export const dataSource = [];
 for (let index = 0; index < 50; index++) {
     dataSource.push({
@@ -30,7 +28,7 @@ export const columns =[
     {
         title: 'Avatar',
         width:'15%',
-        render:(record) =><ImageComponent url={record.url || defaultAvatar} />
+        render:(record) =><ImageComponent url={record.image} type='professor' />
     },
     {
         title: 'Frofessor Name',

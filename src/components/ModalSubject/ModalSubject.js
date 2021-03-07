@@ -1,4 +1,5 @@
 import { Table } from "antd";
+import { useSelector } from "react-redux";
 import { AcitonRemoveSubject } from "../Action/ActionProfessor";
 import './detailSubject.scss';
 const dataSource=[];
@@ -20,9 +21,10 @@ const columns =[
         }
 ]
 export default function TableDetailSubject(){
+    const listSubject = useSelector(state=>state.Professor.professores).Subject;
     return(
         <div className="TabelDetailSubject">
-        <Table dataSource={dataSource} columns={columns} pagination={false}
+        <Table dataSource={listSubject} columns={columns} pagination={false}
         scroll={{y:200}} style={{width:'250px'}} bordered
         />
         </div>

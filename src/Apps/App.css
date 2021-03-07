@@ -54,6 +54,11 @@
 .ant-table-cell {
     text-align: center;
 }
-.anticon{
+
+.anticon {
     /* font-size:20px; */
+}
+
+.ant-drawer-body {
+    padding: 0;
 }

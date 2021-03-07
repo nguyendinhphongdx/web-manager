@@ -1,10 +1,14 @@
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Col, Form, Input, Row } from 'antd';
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router';
 import logo from '../../images/logo192.png';
+import { OnLogin } from '../../services/AuthService';
 import './loginCss.css';
  export default function Login(){
-    //  const dispatch = useDispatch();    
+      const dispatch = useDispatch();
+      const history = useHistory();    
      const [isClick,setClick] = useState(()=>false);
     document.addEventListener('keypress',function(e){
          if(e.key === 'Enter'){
@@ -12,11 +16,11 @@ import './loginCss.css';
         }
      });
     async function handleOnLogin(data) {  
-        // setClick(true);
-        // console.log("calling");
-        // await OnLogin(data,dispatch); 
-        // console.log("resolve");
-        // setClick(false);
+        setClick(true);
+        console.log("calling");
+        await OnLogin(dispatch,data,history); // {token,use{}}
+        console.log("resolve");
+        setClick(false);
     }
     const onFinishFailed = err => {
         alert('Vui lòng không để trống thông tin');
@@ -42,10 +46,11 @@ import './loginCss.css';
                     className="login-form form-login"
                     initialValues={{
                         remember: true,
-                    }} 
+                    }}
+                    onFinish={handleOnLogin} 
                     onFinishFailed={onFinishFailed}
                     >
-                    <Form.Item name="username" className="group-login"
+                    <Form.Item name="user_name" className="group-login"
                         rules={[
                         {
                             required: true,
@@ -79,7 +84,7 @@ import './loginCss.css';
                 </a>
                 </Form.Item>
                     <Form.Item className="group-login-fuc" style={{margin:'0px'}}>
-                        <Button style={{width:'100%',height:'36px'}}  type="primary" htmlType="submit" className="login-form-button" >
+                        <Button style={{width:'100%',height:'36px'}} id='btn-login' type="primary" htmlType="submit" className="login-form-button" disabled={isClick}>
                         Log in
                         </Button>
                     </Form.Item>
