@@ -20,8 +20,10 @@ export async function OnLogin(dispatch,data,history){
     })
     .catch((error) =>{
         console.log(error);
-        if(error.response.status ===401){
+        if(error.response){
             message.warning({ content: 'Sai thông tin tài khoản.', key });
+        }else{
+            message.warning({ content: 'Lỗi Mạng.', key });
         }
     })
     return request
