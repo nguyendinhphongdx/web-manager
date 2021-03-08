@@ -1,5 +1,5 @@
 class ArrayService{
-    isExistWithId = function (array,id) {
+    isExistWithId (array,id){
         const isExist = array.some(item => JSON.stringify(item._id)==JSON.stringify(id) );
         console.log(isExist);
         return isExist
