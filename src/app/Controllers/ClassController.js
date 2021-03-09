@@ -7,6 +7,8 @@ const StudentModel = require('../Models/StudentModel');
 const StudentService = require("../service/StudentService");
 const ArrayService = require("../service/ArrayService");
 const ClassService = require("../service/ClassService");
+const SubjectService = require("../service/SubjectService");
+const ProfessorService = require("../service/ProfessorService");
 exports.addClass = (req, res, next) => {
     ClassModel.findOne({name: req.body.name})
     .exec((err,item) => {
@@ -69,23 +71,40 @@ exports.removeClass = (req, res, next) => {
         responeInstance.error400(res, jsonInstance.jsonNoData(err.message));
     })
 }
-exports.updateClass = (req, res, next) => {
-    const {name,_idSubject,_idProfessor,status,startDate,schedule1,schedule2} = req.body;
-    console.log(_idProfessor,_idSubject);
-    ClassModel.findOneAndUpdate({_id:req.body._id},req.body,{new:true})
-    .then((_class)=>{
-        if(_class){
-            responeInstance.success200(
-                res,
-                jsonInstance.toJsonWithData(`SUCCESS`, _class)
-              );
-        } else{
-            throw new Error('_class not found')
+exports.updateClass = async (req, res, next) => {
+    const {_idSubject,_idProfessor} = req.body;
+    try {
+        const subject = await Promise.resolve(SubjectModel.findById(_idSubject))
+        const professor = await Promise.resolve(ProfessorModel.findById(_idProfessor))
+        const _class =  await Promise.resolve(ClassModel.findById(req.body._id))
+        var newClass={...req.body};
+        if(subject){
+            newClass={...newClass,subject}
         }
-    })
-    .catch(err => {
-        responeInstance.error400(res, jsonInstance.jsonNoData(err.message));
-    })
+        if(professor){
+            newClass={...newClass,professor}
+            if(!ProfessorService.classIsExist(professor._id,_class._id)){
+                professor.class.push(_class._id);
+                await professor.save();
+            }
+        }
+        ClassModel.findOneAndUpdate({_id:req.body._id},newClass,{new:true})
+        .then(async (_class)=>{
+            if(_class){
+                responeInstance.success200(
+                    res,
+                    jsonInstance.toJsonWithData(`SUCCESS`, _class)
+                );
+            } else{
+                throw new Error('_class not found')
+            }
+        })
+        .catch(err => {
+            responeInstance.error400(res, jsonInstance.jsonNoData("err "+err.message));
+        })
+    } catch (error) {
+        responeInstance.error400(res, jsonInstance.jsonNoData(error.message));
+    }
 }
 exports.assignProfessor = (req, res, next) => {
     const {_idProfessor} = req.body;
@@ -110,40 +129,42 @@ exports.assignProfessor = (req, res, next) => {
         responeInstance.error400(res, jsonInstance.jsonNoData(err.message));
     })
 }
-exports.addMember = (req, res, next) => {
-    const {_idStudent} = req.body;
-    StudentModel.findById(_idStudent)
-    .then((student)=>{
-        if(!student){
-            throw new Error('Student not found')
-        }
+exports.addMember = async (req, res, next) => {
+    const {_idStudents} = req.body;
+    try {
+        const listMember = await StudentModel.find().where('_id').in(_idStudents)
         ClassModel.findById(req.body._id)
-        .then((_class)=>{
+        .then(async(_class)=>{
             if(_class){
-                if(ArrayService.isExistWithId(_class.member,student._id)){
-                    throw new Error('Student already exists in Class')
+                for(var i=0;i<_idStudents.length;i++){
+                    console.log(_idStudents[i]);
+                    await StudentModel.findById(_idStudents[i])
+                    .then(async(student)=>{
+                        if(student){
+                              if(ArrayService.isExistWithId(_class.member,student._id)){
+                                        console.log(`Student already in Class ${student.name}`);
+                                }else{
+                                        console.log(console.log('Student is not already in Class '+student.name));
+                                        student.class.push(_class._id); // student added class
+                                        _class.member.push(student._id);
+                                        await student.save();
+                                        await _class.save();
+                                }
+                        }
+                    })
                 }
-                student.class.push(_class._id); // student added class
-               _class.member.push(student._id);
-               ClassModel.findByIdAndUpdate({_id:req.body._id},_class,{new:true}) //add student to member
-               .then((_newClass)=>{
-                StudentModel.findByIdAndUpdate({_id:student._id},student,{new:true}) // update student added class
-                        .then((student)=>{
-                            responeInstance.success200(res, jsonInstance.toJsonWithData('SUCCESS1',_newClass));
-                        })
-               })
-            } else{
-                throw new Error('_class not found')
+            }else{
+                throw new Error('Class is Not Found')
             }
+            await ClassModel.findById(_class._id)
+            .then(newClass =>{
+                responeInstance.success200(res, jsonInstance.toJsonWithData('SUCCESS',newClass))
+            })
         })
-        .catch(err => {
-            responeInstance.error400(res, jsonInstance.jsonNoData(err.message));
-        })
-    })
-    .catch((err)=>{
-        responeInstance.error400(res, jsonInstance.jsonNoData(err.message));
-    })
-    
+        .catch(error =>  responeInstance.error400(res, jsonInstance.jsonNoData(error.message)))
+    } catch (error) {
+        responeInstance.error400(res, jsonInstance.jsonNoData(error.message))
+    }
 }
 exports.removeMember = (req, res, next) => {
     const {_idStudent,_id} = req.body;

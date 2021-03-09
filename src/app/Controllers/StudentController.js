@@ -10,7 +10,7 @@ const uploadStudent  =path.join('public/uploads/students/');
 exports.addStudent = (req, res, next) => {
     let avatarStudent = null;
     let uploadPath;
-    let image;
+    let image='';
     if (req.files !== null) {
         avatarStudent = req.files.file; // name of file
         image = new Date().getTime()+path.extname(avatarStudent.name);
@@ -26,7 +26,7 @@ exports.addStudent = (req, res, next) => {
         const {name,password,age,email,status,description} = req.body;
         const __student = new Student({name,password,age,email,status,description,image});
         try {
-            if(avatarStudent!==undefined){
+            if(avatarStudent){
                 await  avatarStudent.mv(uploadPath)
             }
             __student.save()
@@ -64,8 +64,9 @@ exports.removeStudent = (req, res, next) => {
             const oldPath = uploadStudent+ student.image; // old file
             if(fs.existsSync(oldPath)){
                 fs.unlinkSync(oldPath)
+                console.log('Deleted Image');
               }else{
-                responeInstance.error400(res, jsonInstance.jsonNoData('Not find Image in Server'));
+                console.log('Not find Image in Server');
               }
             responeInstance.success200(
                 res,

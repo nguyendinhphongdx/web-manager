@@ -54,6 +54,7 @@ class StudentService{
      }
     avgMarkStudent(student){
         var markClass =0;
+        
         if(student.mark.length==0){
             return  {
                 name:student.name,

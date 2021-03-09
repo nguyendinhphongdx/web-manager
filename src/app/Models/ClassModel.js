@@ -6,7 +6,7 @@ const ClassSchema = new mongoose.Schema({
     name: {type: String,required: true},
     subject:{type: [SubjectModel.schema],default:[]},
     member:{type:[mongoose.Schema.Types.ObjectId],default:[]},
-    professor:{type: [ProfessorModel.schema],default:[]},
+    professor:{type: [mongoose.Schema.Types.ObjectId],default:[]},
     status:{
         type: String,
         enum: ['actived','blocked'],

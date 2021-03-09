@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const ClassModel = require('./ClassModel');
 const SubjectModel = require('./SubjectModel');
 
 const ProfessorSchema = new mongoose.Schema({
@@ -12,7 +13,8 @@ const ProfessorSchema = new mongoose.Schema({
        required: true,
     },
     email:{type: String,required: true},
-    Subject:{type: [SubjectModel.schema],default:[]},
+    subject:{type: [SubjectModel.schema],default:[]},
+    class:{type: [ClassModel.schema],default:[]},
     status:{
         type: String,
         enum: ['actived','blocked'],

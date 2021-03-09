@@ -5,7 +5,7 @@ const jsonInstance = require("../utils/JsonUtils");
 const responeInstance = require("../utils/ResponeUtils");
 const uploadProfessor =path.join('public/uploads/frofessor/');
 exports.addProfessor = (req, res, next) => {
-    let avatar;
+    let avatar= null;
     let uploadPath;
     let image;
     if (req.files) {
@@ -24,7 +24,7 @@ exports.addProfessor = (req, res, next) => {
         
         const __professor = new ProfessorModel({name,age,email,status,description,phone,image});
         try {
-            if(avatar!==undefined){
+            if(avatar){
                 await avatar.mv(uploadPath)
             }
             __professor.save()
