@@ -1,28 +1,27 @@
 import { Button, Col, Form, Input, Row, Select } from "antd";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { styleRowModal, styleRowModalAction,styleColumnModal } from "../../../Common/variable/var";
-import { GetDataProfessor } from "../../../services/ProfessorService";
-import { GetDataSubject } from "../../../services/SubjectService";
+import { useDispatch } from "react-redux";
+import { styleColumnModal, styleRowModal, styleRowModalAction } from "../../../Common/variable/var";
+import { validateClass } from "../../../helpers/validate";
+import { UpdateDataClass } from "../../../services/ClassService";
 export function UpdateClass(props){
     const [form] = Form.useForm();
-    const {record,callback} = props;
-    const professorRedux = useSelector(state=>state.Professor.professores);
-    const subjectRedux = useSelector(state=>state.Subject.subjects);
+    const {record,callback,state} = props;
+    const professorRedux = state.Professor.professores;
+    const subjectRedux = state.Subject.subjects;
     const dispatch = useDispatch();
-    useEffect(()=>{
-        GetDataProfessor(dispatch)
-        GetDataSubject(dispatch);
-    },[])
     const onReset = () => {
         form.resetFields();
       };
-    const handleOnClickAdd=(data)=>{
-        const name = data.name?data.name:record.name;
-        const _idSubject = data.idSubject;
-        const _idFrofessor = data.idProfessor;
-        const body = {_id:record._id,name,_idSubject,_idFrofessor}
-        console.log(body);
+    const handleOnClickUpdate=(data)=>{
+        const dataValidate = validateClass(data);
+        if(Object.keys(dataValidate).length!==0){
+            var body = {_id:record._id,...dataValidate}
+            UpdateDataClass(dispatch,body)
+            .then(result =>{
+                console.log(result);
+                callback();
+            })
+        }
         callback();
     }
     const elementSubject = subjectRedux.map(item => {
@@ -35,8 +34,12 @@ export function UpdateClass(props){
             <Select.Option value={item._id} key={item._id}>{item.name}</Select.Option>
         );
     })
+    const arraySchedule = ['thứ 2','thứ 3','thứ 4','thứ 5','thứ 6','thứ 7','chủ nhật']
+    const elementSchedule = arraySchedule.map((item,index)=>{
+        return <Select.Option value={item} key={index}>{item}</Select.Option>
+    })
     return(
-        <Form onFinish={handleOnClickAdd} form={form}>
+        <Form onFinish={handleOnClickUpdate} form={form}>
         <Row style={styleRowModal}>
             <Col span={24} className="columns-element" style={styleColumnModal}>
             <Form.Item label="Name" name="name" value={record.name}>
@@ -47,17 +50,33 @@ export function UpdateClass(props){
         </Row>
         <Row style={styleRowModal}>
             <Col span={12} className="columns-element" style={styleColumnModal}>
-            <Form.Item name="idSubject" label="Subject" >
-                    <Select  defaultValue={record.subject[0]?record.subject[0]._id:''} >
+            <Form.Item name="_idSubject" label="Subject" >
+                    <Select >
                         {elementSubject}
                     </Select>
             </Form.Item>
             </Col>
             <Col span={12} className="columns-element" style={styleColumnModal}>
-            <Form.Item label="Proff" name="idProfessor">
-                <Select placeholder='Basic' defaultValue={record.professor[0]?record.professor[0]._id:''}>
+            <Form.Item label="Proff" name="_idProfessor">
+                <Select >
                     {elementProfessor}
                 </Select>
+            </Form.Item>
+            </Col> 
+        </Row>
+        <Row style={styleRowModal}>
+            <Col span={12} className="columns-element" style={styleColumnModal}>
+            <Form.Item name="schedule1" label="Schedule 1" >
+                <Select initialValues={'3'}>
+                    {elementSchedule}
+                </Select>
+            </Form.Item>
+            </Col>
+            <Col span={12} className="columns-element" style={styleColumnModal}>
+            <Form.Item name="schedule2" label="Schedule 2">
+                    <Select initialValues={'3'}>
+                        {elementSchedule}
+                    </Select>
             </Form.Item>
             </Col> 
         </Row>

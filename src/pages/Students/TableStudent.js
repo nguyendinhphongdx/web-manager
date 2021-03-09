@@ -31,7 +31,7 @@ export default function TabelStudent(){
             <Modal title="Add Student" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
                
             </Modal>
-            <Table dataSource={studentRedux} columns={columns} bordered></Table>
+            <Table dataSource={studentRedux} columns={columns} bordered ></Table>
         </div>
         
     );

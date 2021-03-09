@@ -9,17 +9,21 @@ import './NavCard.scss';
 export default function NavCard(){
     const dispatch = useDispatch()
     const listClass = useSelector(state=>state.Class.classes)
+    const listProfessor = useSelector(state=>state.Professor.professores)
     useEffect(()=>{
         GetDataClass(dispatch)
         .then(result =>console.log(result))
     },[])
+   
     const listdevided = devideCard(listClass);
     const elementCarousel = listdevided.map((group,index)=>{
         const elementItem = group.map((item,index)=>{
+          
             return(
                 <Col span={6} key={item._id}>
                         <Card title={item.name} bordered={true} className="card-title">
-                        <ContentNavCard item={item}/>
+                            <ContentNavCard item={item} listProfessor={listProfessor}/>
+                            
                         </Card>
                 </Col>
             );

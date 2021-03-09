@@ -34,6 +34,7 @@ const _class =(state = initialState, action)=>{
                } else return item;
            })
            message.success({ content: 'Cập nhật lớp thành công!', key, duration: 2 });
+           
             return {
                 ...state,
                 classes: new_classes
@@ -42,7 +43,8 @@ const _class =(state = initialState, action)=>{
         case constants.REMOVE_CLASS: {
             const { payload } = action; // item remoce
             let classes = [...state.classes];
-            const _newClass = classes.filter(item => item._id !== payload._id);
+            const _newClass = classes.filter(item => item._id !== payload);
+            console.log('inreducer',_newClass);
            message.success({ content: 'Xóa lớp thành công!', key, duration: 2 });
             return {
                 ...state,

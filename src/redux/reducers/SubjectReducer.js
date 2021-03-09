@@ -8,7 +8,6 @@ const subject =(state = initialState, action)=>{
     switch(action.type){
         case constants.GET_ALL_SUBJECT: {
             const { payload } = action; // list item
-            console.log(payload);
             message.success({ content: 'Fetch danh sách Subject thành công !', key, duration: 2 });
             return {
                 ...state,

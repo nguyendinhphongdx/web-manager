@@ -8,7 +8,6 @@ const student =(state = initialState, action)=>{
     switch(action.type){
         case constants.GET_ALL_STUDENT: {
             const { payload } = action; // list item
-            console.log(payload);
             message.success({ content: 'Fetch danh sách Sinh Viên thành công !', key, duration: 2 });
             return {
                 ...state,

@@ -37,7 +37,7 @@ export const columns =[
     {
         title: 'Avartar',
         width:'10%',
-        render:(record)=> <ImageComponent url={record.image||defaultAvatar} type='student'/>
+        render:(record)=> <ImageComponent url={record.image} type='student'/>
     },
     {
         key: 'age',

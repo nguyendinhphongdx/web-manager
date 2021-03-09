@@ -14,7 +14,7 @@ export const columns =[
         title: 'Index',
         key: 'key',
         dataIndex:'key',
-        width:'10%'
+        width:'5%'
     },
     {
         title: 'Class Name',
@@ -23,32 +23,38 @@ export const columns =[
         sorter: {
             compare: (a, b) => a.name.length - b.name.length
           },
-        width:'20%'
+        width:'15%'
     },
     {
         title: 'Subject',
         key: 'subject',
-        dataIndex:'subject'||'Chưa có',
+        dataIndex:'subject',
         sorter: {
             compare: (a, b) => a.subject.length - b.subject.length,
             multiple: 3,
           },
-        width:'20%'
+        width:'15%'
+    },
+    {
+        title: 'Start Date',
+        key: 'startDate',
+        dataIndex:'startDate',
+        width:'15%'
     },
     {
         title: 'Total',
         key: 'total',
         dataIndex:'total',
-        width:'15%',
+        width:'10%',
         sorter: {
             compare: (a, b) => a.total - b.total,
             multiple: 3,
           },
     },
     {
-        title: 'Frofessor',
-        key: 'frofessor',
-        dataIndex:'frofessor',
+        title: 'Professor',
+        key: 'professor',
+        dataIndex:'professor',
         width:'15%'
     },
     {

@@ -22,3 +22,24 @@ export function filterStudentInClass(members,students){
     })
     return studentInfo;
 }
+export function getProfessorById(_Id,professor){
+      const result =  professor.find(item =>JSON.stringify(item._id)===JSON.stringify(_Id))
+      if(result){
+        return result
+      }else{
+        return {
+          name:'defaul Professor'
+        }
+      }
+}
+export function devideStudentInClass(members,students){
+    const inClass = members.map(member => {
+      return students.filter(student =>JSON.stringify(student._id)===JSON.stringify(member))
+    })
+    const NotInClass = students.filter(student => !members.includes(student._id))
+
+    return {
+      inClass,
+      NotInClass
+    };
+}

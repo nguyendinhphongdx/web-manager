@@ -1,16 +1,21 @@
 import { Drawer, Modal, Popconfirm} from "antd";
-import {EditOutlined,DeleteOutlined,WalletOutlined} from '@ant-design/icons';
+import {EditOutlined,DeleteOutlined,WalletOutlined,TeamOutlined} from '@ant-design/icons';
 import { rowAction } from "../../Common/variable/var";
 import { useEffect, useState } from "react";
 import { DrawerClass } from "../drawer/drawerClass";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { GetDataStudent } from "../../services/StudentService";
 import { UpdateClass } from "../FormModal/class/editClass";
+import { DeleteDataClass } from "../../services/ClassService";
+import { AddMemberToClass } from "../FormModal/class/addMember";
 
 export default function ActionClass(props){
     const [visible, setVisible] = useState(false);
     const [isModalVisible, setIsModalVisible] = useState(false);
+    const [isModalMemberVisible, setIsModalMemberVisible] = useState(false);
     const dispatch = useDispatch()
+    const state = useSelector(state=>state);
+    console.log(state);
     useEffect(()=>{
         GetDataStudent(dispatch)
     },[]);
@@ -33,15 +38,34 @@ export default function ActionClass(props){
     const handleCancel = () => {
         setIsModalVisible(false);
     };
+    const showModalMember = () => {
+      setIsModalMemberVisible(true);
+  };
+    const handleOkMember = () => {
+      setIsModalMemberVisible(false);
+  };
+
+  const handleCancelMember = () => {
+    setIsModalMemberVisible(false);
+  };
+    const handleDelete=()=>{
+      DeleteDataClass(dispatch,record._id)
+      .then((result)=>console.log(result));
+      
+    }
     const {record} = props;
     return(
         <div style={rowAction}>
             <WalletOutlined style={{fontSize: '20px' }} onClick={showDrawer}/>
             <EditOutlined style={{fontSize: '20px' }} onClick={showModal}/>
               <Modal title="Edit Class" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel} footer={null}>
-                  <UpdateClass record={record} callback={handleOk}/>  
+                  <UpdateClass state={state} record={record} callback={handleOk}/>  
               </Modal>
-            <Popconfirm title="Sure to delete?" onConfirm={() => alert('Are you sure you want to delete'+record.name)}>
+              <TeamOutlined style={{fontSize: '20px' }} onClick={showModalMember}/>
+              <Modal title="Members" visible={isModalMemberVisible} onOk={handleOkMember} onCancel={handleCancelMember} footer={null}>
+                  <AddMemberToClass state={state} record={record} callback={handleCancelMember}/>  
+              </Modal>
+            <Popconfirm title="Sure to delete?" onConfirm={handleDelete}>
                 <DeleteOutlined  style={{fontSize: '20px' }}/>
             </Popconfirm>
             <Drawer
@@ -52,7 +76,7 @@ export default function ActionClass(props){
             visible={visible}
             width={300}
           >
-            <DrawerClass students={record.member}/>
+            <DrawerClass students={record.member} state={state}/>
           </Drawer>
         </div>
     );

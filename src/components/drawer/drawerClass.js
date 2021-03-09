@@ -5,7 +5,7 @@ import { filterStudentInClass } from "../../helpers/uploadPreview";
 import { useSelector } from "react-redux";
 
 export function DrawerClass(props){
-    const {students} = props;
+    const {students,state} = props;
     const studentRedux = useSelector(state=>state.Student.students);
     const studentInClass = filterStudentInClass(students,studentRedux);
     const element = studentInClass.map((student,index) =>{
