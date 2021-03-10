@@ -38,7 +38,6 @@ export default function NavCard(){
             </div>
         )
     })
-    console.log(elementCarousel);
     return(
         <Carousel autoplay >
             {elementCarousel}

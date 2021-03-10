@@ -15,7 +15,7 @@ export default function HomePage(){
     },[])
     return(
         <div className="homePage">
-               <NavCard/>
+               <NavCard pros/>
                <TableHome/>
         </div>
        

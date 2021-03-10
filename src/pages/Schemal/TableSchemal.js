@@ -1,30 +1,14 @@
-import { Button, Modal, Row, Table } from "antd";
+import { Button, Calendar, Alert  } from "antd";
 import { useState } from 'react';
-import { columns, dataSource } from '../../contructData/schemal';
+import moment from 'moment';
 import './Schemal.scss';
 export default function TableSchemal(){
-    const [isModalVisible, setIsModalVisible] = useState(false);
-
-    const showModal = () => {
-        setIsModalVisible(true);
-    };
-
-    const handleOk = () => {
-        setIsModalVisible(false);
-    };
-
-    const handleCancel = () => {
-        setIsModalVisible(false);
-    };
+    const [state,setState] = useState(()=>moment('2017-01-25'))
+   
     return(
         <div className="tabelPanel">
-            <Row className="add-student">
-                <Button type="primary" onClick={showModal}>Add Schemal</Button>
-            </Row>
-            <Modal title="Add Schemal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-               
-            </Modal>
-            <Table dataSource={dataSource} columns={columns}></Table>
+            {/* <Table dataSource={dataSource} columns={columns}></Table> */}
+            <Calendar   />
         </div>
         
     );
