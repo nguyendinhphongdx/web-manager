@@ -29,6 +29,7 @@ export async function OnLogin(dispatch,data,history){
     return request
 }
 export function OnLogout(){
-    message.loading({ content: 'Đăng xuất thành công 1', key });
+    message.loading({ content: 'Đăng xuất thành công', key });
+    localStorage.removeItem('token');
     window.location = '/login';
 }

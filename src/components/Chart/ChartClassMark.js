@@ -1,5 +1,6 @@
 import { Column } from '@ant-design/charts';
 import { Button } from 'antd';
+import { useSelector } from 'react-redux';
 import { styleButtonTopTable } from '../../Common/variable/var';
 export default function ChartClassMark() {
     // var data = [
@@ -84,7 +85,7 @@ export default function ChartClassMark() {
     //       value: 42.4,
     //     },
     //   ];
-    const dataSource = useSelector;
+    const dataSource = useSelector(state=>state);
     var config = {
         height: 450,
         data: dataSource,
@@ -103,19 +104,17 @@ export default function ChartClassMark() {
     };
     let chart;
     const downloadImage = () => {
-        chart ? .downloadImage();
+        chart ?.downloadImage();
     };
-    return ( <
-        div className = "" >
-        <
-        Button type = "primary"
+    return ( <div className = "" >
+        <Button type = "primary"
         style = { styleButtonTopTable }
-        onClick = { downloadImage } > Download < /Button> <
+        onClick = { downloadImage } 
+        > Download </Button> 
+        <
         Column {...config }
         onReady = {
             (chartInstance) => (chart = chartInstance) }
-        /> <
-        /div>
-
+        /> </div>
     );
 }
