@@ -43,3 +43,9 @@ export function devideStudentInClass(members,students){
       NotInClass
     };
 }
+export function filterClassInStudent(classes,listClass){
+  const result= classes.map(item => {
+      return listClass.find(_item =>JSON.stringify(_item._id)===JSON.stringify(item))
+  })
+  return result;
+}

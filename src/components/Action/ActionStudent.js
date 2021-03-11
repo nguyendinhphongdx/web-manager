@@ -2,19 +2,19 @@ import { Popconfirm, Drawer} from "antd";
 import {EditOutlined,DeleteOutlined,WalletOutlined} from '@ant-design/icons';
 import { rowAction } from "../../Common/variable/var";
 import { useState } from "react";
+import { DrawerStudent } from "../drawer/drawerStudent";
 
 export default function ActionStudent(props){
     const [visible, setVisible] = useState(false);
     const showDrawer = () => {
       setVisible(true);
     };
-
     const onClose = () => {
       setVisible(false);
     };
-    const {subject} = props;
+    const {record} = props;
     const handleDelete = () => {
-      console.log(subject);
+      console.log(record._id);
     }
     return(
         <div style={rowAction}>
@@ -24,15 +24,13 @@ export default function ActionStudent(props){
                 <DeleteOutlined  style={{fontSize: '20px' }}/>
             </Popconfirm>
             <Drawer
-              title="Basic Drawer"
+              title={record.name}
               placement="right"
               closable={false}
               onClose={onClose}
               visible={visible}
             >
-              <p>Some contents...</p>
-              <p>Some contents...</p>
-              <p>Some contents...</p>
+              <DrawerStudent record={record}/>
             </Drawer>
         </div>
     );

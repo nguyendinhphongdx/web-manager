@@ -14,7 +14,6 @@ export default function ImageComponent(props) {
     }else{
         src = defaultAvatar;
     }
-    console.log(src);
     return(
         <div className="">
             <Image width={100} src={src}/>

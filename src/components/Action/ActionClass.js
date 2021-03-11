@@ -15,7 +15,6 @@ export default function ActionClass(props){
     const [isModalMemberVisible, setIsModalMemberVisible] = useState(false);
     const dispatch = useDispatch()
     const state = useSelector(state=>state);
-    console.log(state);
     useEffect(()=>{
         GetDataStudent(dispatch)
     },[]);

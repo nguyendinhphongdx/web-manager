@@ -1,5 +1,5 @@
 import { BellOutlined, LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
-import { Badge, Col, Drawer, Dropdown, Menu, message, Row } from "antd";
+import { Badge, Col, Drawer, Dropdown, Menu, message, Popover, Row } from "antd";
 import Search from "antd/lib/input/Search";
 import { useState } from "react";
 import {useSelector } from "react-redux";
@@ -31,6 +31,12 @@ export default function HeaderComponent() {
           </Menu.Item>
         </Menu>
       );
+      const content = (
+        <div>
+          <p>Content</p>
+          <p>Content</p>
+        </div>
+      );
     return(
         <div className="headerComponent">
             <Row className="row-header">
@@ -42,17 +48,21 @@ export default function HeaderComponent() {
                     </Menu.Item>
                     <Menu.Item key="user">
                         <Dropdown.Button overlay={menu}  icon={<UserOutlined />}>
-                            {currentUser.user_name}
+                            {currentUser.user_name||'AdminDefault'}
                         </Dropdown.Button>
                     </Menu.Item>
                     <Menu.Item key="noti">
-                      <Badge size="default" count={5} offset={[-10,0]}>
-                        <BellOutlined style={{ fontSize: '20px' }} />
-                      </Badge>
+                      
+                        <Popover placement="bottomRight" title={'Notifications'} content={content} trigger="click">
+                            <Badge size="default" count={5} offset={[-10,0]}>
+                            <BellOutlined style={{ fontSize: '20px' }} />
+                            </Badge>
+                        </Popover>
+                      
                     </Menu.Item>
-                    <Menu.Item key="Setting">
+                    <Menu.Item key="Setting" onClick={showDrawer}>
                     <Badge size="default" count={5} offset={[-10,0]}>
-                     <SettingOutlined style={{ fontSize: '20px' }} onClick={showDrawer}/>
+                     <SettingOutlined style={{ fontSize: '20px' }} />
                     </Badge>
                     </Menu.Item>
                 </Menu>

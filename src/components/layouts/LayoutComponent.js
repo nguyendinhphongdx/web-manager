@@ -42,12 +42,12 @@ export default function LayoutComponent(){
     return(
         <Layout  >
       <Sider collapsible collapsed={state} onCollapse={handleChangeState}>
+        <div className="" style={{position:'fixed',width:'200px'}}>
           <div className="logo" style={{height:'50px'}} >  
           <Menu style={{height:'100%'}}>
           <div className="pic">
            <Menu.Item icon={<AntDesignOutlined style={{ fontSize: '24px'}}/>}>
               <Link to={'/home'} >
-           
               </Link> 
             </Menu.Item>
           </div>
@@ -75,6 +75,7 @@ export default function LayoutComponent(){
               <NavLink to={'/file'}> Files</NavLink>
             </Menu.Item>
           </Menu>
+          </div>
         </Sider>
       
         <Layout className="site-layout" >

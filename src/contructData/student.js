@@ -58,7 +58,6 @@ export const columns =[
     {
         key: 'operation',
         title: 'Action',
-        dataIndex: 'operation',
         render:(record)=> <ActionStudent record={record}/>,
         width:'20%'
     },
