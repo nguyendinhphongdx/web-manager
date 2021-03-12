@@ -11,26 +11,15 @@ const SubjectService = require("../service/SubjectService");
 const ProfessorService = require("../service/ProfessorService");
 exports.addClass = (req, res, next) => {
     ClassModel.findOne({name: req.body.name})
-    .exec((err,item) => {
+    .exec(async(err,item) => {
         if(item){ 
             responeInstance.error400(res, jsonInstance.jsonNoData('Class already exists'));
             return 
         }
-        const {name,_idSubject,_idFrofessor,status,startDate,schedule1,schedule2} = req.body;
-        var _subject,_frofessor;
-        if(_idSubject){
-            SubjectModel.findById(_idSubject)
-            .then((subject)=>{
-                _subject=subject;
-            })
-        }
-        if(_idFrofessor){
-            FrofessorModel.findById(_idFrofessor)
-            .then((frofessor)=>{
-                _frofessor=frofessor;
-            })
-        }
-        const __class = new ClassModel({name,_subject,_frofessor,status,startDate,schedule1,schedule2});
+        const {name,_idSubject,_idProfessor,status,startDate,schedule1,schedule2} = req.body;
+        const subject = await SubjectModel.findById(_idSubject)
+        const professor = _idProfessor;
+        const __class = new ClassModel({name,subject,professor,status,startDate,schedule1,schedule2});
         __class.save()
         .then((newClass) =>{
             responeInstance.success200(res, jsonInstance.toJsonWithData('SUCCESS',newClass ));
@@ -64,6 +53,7 @@ exports.removeClass = (req, res, next) => {
                 jsonInstance.toJsonWithData(`SUCCESS`, _class)
               );
         } else{
+            console.log('id Student',req.body._id);
             responeInstance.error400(res, jsonInstance.jsonNoData('Not find _class'));
         }
     })

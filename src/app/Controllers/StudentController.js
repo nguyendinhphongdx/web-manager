@@ -16,6 +16,7 @@ exports.addStudent = (req, res, next) => {
         image = new Date().getTime()+path.extname(avatarStudent.name);
         uploadPath = uploadStudent + image;
     }
+    console.log( req.body);
     Student.findOne({email: req.body.email})
     .exec(async (err, student) => {
         if(student){ 
@@ -25,6 +26,7 @@ exports.addStudent = (req, res, next) => {
         // Use the mv() method to place the file somewhere on your server
         const {name,password,age,email,status,description} = req.body;
         const __student = new Student({name,password,age,email,status,description,image});
+        console.log(__student);
         try {
             if(avatarStudent){
                 await  avatarStudent.mv(uploadPath)
@@ -57,10 +59,13 @@ exports.Students = (req, res) =>{
           );
     })
 }
-exports.removeStudent = (req, res, next) => {
+exports.removeStudent = async (req, res, next) => {
+    const result = await Student.findById(req.body._id)
+    console.log(result)
     Student.findByIdAndDelete(req.body._id)
     .then((student)=>{
         if(student){
+            console.log(student);
             const oldPath = uploadStudent+ student.image; // old file
             if(fs.existsSync(oldPath)){
                 fs.unlinkSync(oldPath)
