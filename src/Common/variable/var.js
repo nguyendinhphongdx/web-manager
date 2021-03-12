@@ -37,3 +37,9 @@ export const styleBackTop = {
     display: 'flex',
     justifyContent:'flex-end',
   }
+  export const styleRowUploadAvatar={
+    width:'100%',
+    display: 'flex',
+    justifyContent:'center',
+    alignContent: 'center',
+  }

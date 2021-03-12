@@ -8,6 +8,7 @@ export default function TableHome(){
             <Row>
                 <Col span={16}>
                     <ChartClassMark/>
+                  
                 </Col>
                 <Col span={8}>
                     <TopLevel/>

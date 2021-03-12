@@ -6,6 +6,7 @@ export function getBase64(file) {
       reader.onerror = error => reject(error);
     });
   }
+  
 export function devideCard(array){
   const nGroup = array.length/4;
   var newArray=[];

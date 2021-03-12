@@ -48,7 +48,8 @@ export default function ActionClass(props){
     setIsModalMemberVisible(false);
   };
     const handleDelete=()=>{
-      DeleteDataClass(dispatch,record._id)
+      const body ={_id:record._id}
+      DeleteDataClass(dispatch,body)
       .then((result)=>console.log(result));
       
     }

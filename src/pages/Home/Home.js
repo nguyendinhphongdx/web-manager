@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import NavCard from "../../components/ListCard/NavCard";
 import { GetDataProfessor } from "../../services/ProfessorService";
@@ -10,13 +10,13 @@ export default function HomePage(){
     const dispatch = useDispatch()
     console.log(state);
     useEffect(()=>{
-        GetDataProfessor(dispatch)
+        GetDataProfessor(dispatch) 
         GetDataSubject(dispatch);
     },[])
-    return(
+    return( 
         <div className="homePage">
-               <NavCard pros/>
-               <TableHome/>
+               <NavCard/>
+               <TableHome />
         </div>
        
     );

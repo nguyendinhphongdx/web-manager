@@ -1,6 +1,7 @@
 import { Button, Modal, Row, Table } from "antd";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { FormAddClass } from "../../components/FormModal/class/addClass";
 import { columns } from "../../contructData/Class";
 import { convertClass } from "../../helpers/convert";
 import { GetDataClass } from "../../services/ClassService";
@@ -31,8 +32,8 @@ export default function TableClass(){
             <Row className="add-class">
                 <Button type="primary" onClick={showModal}>Add Class</Button>
             </Row>
-            <Modal title="Add Class" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-               
+            <Modal title="Add Class" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel} footer={null}>
+                    <FormAddClass callback={handleOk}/>
             </Modal>
             <Table dataSource={classConverted} columns={columns}  bordered></Table>
         </div>

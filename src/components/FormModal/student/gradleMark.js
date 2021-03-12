@@ -1,11 +1,11 @@
 import { Button, Col, Form, Input, Row, Select } from "antd";
 import { useState } from "react";
-import { useSelector } from "react-redux";
 import { styleColumnModal, styleRowModal, styleRowModalAction } from "../../../Common/variable/var";
 
 export function GradeMark(props){
     const {record,_class,callback} = props;
     const [type,setType] = useState(()=>'default');
+    const [mark,setMark] = useState(()=>10);
     const subjectUpdate = record.mark.find(subject => {
         return JSON.stringify(subject.subject._id)===JSON.stringify(_class.subject[0]._id)
     }
@@ -31,12 +31,12 @@ export function GradeMark(props){
         }
         callback();
     }
-    const [mark,setMark] = useState(()=>0);
+    
     function handleChangeTypeMark(type){
         setType(type)
-        
+        document.getElementById('mark').value=Math.random();
         if(subjectUpdate){
-            const markByType=subjectUpdate[type]?subjectUpdate[type].mark:0;
+            const markByType=subjectUpdate[type]?subjectUpdate[type].mark:2;
             console.log(markByType);
             setMark(markByType);
         }
@@ -69,7 +69,7 @@ export function GradeMark(props){
             </Col>
             <Col span={12} className="columns-element" style={styleColumnModal}>
             <Form.Item label="Mark" name="mark" >
-                <Input  type="number" initialvalues={mark}/>
+                <Input  type="number" min={1} max={10} defaultValue={mark}/>
             </Form.Item>
             </Col>
         </Row>
