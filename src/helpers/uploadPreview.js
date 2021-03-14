@@ -29,13 +29,14 @@ export function getProfessorById(_Id,professor){
         return result
       }else{
         return {
-          name:'defaul Professor'
+          name:'defaul Professor',
+          _id:'defaul id'
         }
       }
 }
 export function devideStudentInClass(members,students){
     const inClass = members.map(member => {
-      return students.filter(student =>JSON.stringify(student._id)===JSON.stringify(member))
+      return students.find(student =>JSON.stringify(student._id)===JSON.stringify(member))
     })
     const NotInClass = students.filter(student => !members.includes(student._id))
 
@@ -47,6 +48,23 @@ export function devideStudentInClass(members,students){
 export function filterClassInStudent(classes,listClass){
   const result= classes.map(item => {
       return listClass.find(_item =>JSON.stringify(_item._id)===JSON.stringify(item))
+  })
+  return result;
+}
+export function filterStudentByKeys(keys,students){
+  const result= keys.map(item => {
+     const  student = students.find(_item =>JSON.stringify(_item.key)===JSON.stringify(item))
+     return student?student._id:null;
+  })
+  return result;
+}
+export function cutChartData(data){
+  const result= data.filter(item=>{
+    if(!isNaN(item.value)&&item.value!=0){
+      return {
+        ...item,value:Number(item.value)
+      }
+    }
   })
   return result;
 }

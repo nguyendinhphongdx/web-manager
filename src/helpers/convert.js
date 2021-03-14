@@ -22,3 +22,14 @@ function getNameProfessorByID(id,list){
     return {name:'null'};
    
 }
+export function convertTopClass(data){
+    
+    
+    const filter = data.filter(item=>item.name==='Mark');
+    const result = filter.sort(function(a,b){
+        return b.value -a.value;
+    })
+    return result.map((item,index)=>{
+        return {...item, key:index+1}
+    });
+}

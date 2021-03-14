@@ -63,7 +63,7 @@ export default function ActionClass(props){
               </Modal>
               <TeamOutlined style={{fontSize: '20px' }} onClick={showModalMember}/>
               <Modal title="Members" visible={isModalMemberVisible} onOk={handleOkMember} onCancel={handleCancelMember} footer={null}>
-                  <AddMemberToClass state={state} record={record} callback={handleCancelMember}/>  
+                  <AddMemberToClass record={record} callback={handleCancelMember}/>  
               </Modal>
             <Popconfirm title="Sure to delete?" onConfirm={handleDelete}>
                 <DeleteOutlined  style={{fontSize: '20px' }}/>
@@ -76,7 +76,7 @@ export default function ActionClass(props){
             visible={visible}
             width={300}
           >
-            <DrawerClass students={record.member} state={state}/>
+            <DrawerClass students={record.member} professor={record.professor} state={state}/>
           </Drawer>
         </div>
     );

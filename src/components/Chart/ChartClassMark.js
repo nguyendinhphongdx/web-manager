@@ -1,95 +1,30 @@
 import { Column } from '@ant-design/charts';
 import { Button } from 'antd';
+import { useState,useEffect } from 'react';
 import { styleButtonTopTable } from '../../Common/variable/var';
-import {useSelector} from 'react';
+import { dataChart } from '../../contructData/Class';
+import { GetDataChartClass } from '../../services/ClassService';
+import { useDispatch,useSelector } from "react-redux";
+
 export default function ChartClassMark() {
-    var data = [
-        {
-          name: 'London',
-          class: 'Jan.',
-          value: 18.9,
-        },
-        {
-          name: 'Berlin',
-          class: 'Jan.',
-          value: 12.4,
-        },
-        {
-          name: 'London',
-          class: 'Feb.',
-          value: 28.8,
-        },
-        {
-          name: 'London',
-          class: 'Mar.',
-          value: 39.3,
-        },
-        {
-          name: 'London',
-          class: 'Apr.',
-          value: 50,
-        },
-        {
-          name: 'London',
-          class: 'May',
-          value: 47,
-        },
-        {
-          name: 'London',
-          class: 'Jun.',
-          value: 20.3,
-        },
-        {
-          name: 'London',
-          class: 'Jul.',
-          value: 24,
-        },
-        {
-          name: 'London',
-          class: 'Aug.',
-          value: 35.6,
-        },
-        {
-          name: 'Berlin',
-          class: 'Feb.',
-          value: 23.2,
-        },
-        {
-          name: 'Berlin',
-          class: 'Mar.',
-          value: 34.5,
-        },
-        {
-          name: 'Berlin',
-          class: 'Apr.',
-          value: 60,
-        },
-        {
-          name: 'Berlin',
-          class: 'May',
-          value: 52.6,
-        },
-        {
-          name: 'Berlin',
-          class: 'Jun.',
-          value: 35.5,
-        },
-        {
-          name: 'Berlin',
-          class: 'Jul.',
-          value: 37.4,
-        },
-        {
-          name: 'Berlin',
-          class: 'Aug.',
-          value: 42.4,
-        },
-      ];
-    // const state = useSelector(state => state);
-    // console.log('state in chart',state);
+    const dispatch = useDispatch();
+   const data = useSelector(state=>state.Class.chart);
+   const dataConverted = data.map(item=>{
+    return {
+      ...item,
+      value: Number(item.value)
+    }
+   })
+    console.log(dataConverted);
+   useEffect(()=>{
+    GetDataChartClass(dispatch)
+    .then(data =>{
+      console.log(typeof data[0].value);
+    })
+   },[])
     var config = { 
         height: 450,
-        data: data,
+        data: dataConverted,
         isGroup: true,
         xField: 'class',
         yField: 'value',

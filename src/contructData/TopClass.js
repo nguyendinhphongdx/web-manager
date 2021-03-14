@@ -24,7 +24,7 @@ export const columns = [
         key:'operation',
         render:(record)=>{
             return(
-                <Progress percent={record.mark} status="active"/>
+                <Progress percent={Number(record.value*10).toFixed(1)} status="active"/>
             );
         }
     }

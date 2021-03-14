@@ -1,11 +1,11 @@
+import { Button, Col, Form, Input, Row, Select, Upload } from "antd";
 import { EyeInvisibleOutlined, EyeTwoTone, UploadOutlined } from '@ant-design/icons';
-import { Button, Col, Form, Input, Row, Switch, Upload } from "antd";
 import TextArea from "antd/lib/input/TextArea";
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { styleColumnModal, styleRowModal, styleRowModalAction, styleRowUploadAvatar } from "../../../Common/variable/var";
-import {Add_Student_Service} from '../../../services/StudentService';
-export function AddStudent(props){
+import { useDispatch } from "react-redux";
+import { styleRowModal, styleRowModalAction,styleColumnModal, styleRowUploadAvatar } from "../../../Common/variable/var";
+import { useState } from "react";
+
+export function AddDocument(props){
     const {callback} = props;
     const [form] = Form.useForm();
     const dispatch = useDispatch();
@@ -19,17 +19,13 @@ export function AddStudent(props){
       };
     function handleChangeOnAdd(data){
       data = {...data,file:file}
-      Add_Student_Service(dispatch,data)
-      .then(result => {
-        callback();
-      })
     }
     return(
         <Form onFinish={handleChangeOnAdd} form={form}>
         <Row style={styleRowModal}>
             <Col span={24} className="columns-element" style={styleColumnModal}>
-            <Form.Item label="Name" name="name">
-                <Input placeholder={'Enter student name'} required={true}
+            <Form.Item label="Title" name="title">
+                <Input placeholder={'Enter Title'} required={true}
                 />
             </Form.Item>
             </Col>
@@ -71,7 +67,7 @@ export function AddStudent(props){
                </Col>
                <Col span={12} className="columns-element" style={styleColumnModal}>
                             <Form.Item label="Status" name="status" >
-                                <Switch defaultChecked={true}/>
+                             
                             </Form.Item>
                </Col>
         </Row>

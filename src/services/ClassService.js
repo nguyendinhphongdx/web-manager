@@ -1,6 +1,8 @@
 import { message } from "antd";
 import sendRequest from "../axios/API";
-import { Add_Class, Get_All_Class, Remove_Class, Update_Class } from "../redux/actions/classAction";
+import { dataChart } from "../contructData/Class";
+import { cutChartData } from "../helpers/uploadPreview";
+import { Add_Class, Get_All_Class, Get_Data_Chart, Remove_Class, Update_Class } from "../redux/actions/classAction";
 
 const key='updatable'
 export async function GetDataClass(dispatch){
@@ -65,6 +67,44 @@ export async function AddDataClass(dispatch,body){
     .catch((error) =>{
         console.log(error);
         message.warning({ content: 'Thêm Lớp lỗi.', key });
+    })
+    return request
+}
+export async function AddStudentsToClass(dispatch,body){
+    // {
+    //     "_idStudents":[
+    //         "6046430f0cc6fc4ec604dd7e","6046438b0cc6fc4ec604dd80"
+    //     ],
+    //     "_id":"60464aab459f7b4cfe85bae2"
+    // }
+    message.loading({ content: 'Đang xử lý... ', key });
+    const request = await sendRequest('class/add_member','post',body)
+    .then(data =>{
+        const action = Update_Class(data[0])
+        dispatch(action);
+         return 'success'
+    })
+    .catch((error) =>{
+        console.log(error);
+        message.warning({ content: 'Thêm sinh viên lỗi Lớp lỗi.', key });
+    })
+    return request
+}
+export async function GetDataChartClass(dispatch){
+    const request = await sendRequest('class/compare_class','get')
+    .then(data =>{
+        if(data){
+            const action = Get_Data_Chart(cutChartData(data));
+            dispatch(action);
+            return cutChartData(data);
+        }else{
+            return dataChart
+        }
+         
+    })
+    .catch((error) =>{
+        console.log(error);
+        message.warning({ content: 'Không thể lấy biểu đồ.', key });
     })
     return request
 }

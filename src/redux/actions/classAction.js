@@ -35,3 +35,9 @@ export const Add_Member=(_class) => {
        payload: _class
    }
 }
+export const Get_Data_Chart=(arr) => {
+    return {
+       type: constants.GET_DATA_CHART,
+       payload: arr
+   }
+}

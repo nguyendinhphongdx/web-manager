@@ -1,6 +1,6 @@
 import { message } from "antd";
 import sendRequest from "../axios/API";
-import { Add_Student, Get_All_Student, Remove_Student } from "../redux/actions/studentAction";
+import { Add_Student, Get_All_Student, Remove_Student, Update_Student } from "../redux/actions/studentAction";
 const key='updatable'
 export async function GetDataStudent(dispatch){
     message.loading({ content: 'Đang xử lý...', key });
@@ -57,6 +57,24 @@ export async function Delete_Student_Service(dispatch,body){
             message.error({ content: `${'Student is not Found'}`, key });
         }else{
             message.warning({ content: 'Delete Failed.', key });
+        }
+    })
+    return request
+}
+export async function Gradle_Mark_Service(dispatch,body){
+    message.loading({ content: 'Đang xử lý...', key });
+    const request = await sendRequest('student/grade_mark','post',body)
+    .then(data =>{
+        const action = Update_Student(data[0])
+        dispatch(action);
+        return data
+    })
+    .catch((error) =>{
+        console.log(error.response);
+        if(error.response.status===400){
+            message.error({ content: `${'Student is not Found'}`, key });
+        }else{
+            message.warning({ content: 'Gradle Failed.', key });
         }
     })
     return request

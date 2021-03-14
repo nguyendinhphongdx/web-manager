@@ -64,3 +64,75 @@ export const columns =[
         render:(record)=> <ActionClass record={record}/>
     }
 ];
+export const dataChart= [
+    {
+        "name": "Mark",
+        "class": "1810A05",
+        "value": 8.74
+    },
+    {
+        "name": "Mark",
+        "class": "1810A01",
+        "value": 6.96
+    },
+    {
+        "name": "Mark",
+        "class": "1810A02",
+        "value": 8.59
+    },
+    {
+        "name": "Mark",
+        "class": "1810A04",
+        "value": 7.61
+    },
+    {
+        "name": "Mark",
+        "class": "1010A01",
+        "value": 9.31
+    },
+    {
+        "name": "Mark",
+        "class": "1810A02",
+        "value": 8.59
+    },
+    {
+        "name": "Mark",
+        "class": "1810A02",
+        "value": 8.59
+    },
+    {
+        "name": "Total",
+        "class": "1810A05",
+        "value":3
+    },
+    {
+        "name": "Total",
+        "class": "1810A01",
+        "value": 3
+    },
+    {
+        "name": "Total",
+        "class": "1810A02",
+        "value": 4
+    },
+    {
+        "name": "Total",
+        "class": "1810A04",
+        "value":6
+    },
+    {
+        "name": "Total",
+        "class": "1010A01",
+        "value": 5
+    },
+    {
+        "name": "Total",
+        "class": "1810A02",
+        "value": 4
+    },
+    {
+        "name": "Total",
+        "class": "1810A02",
+        "value": 4
+    }
+]

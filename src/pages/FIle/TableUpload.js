@@ -1,5 +1,6 @@
 import { Button, Modal, Row, Table } from "antd";
 import { useState } from "react";
+import { AddDocument } from "../../components/FormModal/document/AddDocument";
 import ListCardUpload from "../../components/ListCard/ListCardUpload";
 
 export default function TableUpload(){
@@ -18,10 +19,10 @@ export default function TableUpload(){
     return(
         <div className="tabelPanel">
             <Row className="add-file">
-                <Button type="primary" onClick={showModal}>Add File</Button>
+                <Button type="primary" onClick={showModal}>Upload Document</Button>
             </Row>
-            <Modal title="Add Document" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-               
+            <Modal title="Add Document" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel} footer={null}>
+               <AddDocument callback={handleOk}/>
             </Modal>
             <ListCardUpload/>
         </div>

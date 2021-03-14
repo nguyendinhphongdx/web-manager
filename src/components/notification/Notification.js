@@ -1,6 +1,6 @@
 import { Avatar, List } from "antd";
 
-export default function History(){
+export default function Notification(){
     const data = [
         {
           title: 'Ant Design Title 1',
@@ -15,11 +15,10 @@ export default function History(){
           title: 'Ant Design Title 4',
         },
       ];
-   
     return(
-        <div className="HistoryPage">
-              <List
+            <List
             itemLayout="horizontal"
+            style={{width:'400px'}}
             dataSource={data}
             renderItem={item => (
             <List.Item>
@@ -28,10 +27,8 @@ export default function History(){
                 title={<a href="https://ant.design">{item.title}</a>}
                 description="Ant Design, a design language for background "
                 />
-                <div style={{marginRight:'20px'}}>Content</div>
             </List.Item>
             )}
         />
-        </div>
     );
 }

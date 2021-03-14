@@ -1,7 +1,8 @@
 import { message } from 'antd';
 import * as constants from '../constants';
 const initialState={
-    classes:[]
+    classes:[],
+    chart:[]
 }
 const key='updatable'
 const _class =(state = initialState, action)=>{
@@ -49,6 +50,14 @@ const _class =(state = initialState, action)=>{
             return {
                 ...state,
                 classes: _newClass
+            };
+        }
+        case constants.GET_DATA_CHART: {
+            const { payload } = action; // arr
+           message.success({ content: 'Fetch data chart thành công!', key, duration: 2 });
+            return {
+                ...state,
+                chart: payload
             };
         }
         default: return {...state}

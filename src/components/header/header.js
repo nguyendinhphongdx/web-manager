@@ -1,5 +1,6 @@
 import { BellOutlined, LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
 import { Badge, Col, Drawer, Dropdown, Menu, message, Popover, Row } from "antd";
+import Notification from '../notification/Notification'
 import Search from "antd/lib/input/Search";
 import { useState } from "react";
 import {useSelector } from "react-redux";
@@ -52,13 +53,13 @@ export default function HeaderComponent() {
                         </Dropdown.Button>
                     </Menu.Item>
                     <Menu.Item key="noti">
-                      
-                        <Popover placement="bottomRight" title={'Notifications'} content={content} trigger="click">
+                        <Popover placement="bottomRight" title={'Notifications'} content={<Notification/>}
+                        width={400} 
+                        trigger="click">
                             <Badge size="default" count={5} offset={[-10,0]}>
                             <BellOutlined style={{ fontSize: '20px' }} />
                             </Badge>
                         </Popover>
-                      
                     </Menu.Item>
                     <Menu.Item key="Setting" onClick={showDrawer}>
                     <Badge size="default" count={5} offset={[-10,0]}>
