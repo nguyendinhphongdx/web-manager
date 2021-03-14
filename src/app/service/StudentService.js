@@ -54,7 +54,6 @@ class StudentService{
      }
     avgMarkStudent(student){
         var markClass =0;
-        
         if(student.mark.length==0){
             return  {
                 name:student.name,
@@ -63,13 +62,15 @@ class StudentService{
         }else{
             const subjects = student.mark;
             subjects.forEach(subject=>{
-                markClass+=MarkService.avgMark(subject);
+                markClass+=Number(MarkService.avgMark(subject));
             })
+            markClass=Number(markClass/subjects.length).toFixed(2);
         }
         return {
             name:student.name,
             mark:markClass,
         }
+       
     }
 }
 module.exports = new StudentService();

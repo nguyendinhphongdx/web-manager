@@ -24,7 +24,8 @@ exports.addStudent = (req, res, next) => {
             return 
         }
         // Use the mv() method to place the file somewhere on your server
-        const {name,password,age,email,status,description} = req.body;
+        let {name,password,age,email,status,description} = req.body;
+        age = Number(age);
         const __student = new Student({name,password,age,email,status,description,image});
         console.log(__student);
         try {
@@ -174,21 +175,6 @@ exports.gradeMark = (req, res, next) => {
     .catch(error=>{
         responeInstance.error400(res, jsonInstance.jsonNoData(error.message));
     })
-    // Student.findOne({_id:req.body._id})
-    // .then((student)=>{
-    //     if(student){
-    //         const _newStudent = {...student}
-    //         responeInstance.success200(
-    //             res,
-    //             jsonInstance.toJsonWithData(`SUCCESS`, student)
-    //           );
-    //     } else{
-    //         throw new Error('Student not found')
-    //     }
-    // })
-    // .catch(err => {
-    //     responeInstance.error400(res, jsonInstance.jsonNoData(err.message));
-    // })
 }
 exports.detailStudent = (req, res) => {
     Student.findById(req.body._id)

@@ -5,7 +5,7 @@ const RouteSubject = require("./Subject");
 const RouteProfessor = require("./Professor");
 const RouteClass = require("./Class");
 const RouteDocument = require("./Document");
-
+const RouteHistory = require("./History");
 function Route(app){
     app.use('/login',RouteLogin);
     app.use('/user',RouteUser);
@@ -13,6 +13,7 @@ function Route(app){
     app.use('/subject',RouteSubject);
     app.use('/professor',RouteProfessor);
     app.use('/class',RouteClass);
+    app.use('/history',RouteHistory);
     app.use('/document',RouteDocument);
     app.use('/',(req, res) =>{
         res.json({

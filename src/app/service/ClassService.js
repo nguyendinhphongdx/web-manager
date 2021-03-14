@@ -41,8 +41,8 @@ function getMarkClass(members,students,name){
 }
 function countMarkClas(membersInClass){
     var total =0;
-    membersInClass.forEach(member => total += StudentService.avgMarkStudent(member).mark);
-    return total;
+    membersInClass.forEach(member => total += Number(StudentService.avgMarkStudent(member).mark));
+    return (Number(total)/membersInClass.length).toFixed(1);
 }
 
 module.exports = new ClassService();
