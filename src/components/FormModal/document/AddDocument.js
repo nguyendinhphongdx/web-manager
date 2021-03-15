@@ -1,17 +1,17 @@
-import { Button, Col, Form, Input, Row, Select, Upload } from "antd";
+import { Button, Col, Form, Input, Row, Select, Switch, Upload } from "antd";
 import { EyeInvisibleOutlined, EyeTwoTone, UploadOutlined } from '@ant-design/icons';
 import TextArea from "antd/lib/input/TextArea";
 import { useDispatch } from "react-redux";
 import { styleRowModal, styleRowModalAction,styleColumnModal, styleRowUploadAvatar } from "../../../Common/variable/var";
 import { useState } from "react";
+import { AddDocumentService } from "../../../services/DocumentService";
 
 export function AddDocument(props){
-    const {callback} = props;
+    const {callback,state} = props;
     const [form] = Form.useForm();
     const dispatch = useDispatch();
     const [file,setFile] = useState(()=>[]);
     const onChangeHandler = (e)=>{
-        console.log(e.target.files[0]);
         setFile(e.target.files[0]);
     }
     const onReset = () => {
@@ -19,7 +19,24 @@ export function AddDocument(props){
       };
     function handleChangeOnAdd(data){
       data = {...data,file:file}
+      AddDocumentService(dispatch,data)
+      .then((data)=>{
+        callback();
+      })
+     
     }
+    const subjectRedux = state.Subject.subjects;
+    const professorRedux = state.Professor.professores;
+    const elementSubject = subjectRedux.map(item => {
+        return(
+            <Select.Option value={item._id} key={item._id}>{item.name}</Select.Option>
+        );
+    })
+    const elementProfessor = professorRedux.map(item => {
+        return(
+            <Select.Option value={item._id} key={item._id}>{item.name}</Select.Option>
+        );
+    })
     return(
         <Form onFinish={handleChangeOnAdd} form={form}>
         <Row style={styleRowModal}>
@@ -34,22 +51,11 @@ export function AddDocument(props){
            <Col span={12} className="columns-element" style={styleColumnModal}>
                <Row>
                <Col span={24} className="columns-element" style={styleColumnModal}>
-                        <Form.Item label="Password" name="password">
-                        <Input.Password
-                                placeholder="input password"
-                                iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
-                                />
+                        <Form.Item label="Subject" name="_idSubject">
+                            <Select>{elementSubject}</Select>
                         </Form.Item>
                </Col>
                </Row>
-               <Row >
-                    <Col span={24} className="columns-element" style={styleColumnModal}>
-                    <Form.Item label="Age" name="age">
-                            <Input type="number" min="10" max="30" defaultValue={20}/>
-                        </Form.Item>
-                    </Col>
-               </Row>
-              
            </Col>
            <Col span={12} className="columns-element" style={styleRowUploadAvatar}>
                     <Form.Item label="Avatar" name="file"  onChange={onChangeHandler}>
@@ -60,24 +66,16 @@ export function AddDocument(props){
            </Col>
         </Row>
         <Row style={styleRowModal}>
-               <Col span={12} className="columns-element" style={styleColumnModal}>
-                            <Form.Item label="Phone" name="phone" >
-                            <Input min="10" max="30" placeholder={'Enter phone number'}/>
-                            </Form.Item>
-               </Col>
-               <Col span={12} className="columns-element" style={styleColumnModal}>
+                    <Col span={16} className="columns-element" style={styleColumnModal}>
+                        <Form.Item label="Professor" name="_idAuth">
+                            <Select>{elementProfessor}</Select>
+                        </Form.Item>
+                    </Col>
+               <Col span={8} className="columns-element" style={styleColumnModal}>
                             <Form.Item label="Status" name="status" >
-                             
+                                <Switch checked={true}/>
                             </Form.Item>
                </Col>
-        </Row>
-        <Row style={styleRowModal}>
-            <Col span={24} className="columns-element" style={styleColumnModal}>
-            <Form.Item label="Email" name="email">
-                <Input type="email" placeholder={'Enter gmail'} required={true}
-                />
-            </Form.Item>
-            </Col>
         </Row>
         <Row style={styleRowModal}>
             <Col span={24} className="columns-element" style={styleColumnModal}>

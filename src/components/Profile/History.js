@@ -1,4 +1,7 @@
 import { Avatar, List } from "antd";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { GetDataHistory } from "../../services/HistoryService";
 
 export default function History(){
     const data = [
@@ -15,20 +18,27 @@ export default function History(){
           title: 'Ant Design Title 4',
         },
       ];
-   
+    const dispatch =useDispatch();
+    const historyRedux = useSelector(state=>state.History.histories);
+    useEffect(()=>{
+      GetDataHistory(dispatch)
+      .then(data=>{
+        console.log(data);
+      })
+    },[]);
     return(
         <div className="HistoryPage">
               <List
             itemLayout="horizontal"
-            dataSource={data}
+            dataSource={historyRedux}
             renderItem={item => (
             <List.Item>
                 <List.Item.Meta
                 avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
-                title={<a href="https://ant.design">{item.title}</a>}
-                description="Ant Design, a design language for background "
+                title={`user: ${item.user} - address: ${item.remoteAddress}`}
+                description={item.path}
                 />
-                <div style={{marginRight:'20px'}}>Content</div>
+                <div style={{marginRight:'20px'}}>{item.content}</div>
             </List.Item>
             )}
         />

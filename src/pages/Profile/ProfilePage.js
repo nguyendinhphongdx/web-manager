@@ -15,7 +15,7 @@ export default function ProfilePage(){
             <History/>
           </TabPane>
           <TabPane tab="Tab 3" key="3">
-            Content of Tab 3
+          <History/>
           </TabPane>
         </Tabs>
         </div>

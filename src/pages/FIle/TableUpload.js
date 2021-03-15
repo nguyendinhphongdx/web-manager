@@ -1,10 +1,12 @@
 import { Button, Modal, Row, Table } from "antd";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import { AddDocument } from "../../components/FormModal/document/AddDocument";
 import ListCardUpload from "../../components/ListCard/ListCardUpload";
 
 export default function TableUpload(){
     const [isModalVisible, setIsModalVisible] = useState(false);
+    const state = useSelector(state=>state)
     const showModal = () => {
         setIsModalVisible(true);
     };
@@ -22,7 +24,7 @@ export default function TableUpload(){
                 <Button type="primary" onClick={showModal}>Upload Document</Button>
             </Row>
             <Modal title="Add Document" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel} footer={null}>
-               <AddDocument callback={handleOk}/>
+               <AddDocument callback={handleOk} state={state}/>
             </Modal>
             <ListCardUpload/>
         </div>

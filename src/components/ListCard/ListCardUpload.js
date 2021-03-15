@@ -1,44 +1,17 @@
 import { List, Card } from 'antd';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { GetDataDocument } from '../../services/DocumentService';
 import CardUpload from './CardUpload';
 export default function ListCardUpload(){
-    const data = [
-        {
-          title: 'Title 1',
-        },
-        {
-          title: 'Title 2',
-        },
-        {
-          title: 'Title 3',
-        },
-        {
-          title: 'Title 4',
-        },
-        {
-          title: 'Title 5',
-        },
-        {
-          title: 'Title 6',
-        },
-        {
-            title: 'Title 1',
-          },
-          {
-            title: 'Title 2',
-          },
-          {
-            title: 'Title 3',
-          },
-          {
-            title: 'Title 4',
-          },
-          {
-            title: 'Title 5',
-          },
-          {
-            title: 'Title 6',
-          },
-      ];
+    const documentRedux = useSelector(state=>state.Document.documents)
+    const dispatch = useDispatch()
+    useEffect(()=>{
+      GetDataDocument(dispatch)
+      .then(documents =>{
+        console.log(documents);
+      })
+    },[])
     return(
         <div className="ListCardUpload">
         <List
@@ -51,7 +24,7 @@ export default function ListCardUpload(){
           xl: 6,
           xxl: 4,
         }}
-        dataSource={data}
+        dataSource={documentRedux}
         renderItem={item => (
           <List.Item>
             <CardUpload record={item}/>
