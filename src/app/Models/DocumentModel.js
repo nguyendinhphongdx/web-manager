@@ -10,8 +10,12 @@ const DocumentSchema = new mongoose.Schema({
         enum: ['actived','blocked'],
         default:'actived'
     },
+    size:{type: String},
     type:{type:String},
     date:{type: Number, default: Date.now().valueOf()},
+    description:{type:String},
+    filename:{type:String},
+    path:{type:String},
 },{ timestamps:true });
 
 module.exports = mongoose.model('Document',DocumentSchema);

@@ -1,58 +1,60 @@
-const Student = require('../Models/StudentModel');
+const SubjectModel = require('../Models/SubjectModel');
 const DocumemtModel = require('../Models/DocumentModel');
 const path = require('path');
 const fs = require('fs');
 const jsonInstance = require("../utils/JsonUtils");
 const responeInstance = require("../utils/ResponeUtils");
 const ProfessorModel = require('../Models/ProfessorModel');
+const { resolveSoa } = require('dns');
 const uploadDocumemt  =path.join('public/uploads/document/');
 exports.uploadDocumemt = (req, res) => {
     if (req.files == null) {
         responeInstance.error400(res, jsonInstance.jsonNoData('Not find file'));
         return
     }
+    try {
     const fileDocument = req.files.file; // name of file
-    const image = new Date().getTime()+path.extname(fileDocument.name);
-    const uploadPath = uploadDocumemt + image;
-    const {name,description,_idAuth} = req.body;
-    DocumemtModel.findOne({name})
-    .exec((err, document) => {
+    const filename = new Date().getTime()+path.extname(fileDocument.name);
+    const uploadPath = uploadDocumemt + filename;
+    const {title,_idSubject,description,_idAuth,status} = req.body;
+    DocumemtModel.findOne({title})
+    .exec(async (err, document) => {
         if(document){ 
-            responeInstance.error400(res, jsonInstance.jsonNoData('Name already exists'));
+            responeInstance.error400(res, jsonInstance.jsonNoData('Title already exists'));
             return 
         }
-        ProfessorModel.findById(_idAuth)
-        .then((professor)=>{
-            if(!professor){
-                throw new Error('professor not found');
-            }
-            try {
-                const type = path.extname(fileDocument.name).split('.')[1];
-                const size = fileDocument.size;
-                console.log(professor);
-                 const __document = new DocumemtModel({name,description,auth:_idAuth,type,size,image});
-                fileDocument.mv(uploadPath)
-                .then(() =>{
-                    __document.save()
-                    .then((document) =>{
-                        responeInstance.success200(res, jsonInstance.toJsonWithData('SUCCESS',document));
-                        return 
-                    })
-                    .catch((error) =>{
-                        throw new Error(error.message);
-                    })
-                })
-                .catch(err =>{
-                    throw new Error(err.message);
-                })
-            } catch (error) {
+        const subject = await SubjectModel.findById(_idSubject);
+        if(!subject){
+            throw new Error('Subject not found');
+        }
+        const professor = await ProfessorModel.findById(_idAuth);
+        if(!professor){
+            throw new Error('Professor not found');
+        }
+        const type = path.extname(fileDocument.name).split('.')[1];
+        const size = fileDocument.size;
+        const pathFile = `uploads/document/${filename}`;
+        const __document = new DocumemtModel({title,subject,description,auther:_idAuth,type,size,filename,status,path:pathFile});
+        fileDocument.mv(uploadPath)
+        .then(() =>{
+            __document.save()
+            .then((document) =>{
+                responeInstance.success200(res, jsonInstance.toJsonWithData('SUCCESS',document));
+                return 
+            })
+            .catch((error) =>{
                 throw new Error(error.message);
-            }
+            })
         })
-        .catch((err)=>{
-            responeInstance.error400(res, jsonInstance.jsonNoData(err.message));
+        .catch(err =>{
+            throw new Error(err.message);
         })
     })
+        
+    } catch (error) {
+        throw new Error(error.message);
+    }
+    
 }
 exports.Documents = (req, res) =>{
     DocumemtModel.find({})
@@ -106,3 +108,12 @@ exports.updateDocument = (req, res, next) => {
         responeInstance.error400(res, jsonInstance.jsonNoData(err.message));
     })
 }
+exports.viewDocument = (req, res, next) => {
+    const pathDoc = process.cwd() +'/'+uploadDocumemt+'/'+req.params.filename
+    res.sendFile(pathDoc)
+    fs.readFile(pathDoc, function (err,data){
+        response.contentType("application/pdf");
+        response.send(data);
+     });
+}
+
