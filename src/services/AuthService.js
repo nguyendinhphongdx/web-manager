@@ -16,7 +16,8 @@ export async function OnLogin(dispatch,data,history){
         const action = adminLogin(data[0])
         dispatch(action);
         console.log('redirectting....');
-        history.replace('/home');
+        return data[0].token;
+        // history.replace('/home');
     })
     .catch((error) =>{
         console.log(error);

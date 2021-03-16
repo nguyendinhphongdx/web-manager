@@ -10,11 +10,11 @@ import StudentPage from "./pages/Students/Students";
 import SubjectPage from "./pages/Subject/SubjectPage";
 
 const Routes = [
-    {
-        path: '/',
-        exact: true,
-        main: Login,
-    },
+    // {
+    //     path: '/',
+    //     exact: true,
+    //     main: Login,
+    // },
     {
         path: '/home',
         exact: true,

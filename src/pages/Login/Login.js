@@ -7,9 +7,13 @@ import logo from '../../images/logo192.png';
 import { OnLogin } from '../../services/AuthService';
 import './loginCss.css';
  export default function Login(){
-      const dispatch = useDispatch();
-      const history = useHistory();    
-     const [isClick,setClick] = useState(()=>false);
+    const [token,setToken] = useState(()=>localStorage.getItem('token'));
+    const history = useHistory();    
+    if(token){
+        history.push('/home');
+    }
+    const dispatch = useDispatch();
+    const [isClick,setClick] = useState(()=>false);
     document.addEventListener('keypress',function(e){
          if(e.key === 'Enter'){
             document.getElementById('btn-login').click();
@@ -18,7 +22,12 @@ import './loginCss.css';
     async function handleOnLogin(data) {  
         setClick(true);
         console.log("calling");
-        await OnLogin(dispatch,data,history); // {token,use{}}
+        await OnLogin(dispatch,data,history) // {token,use{}}
+        .then(token => {
+            if(token){
+                setToken(token)
+            }
+        })
         console.log("resolve");
         setClick(false);
     }
@@ -79,7 +88,7 @@ import './loginCss.css';
                         <Checkbox style={{color: 'white'}}>Remember me</Checkbox>
                 </Form.Item>
 
-                <a className="login-form-forgot" href="">
+                <a className="login-form-forgot" href>
                 Forgot password
                 </a>
                 </Form.Item>
@@ -89,7 +98,7 @@ import './loginCss.css';
                         </Button>
                     </Form.Item>
                     <Form.Item className="group-login-fuc" style={{width:'100%',textAlign:'left',margin:'0px'}}>
-                         Or <a href="">register now!</a>
+                         Or <a href>register now!</a>
                     </Form.Item>
                     
                 </Form>
@@ -99,5 +108,4 @@ import './loginCss.css';
           </div>
     </div>
     );
-
 }

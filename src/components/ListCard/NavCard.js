@@ -29,7 +29,7 @@ export default function NavCard(){
             );
         })
         return(
-            <div >
+            <div key={index}>
                 <div style={contentStyle}>
                 <Row gutter={16} className="row-carousel">
                     {elementItem}
