@@ -1,6 +1,7 @@
 const Student = require('../Models/StudentModel');
 const path = require('path');
 const fs = require('fs');
+const jwt = require('jsonwebtoken');
 const jsonInstance = require("../utils/JsonUtils");
 const responeInstance = require("../utils/ResponeUtils");
 const SubjectModel = require('../Models/SubjectModel');
@@ -178,8 +179,13 @@ exports.gradeMark = (req, res, next) => {
 }
 exports.detailStudent = (req, res) => {
     Student.findById(req.body._id)
-    .then(student => {
-        responeInstance.success200(res, jsonInstance.toJsonWithData('SUCCESS',student));
+    .then(async student => {
+        if(!student){
+            throw new Error('Student not found')
+        }
+        const data = await StudentService._mobile_GetDetailStudent(student)
+        console.log(Array.isArray(data));
+        responeInstance.success200(res, jsonInstance.toJsonWithData('SUCCESS',data));
     })
     .catch(error=>{
         responeInstance.error400(res, jsonInstance.jsonNoData(error.message));
@@ -193,5 +199,42 @@ exports.markStudent = (req, res) => {
     })
     .catch(error=>{
         responeInstance.error400(res, jsonInstance.jsonNoData(error.message));
+    })
+}
+exports.getAllClass = (req, res) => {
+    Student.findById(req.body._id)
+    .then( async student => {
+        if(!student){
+            throw new Error('Student is not Found')
+        }
+        const data = await StudentService._mobile_GetAllClassByStudent(student)
+        console.log(Array.isArray(data));
+        responeInstance.success200(res, jsonInstance.toJsonWithArray('SUCCESS',data));
+    })
+    .catch(error=>{
+        responeInstance.error400(res, jsonInstance.jsonNoData(error.message));
+    })
+}
+exports.Login = (req, res) => {
+    Student.findOne({email:req.body.email})
+    .exec((err, student) =>{
+        if(err){responeInstance.error400(res, jsonInstance.jsonNoData(err.message)); return}
+        if(!student){responeInstance.error401(res, jsonInstance.jsonNoData('User not found')); return}
+        if(student.authenticate(req.body.password)){
+            const startTime = new Date();
+            const endTime = new Date(startTime);
+            endTime.setMinutes(endTime.getMinutes()+5);
+            // create token
+            const token = jwt.sign({name:student.name},process.env.JWT_SECRET,{expiresIn:'5h'});
+            responeInstance.success200(res, jsonInstance.toJsonWithData('SUCCESS',{
+                token,
+                start: startTime,
+                end: endTime,    
+                student: student
+            }))
+        }else{
+            responeInstance.error401(res, jsonInstance.jsonNoData('Authenticate Failed')); return
+            }
+            
     })
 }

@@ -1,4 +1,6 @@
+const ClassModel = require("../Models/ClassModel");
 const StudentModel = require("../Models/StudentModel");
+const ClassService = require("./ClassService");
 const MarkService = require("./MarkService");
 
 class StudentService{
@@ -71,6 +73,43 @@ class StudentService{
             mark:markClass,
         }
        
+    }
+    async _mobile_GetAllClassByStudent(student){
+        const allClasses = student.class || [];
+        const detailAllClass = await ClassModel.find().where('_id').in(allClasses)
+        const newClasses = await Promise.all(detailAllClass.map( async _class =>{
+            const member = await ClassService._mobile_GetAllStudentByClass(_class);
+            const professor = await ClassService._mobile_GetProfessorByClass(_class);
+            const obj = {
+                ..._class._doc,
+                member:member,
+                professor:professor
+            }
+            return obj
+        }))
+        return newClasses;
+    }
+    async _mobile_GetDetailStudent(student){
+        const allClasses = student.class || [];
+        const detailAllClass = await ClassModel.find().where('_id').in(allClasses)
+        const newClasses = await Promise.all(detailAllClass.map( async _class =>{
+            const member = await ClassService._mobile_GetAllStudentByClass(_class);
+            const professor = await ClassService._mobile_GetProfessorByClass(_class);
+            const obj = {
+                _id:_class._id,
+                name:_class._doc.name,
+                _idSubject:{
+                    _id:_class._doc.subject[0]._id,
+                    name:_class._doc.subject[0].name
+                },
+                member:member,
+                professor:professor,
+            }
+            return obj
+        }))
+        const allMark = student.mark || [];
+
+        return {...student._doc,class:newClasses};
     }
 }
 module.exports = new StudentService();

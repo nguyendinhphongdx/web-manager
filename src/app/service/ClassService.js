@@ -1,3 +1,5 @@
+const ProfessorModel = require("../Models/ProfessorModel");
+const StudentModel = require("../Models/StudentModel");
 const ArrayService = require("./ArrayService");
 const MarkService = require("./MarkService");
 const StudentService = require("./StudentService");
@@ -26,6 +28,32 @@ class ClassService{
             member:member
        }
     }
+    async _mobile_GetAllStudentByClass(_class){
+        const allMember = _class.member || [];
+        let detailAllMember = await StudentModel.find().where('_id').in(allMember)
+        detailAllMember = await detailAllMember.map(item=>{
+            return {
+                name: item.name,
+                _id: item._id
+            }
+        })
+        return detailAllMember;
+    }
+    async _mobile_GetProfessorByClass(_class){
+        if(!_class.professor[0]){
+            return {
+                name:"default name",
+                _id:"defaul id",
+                image:"defaul image"
+            }
+        }
+        let professor = await ProfessorModel.findById(_class.professor[0])
+        return {
+            name:professor.name,
+            _id:professor._id,
+            image:professor.image
+        };
+    }
 }
 function getMarkClass(members,students,name){
     const membersInClass = members.map(idMember =>{
@@ -38,6 +66,7 @@ function getMarkClass(members,students,name){
         value:`${countMarkClas(membersInClass)}`
     }
    return dataMark;
+
 }
 function countMarkClas(membersInClass){
     var total =0;

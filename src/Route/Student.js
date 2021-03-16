@@ -8,7 +8,9 @@ const { requireLogin } = require('../app/Controllers/AuthController');
     changeAvatar,
     gradeMark,
     detailStudent,
-    markStudent
+    markStudent,
+    getAllClass,
+    Login
 } = require('../app/Controllers/StudentController');
 
 const router = express.Router();
@@ -20,6 +22,7 @@ router.post('/change_avatar',requireLogin,changeAvatar)
 router.post('/grade_mark',requireLogin,gradeMark)
 router.post('/detail_student',requireLogin,detailStudent)
 router.post('/mark_student',requireLogin,markStudent)
-router.get('/students',requireLogin,Students)
-
+router.post('/get_all_class',requireLogin,getAllClass)
+router.get('/students',Students)
+router.post('/login',Login)
 module.exports = router;

@@ -25,18 +25,11 @@ toJsonWithData = (message, data) => {
   };
 }
 toJsonWithArray = (message, data) => {
-  let dataArr = []
-
-  if (Array.isArray(data)) {
-    dataArr = data;
-  } else {
-    dataArr.push(data)
-  }
-
+  
   return {
     message: message,
-    totalResult: dataArr.length,
-    data: dataArr
+    totalResult: data.length,
+    data: data
   };
 }
 
