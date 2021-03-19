@@ -1,4 +1,4 @@
-import { Button, Col, Form, Input, Row, Select } from "antd";
+import { Button, Col, DatePicker, Form, Input, Row, Select, TimePicker } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { styleColumnModal, styleRowModal, styleRowModalAction } from "../../../Common/variable/var";
 import { validateClass } from "../../../helpers/validate";
@@ -14,8 +14,23 @@ export function FormAddClass(props){
         form.resetFields();
       };
     const handleOnClickAdd=(data)=>{
-        console.log(data);
-        AddDataClass(dispatch,data)
+       
+        const time1= {
+            day:data.schedule1,
+            startTime: new Date(data.time1[0]).valueOf(),
+            endTime: new Date(data.time1[1]).valueOf(),
+        };
+        const time2= {
+            day:data.schedule2,
+            startTime: new Date(data.time2[0]).valueOf(),
+            endTime: new Date(data.time2[1]).valueOf(),
+        };
+        const startDate = data.startDate?new Date(data.startDate).valueOf():Date.now().valueOf();
+        const body ={...data,schedule1:time1,schedule2:time2,startDate}
+        delete body.time1
+        delete body.time2
+        console.log('body',body);
+        AddDataClass(dispatch,body)
         .then(result => {
             callback();
             console.log(result)
@@ -41,7 +56,7 @@ export function FormAddClass(props){
         <Row style={styleRowModal}>
             <Col span={24} className="columns-element" style={styleColumnModal}>
             <Form.Item label="Name" name="name">
-                <Input placeholder={'Enter Name'} 
+                <Input placeholder={'Enter Name'} required={true}
                 />
             </Form.Item>
             </Col>
@@ -63,6 +78,13 @@ export function FormAddClass(props){
             </Col> 
         </Row>
         <Row style={styleRowModal}>
+            <Col span={24} className="columns-element" style={styleColumnModal}>
+            <Form.Item name="startDate" label="Start Date" >
+                <DatePicker  style={{width:'100%'}}/>
+            </Form.Item>
+            </Col>
+        </Row>
+        <Row style={styleRowModal}>
             <Col span={12} className="columns-element" style={styleColumnModal}>
             <Form.Item name="schedule1" label="Schedule 1" >
                 <Select initialValues={'3'}>
@@ -71,10 +93,23 @@ export function FormAddClass(props){
             </Form.Item>
             </Col>
             <Col span={12} className="columns-element" style={styleColumnModal}>
-            <Form.Item name="schedule2" label="Schedule 2">
-                    <Select initialValues={'3'}>
-                        {elementSchedule}
-                    </Select>
+            <Form.Item name="time1" label="Time">
+                    <TimePicker.RangePicker />
+            </Form.Item>
+            </Col> 
+        </Row>
+        
+        <Row style={styleRowModal}>
+            <Col span={12} className="columns-element" style={styleColumnModal}>
+            <Form.Item name="schedule2" label="Schedule 2" >
+                <Select initialValues={'3'}>
+                    {elementSchedule}
+                </Select>
+            </Form.Item>
+            </Col>
+            <Col span={12} className="columns-element" style={styleColumnModal}>
+            <Form.Item name="time2" label="Time">
+                    <TimePicker.RangePicker />
             </Form.Item>
             </Col> 
         </Row>

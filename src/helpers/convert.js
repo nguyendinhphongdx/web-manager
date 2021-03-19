@@ -33,3 +33,12 @@ export function convertTopClass(data){
         return {...item, key:index+1}
     });
 }
+export function convertScheduleClass(schedule){
+    if(typeof schedule=== 'string'){
+        return `Day ${schedule} From Hour:m to Hour:m`
+    }else{
+        const start = new Date(schedule.startTime);
+        const end  = new Date(schedule.endTime);
+        return `${schedule.day} From ${start.getHours()}:${start.getMinutes()} to ${end.getHours()}:${end.getMinutes()}`
+    }
+}

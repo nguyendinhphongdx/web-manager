@@ -76,7 +76,7 @@ export default function ActionClass(props){
             visible={visible}
             width={300}
           >
-            <DrawerClass students={record.member} professor={record.professor} state={state}/>
+            <DrawerClass students={record.member} professor={record.professor} record={record}/>
           </Drawer>
         </div>
     );

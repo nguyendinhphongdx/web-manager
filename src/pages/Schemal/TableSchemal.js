@@ -40,12 +40,21 @@ export default function TableSchemal(){
               StartTime: new Date(2021, 1, 18, 1, 30),
               EndTime: new Date(2021, 1, 18, 3, 0)
           },];
+          console.log(getDaysInMonth(3,2021));
     return(
         <div className="tabelPanel">
             <ScheduleComponent height='550px' selectedDate={new Date(2021, 1, 15)} eventSettings={{dataSource:data}}>
                 <Inject services={[Day, Week, WorkWeek, Month, Agenda]}/>
             </ScheduleComponent>
         </div>
-        
     );
 }
+function getDaysInMonth(month, year) {
+    var date = new Date(year, month, 1);
+    var days = [];
+    while (date.getMonth() === month) {
+      days.push({date:new Date(date).getDate(),day:new Date(date).getDay()+1});
+      date.setDate(date.getDate() + 1);
+    }
+    return days;
+  }

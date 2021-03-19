@@ -1,5 +1,6 @@
-import { Button, Col, Form, Input, Row, Select } from "antd";
+import { Button, Col, DatePicker, Form, Input, Row, Select, TimePicker } from "antd";
 import { useDispatch } from "react-redux";
+import moment from 'moment';
 import { styleColumnModal, styleRowModal, styleRowModalAction } from "../../../Common/variable/var";
 import { validateClass } from "../../../helpers/validate";
 import { UpdateDataClass } from "../../../services/ClassService";
@@ -12,17 +13,32 @@ export function UpdateClass(props){
     const onReset = () => {
         form.resetFields();
       };
+    
     const handleOnClickUpdate=(data)=>{
-        const dataValidate = validateClass(data);
+        const time1= {
+            day:data.schedule1,
+            startTime: data.time1?new Date(data.time1[0]).valueOf():record.schedule1.startTime,
+            endTime: data.time1?new Date(data.time1[1]).valueOf():record.schedule1.endTime,
+        };
+        const time2= {
+            day:data.schedule2,
+            startTime: data.time2?new Date(data.time2[0]).valueOf():record.schedule2.startTime,
+            endTime: data.time2?new Date(data.time2[1]).valueOf():record.schedule2.endTime,
+        };
+        const startDate = data.startDate?new Date(data.startDate).valueOf():Date.now().valueOf();
+        const body ={_id:record._id,...data,schedule1:time1,schedule2:time2,startDate}
+        delete body.time1;
+        delete body.time2;
+        const dataValidate = validateClass(body);
         if(Object.keys(dataValidate).length!==0){
-            var body = {_id:record._id,...dataValidate}
-            UpdateDataClass(dispatch,body)
+            UpdateDataClass(dispatch,dataValidate)
             .then(result =>{
                 console.log(result);
                 callback();
             })
         }
         callback();
+        console.log(dataValidate);
     }
     const elementSubject = subjectRedux.map(item => {
         return(
@@ -43,7 +59,7 @@ export function UpdateClass(props){
         <Row style={styleRowModal}>
             <Col span={24} className="columns-element" style={styleColumnModal}>
             <Form.Item label="Name" name="name" value={record.name}>
-                <Input placeholder={record.name} defaultValue={record.name}
+                <Input placeholder={record.name} defaultValue={record.name} required={true}
                 />
             </Form.Item>
             </Col>
@@ -51,32 +67,51 @@ export function UpdateClass(props){
         <Row style={styleRowModal}>
             <Col span={12} className="columns-element" style={styleColumnModal}>
             <Form.Item name="_idSubject" label="Subject" >
-                    <Select >
+                    <Select required={true}>
                         {elementSubject}
                     </Select>
             </Form.Item>
             </Col>
             <Col span={12} className="columns-element" style={styleColumnModal}>
             <Form.Item label="Proff" name="_idProfessor">
-                <Select >
+                <Select required={true}>
                     {elementProfessor}
                 </Select>
             </Form.Item>
             </Col> 
         </Row>
         <Row style={styleRowModal}>
+            <Col span={24} className="columns-element" style={styleColumnModal}>
+            <Form.Item name="startDate" label="Start Date" >
+                <DatePicker  style={{width:'100%'}} required={true}/>
+            </Form.Item>
+            </Col>
+        </Row>
+        <Row style={styleRowModal}>
             <Col span={12} className="columns-element" style={styleColumnModal}>
             <Form.Item name="schedule1" label="Schedule 1" >
-                <Select initialValues={'3'}>
+                <Select required={true}>
                     {elementSchedule}
                 </Select>
             </Form.Item>
             </Col>
             <Col span={12} className="columns-element" style={styleColumnModal}>
-            <Form.Item name="schedule2" label="Schedule 2">
-                    <Select initialValues={'3'}>
-                        {elementSchedule}
-                    </Select>
+            <Form.Item name="time1" label="Time">
+                    <TimePicker.RangePicker efaultValue={moment('13:30:56', 'HH:mm:ss')} required={true}/>
+            </Form.Item>
+            </Col> 
+        </Row>
+        <Row style={styleRowModal}>
+            <Col span={12} className="columns-element" style={styleColumnModal}>
+            <Form.Item name="schedule2" label="Schedule 2" >
+                <Select initialValues={'3'} required={true}>
+                    {elementSchedule}
+                </Select>
+            </Form.Item>
+            </Col>
+            <Col span={12} className="columns-element" style={styleColumnModal}>
+            <Form.Item name="time2" label="Time">
+                    <TimePicker.RangePicker required={true}/>
             </Form.Item>
             </Col> 
         </Row>
