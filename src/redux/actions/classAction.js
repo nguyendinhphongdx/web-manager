@@ -41,3 +41,9 @@ export const Get_Data_Chart=(arr) => {
        payload: arr
    }
 }
+export const Get_Data_Schedule=(arr) => {
+    return {
+       type: constants.GET_DATA_SCHEDULE,
+       payload: arr
+   }
+}

@@ -2,7 +2,8 @@ import { message } from 'antd';
 import * as constants from '../constants';
 const initialState={
     classes:[],
-    chart:[]
+    chart:[],
+    schedule:[]
 }
 const key='updatable'
 const _class =(state = initialState, action)=>{
@@ -58,6 +59,14 @@ const _class =(state = initialState, action)=>{
             return {
                 ...state,
                 chart: payload
+            };
+        }
+        case constants.GET_DATA_SCHEDULE: {
+            const { payload } = action; // arr
+           message.success({ content: 'Fetch data Schedule thành công!', key, duration: 2 });
+            return {
+                ...state,
+                schedule: payload
             };
         }
         default: return {...state}

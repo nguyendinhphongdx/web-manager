@@ -50,7 +50,7 @@ export function UpdateClass(props){
             <Select.Option value={item._id} key={item._id}>{item.name}</Select.Option>
         );
     })
-    const arraySchedule = ['thứ 2','thứ 3','thứ 4','thứ 5','thứ 6','thứ 7','chủ nhật']
+    const arraySchedule = ['thứ 2','thứ 3','thứ 4','thứ 5','thứ 6','thứ 7','thứ 1']
     const elementSchedule = arraySchedule.map((item,index)=>{
         return <Select.Option value={item} key={index}>{item}</Select.Option>
     })
@@ -97,7 +97,7 @@ export function UpdateClass(props){
             </Col>
             <Col span={12} className="columns-element" style={styleColumnModal}>
             <Form.Item name="time1" label="Time">
-                    <TimePicker.RangePicker efaultValue={moment('13:30:56', 'HH:mm:ss')} required={true}/>
+                    <TimePicker.RangePicker defaultValue={moment('13:30:56', 'HH:mm:ss')} required={true}/>
             </Form.Item>
             </Col> 
         </Row>

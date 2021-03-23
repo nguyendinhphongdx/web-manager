@@ -21,7 +21,7 @@ export async function OnLogin(dispatch,data,history){
     })
     .catch((error) =>{
         console.log(error);
-        if(error.response){
+        if(error.response && error.response.status===401){
             message.warning({ content: 'Sai thông tin tài khoản.', key });
         }else{
             message.warning({ content: 'Lỗi Mạng.', key });

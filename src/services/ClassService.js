@@ -1,8 +1,8 @@
 import { message } from "antd";
 import sendRequest from "../axios/API";
-import { dataChart } from "../contructData/Class";
+import { dataChart, dataSchedule } from "../contructData/Class";
 import { cutChartData } from "../helpers/uploadPreview";
-import { Add_Class, Get_All_Class, Get_Data_Chart, Remove_Class, Update_Class } from "../redux/actions/classAction";
+import { Add_Class, Get_All_Class, Get_Data_Chart, Get_Data_Schedule, Remove_Class, Update_Class } from "../redux/actions/classAction";
 
 const key='updatable'
 export async function GetDataClass(dispatch){
@@ -105,6 +105,24 @@ export async function GetDataChartClass(dispatch){
     .catch((error) =>{
         console.log(error);
         message.warning({ content: 'Không thể lấy biểu đồ.', key });
+    })
+    return request
+}
+export async function GetDataScheduleClass(dispatch){
+    const request = await sendRequest('class/common_schedule','get')
+    .then(data =>{
+        if(data){
+            const action = Get_Data_Schedule(data);
+            dispatch(action);
+            return data;
+        }else{
+            return dataSchedule
+        }
+         
+    })
+    .catch((error) =>{
+        console.log(error);
+        message.warning({ content: 'Không thể lấy thời khóa biểu.', key });
     })
     return request
 }

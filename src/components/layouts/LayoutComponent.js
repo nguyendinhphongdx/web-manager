@@ -86,7 +86,7 @@ export default function LayoutComponent(){
                     {showPage(page)}
             </div>
           </Content>
-          <Footer style={{ textAlign: 'center' }}>`Designed for Clients-Server HaNoi {today.toLocaleDateString()} `</Footer>
+          <Footer style={{ textAlign: 'center' }}>`Designed for Education HOU - {today.toLocaleDateString()} `</Footer>
         </Layout>
           <BackTop>
             <div style={styleBackTop}>UP</div>

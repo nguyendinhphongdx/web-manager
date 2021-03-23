@@ -106,7 +106,7 @@ export function GradeMark(props){
             <Col span={24} className="columns-element" style={styleColumnModal}>
                 <Row className="row-btn" style={styleRowModalAction}>
                     <Button type="" className="btnFilter" onClick={onReset}>Reset</Button>
-                    <Button type="primary" className="btnFilter"  htmlType="submit">Update Class</Button>
+                    <Button type="primary" className="btnFilter"  htmlType="submit">Update Student</Button>
                 </Row>
             </Col>
         </Row>

@@ -136,3 +136,41 @@ export const dataChart= [
         "value": 4
     }
 ]
+export const dataSchedule = [
+          {
+              Id: 1,
+              Subject: 'Explosion of Betelgeuse Star',
+              StartTime: new Date(2021, 1, 15, 5, 30),
+              EndTime: new Date(2021, 1, 15, 7, 0)
+          }, {
+              Id: 2,
+              Subject: 'Thule Air Crash Report',
+              StartTime: new Date(2021, 1, 16, 0, 0),
+              EndTime: new Date(2021, 1, 16, 2, 0)
+          }, {
+              Id: 3,
+              Subject: 'Blue Moon Eclipse',
+              StartTime: new Date(2021, 1, 17, 2, 0),
+              EndTime: new Date(2021, 1, 17, 4, 0)
+          }, {
+              Id: 4,
+              Subject: 'Meteor Showers in 2021',
+              StartTime: new Date(2021, 1, 14, 0, 0),
+              EndTime: new Date(2021, 1, 14, 2, 30)
+          },
+          {
+            Id: 5,
+              Subject: 'Explosion of Betelgeuse Star',
+              StartTime: new Date(2021, 1, 15, 3, 0),
+              EndTime: new Date(2021, 1, 15, 5, 0)
+          }, {
+              Id: 6,
+              Subject: 'Thule Air Crash Report',
+              StartTime: new Date(2021, 1, 19, 2, 0),
+              EndTime: new Date(2021, 1, 19, 4, 0)
+          }, {
+              Id: 7,
+              Subject: 'Blue Moon Eclipse',
+              StartTime: new Date(2021, 1, 18, 1, 30),
+              EndTime: new Date(2021, 1, 18, 3, 0)
+          },];

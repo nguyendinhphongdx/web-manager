@@ -48,11 +48,11 @@ export function AddMemberToClass(props){
         <Row style={styleRowModal}>
             <Col span={24} className="columns-element" style={styleColumnModal}>
             <Form.Item label="Name" name="name" value={record.name}>
-                <Input placeholder="" initialvalues={record.name} disabled={true}/>
+                <Input placeholder={record.name} initialvalues={record.name} disabled={true}/>
             </Form.Item>
             <Form.Item  name="member">
                     <Transfer
-                    dataSource={studentRedux}
+                    dataSource={studentRedux}                                                                                                                                                       
                     showSearch
                     listStyle={{
                         width: 400,
