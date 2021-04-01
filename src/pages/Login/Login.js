@@ -11,12 +11,17 @@ import './loginCss.css';
     const history = useHistory();    
     if(token){
         history.push('/home');
+        console.log('token is exits');
     }
     const dispatch = useDispatch();
     const [isClick,setClick] = useState(()=>false);
     document.addEventListener('keypress',function(e){
-         if(e.key === 'Enter'){
-            document.getElementById('btn-login').click();
+        console.log();
+        if(e.key === 'Enter'){
+            const btnLogin = document.getElementById('btn-login');
+            if(btnLogin){
+                btnLogin.click()
+            }
         }
      });
     async function handleOnLogin(data) {  
