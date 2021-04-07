@@ -1,8 +1,10 @@
+import { message } from 'antd';
 import io from 'socket.io-client';
 let socket;
 export const initiateSocket = (room) => {
   socket = io('http://localhost:5050');
-  console.log(`Connecting socket...`);
+  message.info(`Connecting socket...`);
+  console.log('init socket',socket);
   if (socket && room) socket.emit('join', room);
 }
 export const disconnectSocket = () => {
@@ -17,6 +19,13 @@ export const subscribeToChat = (cb) => {
   });
 }
 export const sendNotification = (message) => {
-    console.log('message',{ message });
+  console.log('send socket',socket);
     if (socket) socket.emit('notif', { message });
   }
+export const EmitInterval = () => {
+  console.log('emit socket',socket);
+  if (socket)  setInterval(()=>{
+      message.info('just emit to clients');
+      socket.emit('change_schedule','data schedule');
+    },5000)
+}

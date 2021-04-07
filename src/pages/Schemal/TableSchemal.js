@@ -2,13 +2,19 @@ import { Agenda, Day, Inject, Month, ScheduleComponent, Week, WorkWeek } from '@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { GetDataScheduleClass } from '../../services/ClassService';
-import {sendNotification} from '../../socket.io/listenner'
+import {EmitInterval, Listenner, sendNotification, subscribeToChat} from '../../socket.io/listenner';
+import socketIOClient from "socket.io-client";
 import './Schemal.scss';
 export default function TableSchemal(){
 const data = useSelector(state=>state.Class.schedule);
 const [dataSche,setDatasche] = useState(()=>data)
 const dispatch = useDispatch();
+// EmitInterval();
 useEffect(()=>{
+    const socket = socketIOClient("http://localhost:5050");
+    socket.on("receive_data", data => {
+      console.log(data);
+    });
     GetDataScheduleClass(dispatch)
     .then(data =>{
         console.log(data);
