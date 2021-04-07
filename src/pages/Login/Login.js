@@ -1,10 +1,11 @@
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Col, Form, Input, Row } from 'antd';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import logo from '../../images/logo192.png';
 import { OnLogin } from '../../services/AuthService';
+import { initiateSocket } from '../../socket.io/listenner';
 import './loginCss.css';
  export default function Login(){
     const [token,setToken] = useState(()=>localStorage.getItem('token'));
@@ -39,6 +40,9 @@ import './loginCss.css';
     const onFinishFailed = err => {
         alert('Vui lòng không để trống thông tin');
     };
+    useEffect(()=>{
+        initiateSocket()
+    },[])
     return(
       <div className="root-login">
           <div id="container-login" >

@@ -3,6 +3,7 @@ import ChartClassMark from "../../components/Chart/ChartClassMark";
 import TopLevel from "../../components/TopClass/TopClass";
 
 export default function TableHome(){
+   
     return(
         <div className="tableHome">
             <Row>
