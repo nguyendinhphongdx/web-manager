@@ -1,8 +1,9 @@
 import { message } from 'antd';
 import io from 'socket.io-client';
+import { NODE_SERVER, NODE_SOCKET } from '../axios/configAPI';
 let socket;
 export const initiateSocket = (room) => {
-  socket = io('http://localhost:5050');
+  socket = io(NODE_SOCKET);
   message.info(`Connecting socket...`);
   console.log('init socket',socket);
   if (socket && room) socket.emit('join', room);

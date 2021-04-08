@@ -5,13 +5,14 @@ import { GetDataScheduleClass } from '../../services/ClassService';
 import {EmitInterval, Listenner, sendNotification, subscribeToChat} from '../../socket.io/listenner';
 import socketIOClient from "socket.io-client";
 import './Schemal.scss';
+import { NODE_SERVER, NODE_SOCKET } from '../../axios/configAPI';
 export default function TableSchemal(){
 const data = useSelector(state=>state.Class.schedule);
 const [dataSche,setDatasche] = useState(()=>data)
 const dispatch = useDispatch();
 // EmitInterval();
 useEffect(()=>{
-    const socket = socketIOClient("http://localhost:5050");
+    const socket = socketIOClient(NODE_SOCKET);
     socket.on("receive_data", data => {
       console.log(data);
     });
