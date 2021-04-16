@@ -3,6 +3,7 @@ import {EditOutlined,DeleteOutlined,WalletOutlined} from '@ant-design/icons';
 import { rowAction } from "../../Common/variable/var";
 import TableDetailSubject from "../../components/ModalSubject/ModalSubject";
 import { useState } from "react";
+import { DrawerProfessor } from "../drawer/drawerProfessor";
 export default function ActionFrofessor(props){
     const {record} = props;
     const [visible, setVisible] = useState(false);
@@ -27,9 +28,7 @@ export default function ActionFrofessor(props){
               onClose={onClose}
               visible={visible}
             >
-              <p>Some contents...</p>
-              <p>Some contents...</p>
-              <p>Some contents...</p>
+              <DrawerProfessor record={record}/>
             </Drawer>
         </div>
     );

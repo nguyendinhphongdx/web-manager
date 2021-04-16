@@ -30,7 +30,7 @@ useEffect(()=>{
     }
     return(
         <div className="tabelPanel">
-            <ScheduleComponent actionComplete={handleONclick}  height='600px' selectedDate={new Date()} eventSettings={{dataSource:data}}>
+            <ScheduleComponent actionComplete={handleONclick}  height='80%' selectedDate={new Date()} eventSettings={{dataSource:data}}>
                 <Inject services={[Day, Week, WorkWeek, Month, Agenda]}/>
             </ScheduleComponent>
         </div>
