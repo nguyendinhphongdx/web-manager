@@ -4,6 +4,7 @@ import {
   TeamOutlined,
   UserOutlined
 } from '@ant-design/icons';
+import MessengerCustomerChat from 'react-messenger-customer-chat';
 import { BackTop, Layout, Menu } from 'antd';
 import { useState } from 'react';
 import { Link, NavLink, Route } from "react-router-dom";
@@ -87,10 +88,15 @@ export default function LayoutComponent() {
           </div>
         </Content>
         <Footer style={{ textAlign: 'center' }}>`Designed for Education HOU - {today.toLocaleDateString()} `</Footer>
+        <MessengerCustomerChat
+        pageId="101330425442050"
+        appId="936910340378886"
+      />
       </Layout>
       <BackTop>
         <div style={styleBackTop}>UP</div>
       </BackTop>
+     
     </Layout>
 
   );

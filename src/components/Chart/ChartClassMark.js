@@ -1,10 +1,10 @@
 import { Column } from '@ant-design/charts';
 import { Button } from 'antd';
-import { useState,useEffect } from 'react';
+import { useEffect } from 'react';
 import { styleButtonTopTable } from '../../Common/variable/var';
-import { dataChart } from '../../contructData/Class';
 import { GetDataChartClass } from '../../services/ClassService';
 import { useDispatch,useSelector } from "react-redux";
+import { useRef } from 'react';
 
 export default function ChartClassMark() {
     const dispatch = useDispatch();
@@ -23,7 +23,7 @@ export default function ChartClassMark() {
     })
    },[])
     var config = { 
-        height: 450,
+        height: 500,
         data: dataConverted,
         isGroup: true,
         xField: 'class',
@@ -39,8 +39,11 @@ export default function ChartClassMark() {
         },
     };
     let chart;
+    const ref = useRef();
     const downloadImage = () => {
+        console.log(chart);
         chart?.downloadImage();
+        ref.current?.downloadImage();
     };
     return ( <div className = "" >
         <Button type = "primary"
@@ -50,6 +53,7 @@ export default function ChartClassMark() {
         onReady = {
             (chartInstance) => (chart = chartInstance)
         }
+        chartRef={ref}
         /> </div>
 
     );

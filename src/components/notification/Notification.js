@@ -1,18 +1,18 @@
 import { Avatar, List } from "antd";
-
+import batman from '../../images/batman.jpg';
 export default function Notification(){
     const data = [
         {
-          title: 'Ant Design Title 1',
+          title: 'Web Design Title 1',
         },
         {
-          title: 'Ant Design Title 2',
+          title: 'Web Design Title 2',
         },
         {
-          title: 'Ant Design Title 3',
+          title: 'Web Design Title 3',
         },
         {
-          title: 'Ant Design Title 4',
+          title: 'Web Design Title 4',
         },
       ];
     return(
@@ -23,9 +23,9 @@ export default function Notification(){
             renderItem={item => (
             <List.Item>
                 <List.Item.Meta
-                avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
-                title={<a href="https://ant.design">{item.title}</a>}
-                description="Ant Design, a design language for background "
+                avatar={<Avatar src={batman} />}
+                title={<a href="#">{item.title}</a>}
+                description="Web Design, a design language for background "
                 />
             </List.Item>
             )}
