@@ -1,11 +1,11 @@
 import { Agenda, Day, Inject, Month, ScheduleComponent, Week, WorkWeek } from '@syncfusion/ej2-react-schedule';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { GetDataScheduleClass } from '../../services/ClassService';
-import {EmitInterval, Listenner, sendNotification, subscribeToChat} from '../../socket.io/listenner';
 import socketIOClient from "socket.io-client";
+import { NODE_SOCKET } from '../../axios/configAPI';
+import { GetDataScheduleClass } from '../../services/ClassService';
+import { sendNotification } from '../../socket.io/listenner';
 import './Schemal.scss';
-import { NODE_SERVER, NODE_SOCKET } from '../../axios/configAPI';
 export default function TableSchemal(){
 const data = useSelector(state=>state.Class.schedule);
 const [dataSche,setDatasche] = useState(()=>data)
@@ -18,7 +18,13 @@ useEffect(()=>{
     });
     GetDataScheduleClass(dispatch)
     .then(data =>{
-        console.log(data);
+        const times = data.map(item =>  {
+             return {day:item.day,
+             date:new Date(item.StartTime).toLocaleString(),
+             class:item.Subject
+             }
+            })
+        console.log(times);
     })
 },[])
     const handleONclick = (e)=>{
@@ -30,7 +36,7 @@ useEffect(()=>{
     }
     return(
         <div className="tabelPanel">
-            <ScheduleComponent actionComplete={handleONclick}  height='600px' selectedDate={new Date()} eventSettings={{dataSource:data}}>
+            <ScheduleComponent actionComplete={handleONclick} isAllDay={true} height='80%' selectedDate={new Date()} eventSettings={{dataSource:data}}>
                 <Inject services={[Day, Week, WorkWeek, Month, Agenda]}/>
             </ScheduleComponent>
         </div>

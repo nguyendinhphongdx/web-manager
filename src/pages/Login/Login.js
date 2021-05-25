@@ -11,7 +11,7 @@ import './loginCss.css';
     const [token,setToken] = useState(()=>localStorage.getItem('token'));
     const history = useHistory();    
     if(token){
-        history.push('/home');
+        // history.push('/home');
         console.log('token is exits');
     }
     const dispatch = useDispatch();
@@ -31,7 +31,8 @@ import './loginCss.css';
         await OnLogin(dispatch,data,history) // {token,use{}}
         .then(token => {
             if(token){
-                setToken(token)
+                // setToken(token)
+                history.push('/home');
             }
         })
         console.log("resolve");

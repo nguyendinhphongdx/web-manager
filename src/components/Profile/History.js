@@ -2,7 +2,7 @@ import { Avatar, List } from "antd";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { GetDataHistory } from "../../services/HistoryService";
-
+import hacker from "../../images/hacker.png";
 export default function History(){
     const data = [
         {
@@ -34,7 +34,7 @@ export default function History(){
             renderItem={item => (
             <List.Item>
                 <List.Item.Meta
-                avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
+                avatar={<Avatar src={hacker} />}
                 title={`user: ${item.user} - address: ${item.remoteAddress}`}
                 description={item.path}
                 />

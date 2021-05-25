@@ -65,8 +65,8 @@ export function AddSubject(props){
             </Row>
             <Row >
                 <Col span={24} className="columns-element" style={styleColumnModal}>
-                <Form.Item  name="discription" label='Discription'>
-                    <TextArea placeholder="Discription about subject..."/>
+                <Form.Item  name="description" label='Description'>
+                    <TextArea placeholder="Description about subject..."/>
                 </Form.Item>
                 </Col>
             </Row>
