@@ -28,8 +28,8 @@ export function AddStudent(props){
         <Form onFinish={handleChangeOnAdd} form={form}>
         <Row style={styleRowModal}>
             <Col span={24} className="columns-element" style={styleColumnModal}>
-            <Form.Item label="Name" name="name">
-                <Input placeholder={'Enter student name'} required={true}
+            <Form.Item label="Tên học sinh" name="name">
+                <Input placeholder={'Nhập tên học sinh'} required={true}
                 />
             </Form.Item>
             </Col>
@@ -38,9 +38,9 @@ export function AddStudent(props){
            <Col span={12} className="columns-element" style={styleColumnModal}>
                <Row>
                <Col span={24} className="columns-element" style={styleColumnModal}>
-                        <Form.Item label="Password" name="password">
+                        <Form.Item label="Mật khẩu" name="password">
                         <Input.Password
-                                placeholder="input password"
+                                placeholder="nhập nhật khẩu"
                                 iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
                                 />
                         </Form.Item>
@@ -48,7 +48,7 @@ export function AddStudent(props){
                </Row>
                <Row >
                     <Col span={24} className="columns-element" style={styleColumnModal}>
-                    <Form.Item label="Age" name="age">
+                    <Form.Item label="Tuổi" name="age">
                             <Input type="number" min="10" max="30" defaultValue={20}/>
                         </Form.Item>
                     </Col>
@@ -56,7 +56,7 @@ export function AddStudent(props){
               
            </Col>
            <Col span={12} className="columns-element" style={styleRowUploadAvatar}>
-                    <Form.Item label="Avatar" name="file"  onChange={onChangeHandler}>
+                    <Form.Item label="Ảnh đại diện" name="file"  onChange={onChangeHandler}>
                         <Upload >
                             <Button icon={<UploadOutlined />}>Upload</Button>
                         </Upload>
@@ -65,12 +65,12 @@ export function AddStudent(props){
         </Row>
         <Row style={styleRowModal}>
                <Col span={12} className="columns-element" style={styleColumnModal}>
-                            <Form.Item label="Phone" name="phone" >
-                            <Input min="10" max="30" placeholder={'Enter phone number'}/>
+                            <Form.Item label="SDT" name="phone" >
+                            <Input min="10" max="30" placeholder={'Nhập sdt'}/>
                             </Form.Item>
                </Col>
                <Col span={12} className="columns-element" style={styleColumnModal}>
-                            <Form.Item label="Status" name="status" >
+                            <Form.Item label="Trạng thái" name="status" >
                                 <Switch defaultChecked={true}/>
                             </Form.Item>
                </Col>
@@ -78,23 +78,23 @@ export function AddStudent(props){
         <Row style={styleRowModal}>
             <Col span={24} className="columns-element" style={styleColumnModal}>
             <Form.Item label="Email" name="email">
-                <Input type="email" placeholder={'Enter gmail'} required={true}
+                <Input type="email" placeholder={'nhập gmail'} required={true}
                 />
             </Form.Item>
             </Col>
         </Row>
         <Row style={styleRowModal}>
             <Col span={24} className="columns-element" style={styleColumnModal}>
-            <Form.Item label="Description" name="description">
-                <TextArea placeholder="Introduction about student"/>
+            <Form.Item label="Mô tả" name="description">
+                <TextArea placeholder="Giới thiệu về sinh viên"/>
             </Form.Item>
             </Col>
         </Row>
         <Row >
             <Col span={24} className="columns-element" style={styleColumnModal}>
                 <Row className="row-btn" style={styleRowModalAction}>
-                    <Button type="" className="btnFilter" onClick={onReset}>Reset</Button>
-                    <Button type="primary" className="btnFilter"  htmlType="submit">Update Class</Button>
+                    <Button type="" className="btnFilter" onClick={onReset}>Làm mới</Button>
+                    <Button type="primary" className="btnFilter"  htmlType="submit">Cập nhật sinh viên</Button>
                 </Row>
             </Col>
         </Row>

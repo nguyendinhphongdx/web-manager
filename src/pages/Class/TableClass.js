@@ -30,9 +30,9 @@ export default function TableClass(){
     return(
         <div className="tabelPanel">
             <Row className="add-class">
-                <Button type="primary" onClick={showModal}>Add Class</Button>
+                <Button type="primary" onClick={showModal}>Thêm Lớp Học</Button>
             </Row>
-            <Modal title="Add Class" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel} footer={null}>
+            <Modal title="Thêm Lớp Học" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel} footer={null}>
                     <FormAddClass callback={handleOk}/>
             </Modal>
             <Table dataSource={classConverted} columns={columns}  bordered></Table>

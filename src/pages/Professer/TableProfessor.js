@@ -32,10 +32,10 @@ export default function TableFrofessor(){
     return(
         <div className="tabelPanel">
             <Row className="add-frofessor">
-            <Button type="ghost" onClick={SynchonousData} style={{marginRight:'20px'}}>Synchonous Data</Button>
-            <Button type="primary" onClick={showModal}>Add Frofessor</Button>
+            <Button type="ghost" onClick={SynchonousData} style={{marginRight:'20px'}}>Đồng bộ dữ liệu</Button>
+            <Button type="primary" onClick={showModal}>Thêm giảng viên</Button>
             </Row>
-            <Modal title="Add Frofessor" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel} footer={null}>
+            <Modal title="Thêm Giảng viên" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel} footer={null}>
                <AddProfessor callback={handleOk}/>
             </Modal>
             <Table dataSource={listProfessor} columns={columns}  bordered></Table>

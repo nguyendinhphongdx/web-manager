@@ -21,13 +21,13 @@ for(var i=0;i<50;i++){
 export const columns =[
     {
         key: 'key',
-        title: 'index',
+        title: 'STT',
         dataIndex:'key',
         width:'5%'
     },
     {
         key: 'name',
-        title: 'Name',
+        title: 'Tên sinh viên',
         dataIndex:'name',
         sorter: {
             compare: (a, b) => a.name.Length - b.name.Length 
@@ -35,29 +35,29 @@ export const columns =[
           width:'15%'
     },
     {
-        title: 'Avartar',
+        title: 'Ảnh đại diện',
         width:'10%',
         render:(record)=> <ImageComponent url={record.image} type='student'/>
     },
     {
         key: 'age',
-        title: 'Age',
+        title: 'Tuổi',
         dataIndex:'age',
         width:'10%'
     },
     {
         key: 'email',
-        title: 'email',
+        title: 'Email',
         dataIndex:'email'
     },
     {
         key: 'status',
-        title: 'Status',
+        title: 'Trạng thái',
         dataIndex:'status'
     },
     {
         key: 'operation',
-        title: 'Action',
+        title: 'Tác động',
         render:(record)=> <ActionStudent record={record}/>,
         width:'20%'
     },

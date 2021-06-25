@@ -56,25 +56,26 @@ export default function LayoutComponent() {
           </div>
           <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
             <Menu.Item key="1" icon={<PieChartOutlined />}>
-              <NavLink to={'/home'}> HomePage</NavLink>
+              <NavLink to={'/home'}> Trang Chủ</NavLink>
             </Menu.Item>
             <Menu.Item key="2" icon={<DesktopOutlined />}>
-              <NavLink to={'/schemal'}> SchemalPage</NavLink>
+              <NavLink to={'/schemal'}> Lịch Học</NavLink>
             </Menu.Item>
             <Menu.Item key="sub2" icon={<TeamOutlined />}>
-              <NavLink to={'/professor'}> Professor</NavLink>
+              <NavLink to={'/professor'}> Giảng viên</NavLink>
             </Menu.Item>
-            <Menu.Item key="3" icon={<UserOutlined />}><Link to={'/students'}>Students</Link></Menu.Item>
-            <SubMenu key="sub3" icon={<CalendarOutlined />} title=" Subject">
+            <Menu.Item key="3" icon={<UserOutlined />}><Link to={'/students'}>Học Sinh</Link></Menu.Item>
+            <Menu.Item key="4" icon={<CalendarOutlined />}><Link to={'/subject?type=base'}>Môn Học</Link></Menu.Item>
+            {/* <SubMenu key="sub3" icon={<CalendarOutlined />} title=" Subject">
               <Menu.Item key="4"><NavLink to={'/subject?type=base'}> Base Subject</NavLink></Menu.Item>
               <Menu.Item key="5"><NavLink to={'/subject?type=advanced'}> Advanced Subject</NavLink></Menu.Item>
-            </SubMenu>
+            </SubMenu> */}
             <Menu.Item key="6" icon={<FileOutlined />}>
-              <NavLink to={'/class'}> Class</NavLink>
+              <NavLink to={'/class'}> Lớp Học</NavLink>
             </Menu.Item>
-            <Menu.Item key="9" icon={<FileOutlined />}>
+            {/* <Menu.Item key="9" icon={<FileOutlined />}>
               <NavLink to={'/file'}> Files</NavLink>
-            </Menu.Item>
+            </Menu.Item> */}
           </Menu>
         </div>
       </Sider>

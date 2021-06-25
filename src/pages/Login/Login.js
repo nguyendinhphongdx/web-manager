@@ -73,42 +73,42 @@ import './loginCss.css';
                         rules={[
                         {
                             required: true,
-                            message: 'Please input your Username!',
+                            message: 'Vui lòng nhập tên đăng nhập!',
                         },
                         ]}
                     >
-                    <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
+                    <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Tên đăng nhập" />
                 </Form.Item>
                     <Form.Item name="password" className="group-login"
                     rules={[
                     {
                         required: true,
-                        message: 'Please input your Password!',
+                        message: 'Vui lòng nhập mật khẩu!',
                     },
                     ]}
                 >
                 <Input
                 prefix={<LockOutlined className="site-form-item-icon" />}
                 type="password"
-                placeholder="Password"
+                placeholder="Mật khẩu"
                 />
                 </Form.Item>
                 <Form.Item className="group-login-fuc" style={{margin:'0px'}}>
                         <Form.Item name="remember" valuePropName="checked" noStyle>
-                        <Checkbox style={{color: 'white'}}>Remember me</Checkbox>
+                        <Checkbox style={{color: 'white'}}>Ghi nhớ tài khoản</Checkbox>
                 </Form.Item>
 
                 <a className="login-form-forgot" href>
-                Forgot password
+                Quên mật khẩu
                 </a>
                 </Form.Item>
                     <Form.Item className="group-login-fuc" style={{margin:'0px'}}>
                         <Button style={{width:'100%',height:'36px'}} id='btn-login' type="primary" htmlType="submit" className="login-form-button" disabled={isClick}>
-                        Log in
+                       Đăng nhập
                         </Button>
                     </Form.Item>
                     <Form.Item className="group-login-fuc" style={{width:'100%',textAlign:'left',margin:'0px'}}>
-                         Or <a href>register now!</a>
+                         hoặc <a href>Đăng kí !</a>
                     </Form.Item>
                     
                 </Form>

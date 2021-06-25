@@ -1,4 +1,4 @@
-import { Button, Card, Col, DatePicker, Form, Input, Row, Select } from 'antd';
+import { Button, Col, DatePicker, Form, Input, Row, Select } from 'antd';
 import { useState } from 'react';
 import { DownOutlined, UpOutlined } from '@ant-design/icons';
 import './collapseFillter.scss';
@@ -14,9 +14,12 @@ export default function CollapseFilter(props){
         default: Collapse = 'students'; break;
     }
    return(
-       <div className="collapseFilter">
-            {Collapse}
-       </div>
+    //    <div className="collapseFilter">
+    //         {Collapse}
+    //    </div>
+        <div style={{marginBottom:'2rem'}}>
+            
+        </div>
    )
 }
 function CollapseStudent(props){

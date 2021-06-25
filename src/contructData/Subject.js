@@ -16,13 +16,13 @@ for(var i=0;i<50;i++){
 export const columns =[
     {
         key: 'key',
-        title: 'index',
+        title: 'STT',
         dataIndex:'key',
         width:'5%',
     },
     {
         key: 'name',
-        title: 'Name',
+        title: 'Tên Môn',
         dataIndex:'name',
         sorter: {
             compare:(a,b)=> a.name.length - b.name.length
@@ -31,21 +31,21 @@ export const columns =[
     },
     {
         key: 'price',
-        title: 'Price',
+        title: 'Số tín',
         dataIndex:'price',
         width:'10%',
     },
-    {
-        key: 'unit',
-        title: 'Unit',
-        dataIndex:'unit',
-        width:'10%',
-    },
+    // {
+    //     key: 'unit',
+    //     title: 'Unit',
+    //     dataIndex:'unit',
+    //     width:'10%',
+    // },
     {
         key: 'totalSession',
-        title: 'TotalSession',
+        title: 'Số tiết',
         dataIndex:'totalSession',
-        width:'5%',
+        width:'15%',
     },
     // {
     //     key: 'type',
@@ -55,18 +55,19 @@ export const columns =[
     // },
     {
         key: 'description',
-        title: 'description',
+        title: 'Mô tả',
         dataIndex:'description',
-        width:'15%',
+        width:'25%',
     },
     {
         key: 'status',
-        title: 'Status',
-        dataIndex:'status'
+        title: 'Trạng thái',
+        dataIndex:'status',
+        width:'10%',
     },
     {
         key: 'operation',
-        title: 'Action',
+        title: 'Tác động',
         render:(record)=> <ActionSubject subject={record}/>
     },
 

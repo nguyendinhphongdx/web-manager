@@ -10,18 +10,21 @@ for(var i=4;i<10;i++) {
 }
 export const columns = [
     {
-        title:'Level',
+        title:'Xếp hạng',
         key: 'level',
-        dataIndex:'key'
+        dataIndex:'key',
+        width:'30%'
     },
     {
-        title:'Class',
+        title:'Lớp',
         key: 'class',
-        dataIndex:'class'
+        dataIndex:'class',
+        width:'35%'
     },
     {
-        title:'Total Mark',
+        title:'Điểm TB',
         key:'operation',
+        width:'35%',
         render:(record)=>{
             return(
                 <Progress percent={Number(record.value*10).toFixed(1)} status="active"/>

@@ -26,9 +26,9 @@ export default function TableSubject(){
     return(
         <div className="tabelPanel">
             <Row className="add-subject">
-                <Button type="primary" onClick={showModal}>Add Subject</Button>
+                <Button type="primary" onClick={showModal}>Thêm Môn Học</Button>
             </Row>
-            <Modal title="Add Subject" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}
+            <Modal title="Thêm Môn Học" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}
             footer={null} width={600}
             >
                <AddSubject callback={setIsModalVisible}/>

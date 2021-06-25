@@ -55,8 +55,8 @@ export function FormAddClass(props){
         <Form onFinish={handleOnClickAdd} form={form}>
         <Row style={styleRowModal}>
             <Col span={24} className="columns-element" style={styleColumnModal}>
-            <Form.Item label="Name" name="name">
-                <Input placeholder={'Enter Name'} required={true}
+            <Form.Item label="Tên lớp" name="name">
+                <Input placeholder={'Nhập tên lớp'} required={true}
                 />
             </Form.Item>
             </Col>
@@ -70,7 +70,7 @@ export function FormAddClass(props){
             </Form.Item>
             </Col>
             <Col span={12} className="columns-element" style={styleColumnModal}>
-            <Form.Item label="Proff" name="_idProfessor">
+            <Form.Item label="Giảng viên" name="_idProfessor">
                 <Select >
                     {elementProfessor}
                 </Select>
@@ -79,36 +79,36 @@ export function FormAddClass(props){
         </Row>
         <Row style={styleRowModal}>
             <Col span={24} className="columns-element" style={styleColumnModal}>
-            <Form.Item name="startDate" label="Start Date" >
+            <Form.Item name="startDate" label="Ngày bắt đầu" >
                 <DatePicker  style={{width:'100%'}}/>
             </Form.Item>
             </Col>
         </Row>
         <Row style={styleRowModal}>
-            <Col span={12} className="columns-element" style={styleColumnModal}>
-            <Form.Item name="schedule1" label="Schedule 1" >
+            <Col span={9} className="columns-element" style={styleColumnModal}>
+            <Form.Item name="schedule1" label="Lịch học 1" >
                 <Select initialValues={'3'}>
                     {elementSchedule}
                 </Select>
             </Form.Item>
             </Col>
-            <Col span={12} className="columns-element" style={styleColumnModal}>
-            <Form.Item name="time1" label="Time">
+            <Col span={15} className="columns-element" style={styleColumnModal}>
+            <Form.Item name="time1" label="Thời gian">
                     <TimePicker.RangePicker />
             </Form.Item>
             </Col> 
         </Row>
         
         <Row style={styleRowModal}>
-            <Col span={12} className="columns-element" style={styleColumnModal}>
-            <Form.Item name="schedule2" label="Schedule 2" >
+            <Col span={9} className="columns-element" style={styleColumnModal}>
+            <Form.Item name="schedule2" label="Lịch học 2" >
                 <Select initialValues={'3'}>
                     {elementSchedule}
                 </Select>
             </Form.Item>
             </Col>
-            <Col span={12} className="columns-element" style={styleColumnModal}>
-            <Form.Item name="time2" label="Time">
+            <Col span={15} className="columns-element" style={styleColumnModal}>
+            <Form.Item name="time2" label="Thời gian">
                     <TimePicker.RangePicker />
             </Form.Item>
             </Col> 

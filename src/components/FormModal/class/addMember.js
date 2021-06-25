@@ -58,7 +58,7 @@ export function AddMemberToClass(props){
                         width: 400,
                         height: 300,
                         }}
-                    titles={['Source', 'Target']}
+                    titles={['Sinh viên ngoài', 'SV của lớp']}
                     targetKeys={targetKeys}
                     selectedKeys={selectedKeys}
                     onChange={onChange}
@@ -73,8 +73,8 @@ export function AddMemberToClass(props){
         <Row >
             <Col span={24} className="columns-element" style={styleColumnModal}>
                 <Row className="row-btn" style={styleRowModalAction}>
-                    <Button type="" className="btnFilter" onClick={onReset}>Reset</Button>
-                    <Button type="primary" className="btnFilter"  htmlType="submit">Update Class</Button>
+                    <Button type="" className="btnFilter" onClick={onReset}>Làm mới</Button>
+                    <Button type="primary" className="btnFilter"  htmlType="submit">Cập nhật lớp</Button>
                 </Row>
             </Col>
         </Row>

@@ -38,7 +38,7 @@ export function UpdateClass(props){
             })
         }
         callback();
-        console.log(dataValidate);
+        console.log(record);
     }
     const elementSubject = subjectRedux.map(item => {
         return(
@@ -66,14 +66,14 @@ export function UpdateClass(props){
         </Row>
         <Row style={styleRowModal}>
             <Col span={12} className="columns-element" style={styleColumnModal}>
-            <Form.Item name="_idSubject" label="Subject" >
+            <Form.Item name="_idSubject" label="Subject" initialValue={record.subject}>
                     <Select required={true}>
                         {elementSubject}
                     </Select>
             </Form.Item>
             </Col>
             <Col span={12} className="columns-element" style={styleColumnModal}>
-            <Form.Item label="Proff" name="_idProfessor">
+            <Form.Item label="Proff" name="_idProfessor" initialValue={record.professor}>
                 <Select required={true}>
                     {elementProfessor}
                 </Select>
@@ -83,7 +83,7 @@ export function UpdateClass(props){
         <Row style={styleRowModal}>
             <Col span={24} className="columns-element" style={styleColumnModal}>
             <Form.Item name="startDate" label="Start Date" >
-                <DatePicker  style={{width:'100%'}} required={true}/>
+                <DatePicker  style={{width:'100%'}} required={true} />
             </Form.Item>
             </Col>
         </Row>

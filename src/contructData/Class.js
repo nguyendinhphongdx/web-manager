@@ -11,13 +11,13 @@ for (let index = 0; index < 50; index++) {
 }
 export const columns =[
     {
-        title: 'Index',
+        title: 'STT',
         key: 'key',
         dataIndex:'key',
         width:'5%'
     },
     {
-        title: 'Class Name',
+        title: 'Tên Lớp Học',
         key: 'name',
         dataIndex:'name',
         sorter: {
@@ -26,7 +26,7 @@ export const columns =[
         width:'15%'
     },
     {
-        title: 'Subject',
+        title: 'Môn Học',
         key: 'subject',
         dataIndex:'subject',
         sorter: {
@@ -36,13 +36,13 @@ export const columns =[
         width:'15%'
     },
     {
-        title: 'Start Date',
+        title: 'Ngày bắt đầu',
         key: 'startDate',
         dataIndex:'startDate',
         width:'15%'
     },
     {
-        title: 'Total',
+        title: 'Số Lượng',
         key: 'total',
         dataIndex:'total',
         width:'10%',
@@ -52,13 +52,13 @@ export const columns =[
           },
     },
     {
-        title: 'Professor',
+        title: 'Gảng Viên',
         key: 'professor',
         dataIndex:'professor',
         width:'15%'
     },
     {
-        title: 'Action',
+        title: 'Tác động',
         key: 'operation',
         width: '20%',
         render:(record)=> <ActionClass record={record}/>

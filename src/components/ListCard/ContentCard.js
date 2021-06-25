@@ -8,13 +8,13 @@ export default function ContentNavCard(props){
     return(
         <div className="contentCard">
             <Row>
-                Professor : {professor.name }
+                Giảng viên : {professor.name }
             </Row>
             <Row>
-                Total : {item.member.length}
+                SL học sinh : {item.member.length}
             </Row>
             <Row>
-                Subject : {nameSubject}
+                Môn học : {nameSubject}
             </Row>
         </div>
     );

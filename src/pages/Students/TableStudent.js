@@ -26,9 +26,9 @@ export default function TabelStudent(){
     return(
         <div className="tabelPanel">
             <Row className="add-student">
-                <Button type="primary" onClick={showModal}>Add Student</Button>
+                <Button type="primary" onClick={showModal}>Thêm sinh viên</Button>
             </Row>
-            <Modal title="Add Student" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel} footer={null}>
+            <Modal title="Thêm sinh viên" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel} footer={null}>
                <AddStudent callback={handleOk} />
             </Modal>
             <Table dataSource={studentRedux} columns={columns} bordered ></Table>

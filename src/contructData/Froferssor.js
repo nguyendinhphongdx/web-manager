@@ -20,18 +20,18 @@ for (let index = 0; index < 50; index++) {
 }
 export const columns =[
     {
-        title: 'Index',
+        title: 'STT',
         key: 'key',
         dataIndex:'key',
         width:'5%'
     },
     {
-        title: 'Avatar',
+        title: 'Ảnh đại diện',
         width:'15%',
         render:(record) =><ImageComponent url={record.image} type='professor' />
     },
     {
-        title: 'Frofessor Name',
+        title: 'Tên Giảng viên',
         key: 'name',
         dataIndex:'name',
         sorter: {
@@ -40,7 +40,7 @@ export const columns =[
         width:'15%'
     },
     {
-        title: 'Age',
+        title: 'Tuổi',
         key: 'age',
         dataIndex:'age',
         sorter: {
@@ -49,7 +49,7 @@ export const columns =[
         width:'10%'
     },
     {
-        title: 'Subject',
+        title: 'Môn học',
         key: 'operation',
         dataIndex:'subject',
         render:(record)=> <AcitonDetailSubject record={record}/>,
@@ -63,7 +63,7 @@ export const columns =[
     },
    
     {
-        title: 'Action',
+        title: 'Tác động',
         key: 'operation',
         width: '15%',
         render:(record)=> <ActionFrofessor record={record}/>
