@@ -62,7 +62,7 @@ const Users = () => {
         UserServices.SignUpService(body).then(data => {
           if (data) {
             UserServices.QueryAll(dispatch).then(data => {
-              openSuccessNotif("Create User", "Create Success", 2000);
+              // openSuccessNotif("Create User", "Create Success", 2000);
               HelperClass.SetLoading(false, dispatch);
               handleCancel();
             });

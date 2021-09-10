@@ -1,4 +1,6 @@
 import { combineReducers } from "redux";
+import calendar from "./CalendarReducer";
+import history from "./historyReducer";
 import changeState from "./layoutReducer";
 import news from "./newsReducer";
 import services from "./servicesReducer";
@@ -12,6 +14,8 @@ const myReducers = combineReducers({
   Statistic:statistic,
   News:news,
   Settings:settings,
-  Users:users
+  Users:users,
+  Calendar:calendar,
+  History:history
 });
 export default myReducers;

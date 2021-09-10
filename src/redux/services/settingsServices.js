@@ -5,7 +5,7 @@ import Converter from "../../helpers/converter";
 import { openSuccessNotif } from "../../views/notifications/notif/notifStore";
 class SettingsServices {
   QueryConfig = async dispatch => {
-    const result = await sendRequest("settings/config", "get")
+    const result = await sendRequest("/settings/config", "get")
       .then(response => {
         if (response.status == 200) {
           const action = SettingsActions.GetConfig(
@@ -19,12 +19,12 @@ class SettingsServices {
       })
       .catch(error => {
         console.log(error);
-        openSuccessNotif("Thông báo", error.message, 2000, "error");
+        // openSuccessNotif("Thông báo", error.message, 2000, "error");
       });
     return result;
   };
   UpdateConfig= async (config,dispatch) =>{
-    const result = await sendRequest("settings/config", "put",config)
+    const result = await sendRequest("/settings/config", "put",config)
     .then(response => {
       if (response.status == 200) {
         const action = SettingsActions.GetConfig(

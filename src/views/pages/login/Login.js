@@ -22,7 +22,7 @@ import logo from "../../../assets/icons/grafana_icon.png";
 import { AuthContext } from '../../../contexts/auth';
 import { ValidateFormLogin } from '../../../helpers/validateForm';
 import UserService from '../../../redux/services/UserServices';
-
+import SocketInstant from '../../../socket.io/index';
 const Login = (props) => {
   const {from} = props.location.state || {from:{pathname:'/dashboard'}}
   const { register, handleSubmit, formState: { errors } } = useForm();
@@ -40,13 +40,16 @@ const Login = (props) => {
         .then((result) => {
           if (result) {
             const typeUser = result.role_id;
-            if(typeUser == TypeRoleID.ADMIN || typeUser == TypeRoleID.SUPERUSER){
+            // if(typeUser == TypeRoleID.ADMIN || typeUser == TypeRoleID.SUPERUSER){
+              if(true){
               const token = result.token;
+              console.log(token);
               const storage = {
                 token,
-                currentUser:result
+                currentUser:result.user
               }
               login(storage, history,from);
+              SocketInstant.initiateSocket(null,result.user._id);
             }else{
               message.info('Perrmission Deny');
             }
@@ -78,7 +81,7 @@ const Login = (props) => {
                           <CIcon name="cil-user" />
                         </CInputGroupText>
                       </CInputGroupPrepend>
-                      <CInput type="text" placeholder="Username" autoComplete="username" {...register('username', { required: true })} />
+                      <input type="text" className="form-control" placeholder="Tài khoản" {...register('user_name', { required: true })}/>
                     </CInputGroup>
                     {errors.username && <span className="error">This field is required</span>}
                     <CInputGroup className="mb-4">
@@ -87,7 +90,7 @@ const Login = (props) => {
                           <CIcon name="cil-lock-locked" />
                         </CInputGroupText>
                       </CInputGroupPrepend>
-                      <CInput type="password" placeholder="Password" autoComplete="password" {...register('password',{ required: true })} />
+                      <input type="password" className="form-control" placeholder="Mật khẩu" {...register('password', { required: true })}/>
                     </CInputGroup>
                     {errors.password && <span className="error">This field is required</span>}
                     <CRow>

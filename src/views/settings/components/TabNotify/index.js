@@ -52,12 +52,12 @@ const TabNotify = ({ notify, bmail, firebase, news, els, logs, form }) => {
       settingsServices
         .UpdateConfig(body, dispatch)
         .then(data => {
-          openSuccessNotif(
-            "Thông báo",
-            "Cập nhật thành công!",
-            2000,
-            "success"
-          );
+          // openSuccessNotif(
+          //   "Thông báo",
+          //   "Cập nhật thành công!",
+          //   2000,
+          //   "success"
+          // );
         })
         .finally(() => HelperClass.SetLoading(false, dispatch));
     }, 1000);

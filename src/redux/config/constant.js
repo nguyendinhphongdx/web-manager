@@ -28,3 +28,9 @@ export const SettingsConstants = {
 export const LAYOUTCONSTANTS = {
     LOADING : 'LOADING'
    }
+export const CalendarConstant = {
+    GET_DATA_SCHEDULE : 'GET_DATA_SCHEDULE'
+}
+export const HistoryConstant = {
+    GET_ALL_HISTORY : 'GET_ALL_PHISTORY'
+}

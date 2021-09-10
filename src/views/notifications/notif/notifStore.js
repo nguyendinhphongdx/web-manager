@@ -20,7 +20,7 @@ export const openTypeNotif=(title, message,duration,type)=>{
       id: message,
       title: title ||"Wonderful!",
       message: message|| "teodosii@react-notifications-component",
-      type: type||"success",
+      type: type|| "success",
       insert: "top",
       container: "top-right",
       animationIn: ["animate__animated", "animate__fadeIn"],

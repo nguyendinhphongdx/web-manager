@@ -74,7 +74,7 @@ export const ValidateFormUpdateConfig = (data, {access_data,option}) => {
     return body;
 }
 export const ValidateFormLogin = (data) => {
-    if (!data.username) {
+    if (!data.user_name) {
         return {
             message: 'Username not invalid'
         }

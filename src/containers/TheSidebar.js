@@ -27,14 +27,13 @@ const TheSidebar = () => {
       onShowChange={(val) => dispatch({type: 'set', sidebarShow: val })}
     >
       <CSidebarBrand className="d-md-down-none" to="/">
-        
         <div className="c-sidebar-brand-full">
         <CIcon
           name="sygnet"
           height={35}
         />
             <span style={{fontSize:18,marginTop:5}}>
-            <span >Gateway </span> <span style={{color:'red'}}>API</span>
+            <span >Khoa Bảng </span> <span style={{color:'red'}}>Academy</span>
             </span>
         </div>
         <CIcon

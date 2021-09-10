@@ -28,14 +28,24 @@ const _nav =  [
   },
   {
     _tag: 'CSidebarNavItem',
-    name: 'TheHive',
-    to: '/thehive',
+    name: 'Calendar',
+    to: '/calendar',
     icon: <CIcon name="cil-star" customClasses="c-sidebar-nav-icon"/>,
     badge: {
       color: 'info',
       text: 'NEW',
     }
   },
+  // {
+  //   _tag: 'CSidebarNavItem',
+  //   name: 'Profile',
+  //   to: '/profile',
+  //   icon: <CIcon name="cil-star" customClasses="c-sidebar-nav-icon"/>,
+  //   badge: {
+  //     color: 'info',
+  //     text: 'NEW',
+  //   }
+  // },
   {
     _tag: 'CSidebarNavTitle',
     _children: ['Theme']

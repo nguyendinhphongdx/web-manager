@@ -5,6 +5,7 @@ import {
   CDropdownItem,
   CDropdownMenu,
   CDropdownToggle,
+  CHeaderNavLink,
   CImg
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
@@ -14,10 +15,13 @@ import {useHistory} from "react-router-dom";
 const TheHeaderDropdown = () => {
   const { logout } = useContext(AuthContext);
   const history = useHistory();
+  const currentName = JSON.parse(localStorage.getItem('currentUser')).user_name || 'Account';
   const handleLogout = ()=>{
     logout(history)
   }
-  const currentName = JSON.parse(localStorage.getItem('currentUser')).username || 'Account';
+  const handleNavigate=(type)=>{
+
+  }
   return (
     <CDropdown
       inNav
@@ -67,11 +71,12 @@ const TheHeaderDropdown = () => {
           tag="div"
           color="light"
           className="text-center"
+         
         >
           <strong>Settings</strong>
         </CDropdownItem>
-        <CDropdownItem>
-          <CIcon name="cil-user" className="mfe-2" />Profile
+        <CDropdownItem  onClick={()=>handleNavigate("")}>
+        <CIcon name="cil-user" className="mfe-2" /> <CHeaderNavLink to="/profile">Profile</CHeaderNavLink> 
         </CDropdownItem>
         <CDropdownItem>
           <CIcon name="cil-settings" className="mfe-2" />

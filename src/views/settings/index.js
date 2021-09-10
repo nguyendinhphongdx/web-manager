@@ -24,7 +24,7 @@ const Settings = () => {
     HelperClass.SetLoading(true,dispatch);
     setTimeout(()=>{
       settingsServices.UpdateConfig({reset:true},dispatch).then(data => {
-        openSuccessNotif('Thông báo', 'Reset Default Success!', 2000, 'success');
+        // openSuccessNotif('Thông báo', 'Reset Default Success!', 2000, 'success');
       })
       .finally(()=> HelperClass.SetLoading(false,dispatch))
     },1000)

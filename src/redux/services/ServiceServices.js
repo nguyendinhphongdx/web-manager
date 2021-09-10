@@ -2,7 +2,7 @@ import { message } from 'antd';
 import sendRequest from '../../axios/requestAPI';
 import { Action_Exec_Service, Action_Get_All_Service, Action_Refresh_Result, Set_Service_Edit } from '../actions/serviceActions';
 export const Query_All_Service = async (dispatch) => {
-  const result = await sendRequest('services/queryAll', 'get')
+  const result = await sendRequest('/services/queryAll', 'get')
     .then(items => {
       const data = items.data;
       console.log('====================================');
@@ -18,7 +18,7 @@ export const Query_All_Service = async (dispatch) => {
   return result;
 }
 export const Exec_Service = async (dispatch, endpoint, method) => {
-  const result = await sendRequest(`services/${endpoint}`, method)
+  const result = await sendRequest(`/services/${endpoint}`, method)
     .then(items => {
       const data = items.data;
       if (data) {
@@ -40,7 +40,7 @@ export const Refresh_Resutt = (dispatch) => {
   dispatch(action);
 }
 export const Add__Service = async (dispatch, body) => {
-  const result = await sendRequest('services/newService', 'post', body)
+  const result = await sendRequest('/services/newService', 'post', body)
     .then(items => {
       if (!items || items.status != 200) {
         throw new Error(items.message);
@@ -59,7 +59,7 @@ export const Add__Service = async (dispatch, body) => {
   return result;
 }
 export const Update_Service = async (dispatch, body) => {
-  const result = await sendRequest('services/updateService', 'post', body)
+  const result = await sendRequest('/services/updateService', 'post', body)
     .then(items => {
       if (!items || items.status != 200) {
         throw new Error(items.message);
@@ -79,7 +79,7 @@ export const Update_Service = async (dispatch, body) => {
   return result;
 }
 export const Delete_Method = async (dispatch, body) => {
-  const result = await sendRequest('services/delete_method', 'post', body)
+  const result = await sendRequest('/services/delete_method', 'post', body)
     .then(items => {
       if (!items || items.status != 200) {
         throw new Error(items.message);
@@ -98,7 +98,7 @@ export const Delete_Method = async (dispatch, body) => {
   return result;
 }
 export const Delete_Service = async (dispatch, nameService) => {
-  const result = await sendRequest(`services/delete/${nameService}`, 'post')
+  const result = await sendRequest(`/services/delete/${nameService}`, 'post')
     .then(items => {
       if (!items || items.status != 200) {
         throw new Error(items.message);
@@ -122,7 +122,7 @@ export const Set_Service_Config = (dispatch, service) => {
 }
 
 export const Service_Get_List_Key = async (dispatch, body) => {
-  const result = await sendRequest(`services/getKeys`, 'post',body)
+  const result = await sendRequest(`/services/getKeys`, 'post',body)
     .then(items => {
       if (!items || items.status != 200) {
         throw new Error(items.message);

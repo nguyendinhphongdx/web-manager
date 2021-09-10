@@ -6,7 +6,7 @@ import { openSuccessNotif } from '../../views/notifications/notif/notifStore';
 class StatisticService{
     // dữ liệu thống kê chưa tổng hợp
     QueryCollectedLogs = async (dispatch) => {
-        const result = await sendRequest('mobile/networks/counts', 'get')
+        const result = await sendRequest('/mobile/networks/counts', 'get')
         .then(response => {
             if(response.status == 200){
                 const action = StatisticActions.StatisticAllData(Converter.convertCountAllData(response.data || []));
@@ -18,13 +18,13 @@ class StatisticService{
         })
         .catch((error) => {
             console.log(error);
-            openSuccessNotif('Thông báo', error.message, 2000, 'error');
+            // openSuccessNotif('Thông báo', error.message, 2000, 'error');
         });
     return result;
       }
       // Dữ liệu thống kê đã tổng hợp
     QueryGeneralCollectedLogs = async (dispatch) => {
-        const result = await sendRequest('mobile/networks/counts/home', 'get')
+        const result = await sendRequest('/mobile/networks/counts/home', 'get')
             .then(response => {
                 if(response.status == 200){
                    
@@ -37,7 +37,7 @@ class StatisticService{
             })
             .catch((error) => {
                 console.log(error);
-                openSuccessNotif('Thông báo', error.message, 2000, 'error');
+                // openSuccessNotif('Thông báo', error.message, 2000, 'error');
             });
         return result;
     }

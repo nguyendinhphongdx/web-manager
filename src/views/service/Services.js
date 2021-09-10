@@ -52,7 +52,7 @@ const Services = () => {
             .then((result) => {
                 console.log(result)
                 if (result) {
-                    openSuccessNotif('Thông báo', 'Thêm thành công!', 2000, 'success');
+                    // openSuccessNotif('Thông báo', 'Thêm thành công!', 2000, 'success');
                     setSuccess(!success)
                 }
             })
@@ -64,7 +64,7 @@ const Services = () => {
             .then((result) => {
                 console.log(result)
                 if (result) {
-                    openSuccessNotif('Thông báo', 'Sửa thành công!', 2000, 'success');
+                    // openSuccessNotif('Thông báo', 'Sửa thành công!', 2000, 'success');
                     handleUpdateModalVisible(false);
                     setStepFormValues({});
                 }
@@ -80,7 +80,7 @@ const Services = () => {
             .then(result =>{
                 console.log(result);
                 if (result) {
-                    openSuccessNotif('Thông báo', 'Xóa thành công!', 2000, 'success');
+                    // openSuccessNotif('Thông báo', 'Xóa thành công!', 2000, 'success');
                 }
             })
             .finally(()=>{
