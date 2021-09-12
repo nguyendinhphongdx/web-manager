@@ -10,12 +10,12 @@ class SocketInstant {
         this.socket = io(SERVER_NODE,{
           auth:{userId:userId}
         });
-        message.info(`Connecting socket...`);
+        message.info(`reconnect socket ...`);
         console.log("init socket", this.socket);
         if (this.socket && room) this.socket.emit("join", room);
     };
   disconnectSocket = () => {
-    console.log("Disconnecting socket...");
+    message.info(`disconnect socket ...`);
     if (this.socket) this.socket.disconnect();
   };
   subscribeToChat = cb => {

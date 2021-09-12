@@ -2,6 +2,7 @@ import { message } from 'antd';
 import React, { createContext, useState } from 'react';
 import { VerifyToken } from '../helpers/helpers';
 import helpers from '../helpers/helpers';
+import SocketInstant from '../socket.io/index';
 export const AuthContext = createContext();
 
 const AuthContextProvider = ({ children }) => {
@@ -23,6 +24,7 @@ const AuthContextProvider = ({ children }) => {
         localStorage.removeItem('currentUser');
         localStorage.removeItem('date');
         history.push('/login')
+        // SocketInstant.disconnectSocket();
     }
     const tokenContextData = { token: token, login: login, logout: logout };
     // return provider

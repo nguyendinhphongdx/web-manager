@@ -7,7 +7,6 @@ class CalanderServices{
     GetDataSchedule = async (dispatch) => {
         const result = await sendRequest('/class/common_schedule', 'get')
         .then(response => {
-            console.log('response',response);
             if(response.status == 200){
                 const action = CalendarActions.Get_Data_Schedule(response.data || []);
                 dispatch(action);

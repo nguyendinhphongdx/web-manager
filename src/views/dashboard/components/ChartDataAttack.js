@@ -1,34 +1,67 @@
-import { CCard, CCardBody, CCardHeader } from "@coreui/react"
-import { CChartBar } from "@coreui/react-chartjs"
+import { CCard, CCardBody, CCardHeader } from "@coreui/react";
+import { CChartBar } from "@coreui/react-chartjs";
+import { Button } from "antd";
+import { useEffect, useRef } from "react";
+import { Column } from "@ant-design/charts";
+import { useDispatch, useSelector } from "react-redux";
+import ClassServices from "../../../redux/services/ClassServices";
 
-const ChartDataAttack = ({data}) =>{
-  console.log('attack',data);
-  var dataSet = data.map(item =>{
-    return{
-      label: item.key,
-      backgroundColor: item.color,
-      data:  [item.value]
-    }
+const ChartDataAttack = ({ data }) => {
+  const barChart = useSelector(state => state.Class.chart);
+  const dispatch = useDispatch();
+  const dataConverted = barChart.map(item => {
+    return {
+      ...item,
+      value: Number(item.value),
+    };
   });
-
-    return(
-        <CCard>
-        <CCardHeader>
-          <h4 className="card-title mb-0">
-                Bar Chart
-            </h4>
-        </CCardHeader>
-        <CCardBody className="card-body-barchart">
-          <CChartBar
-            datasets={dataSet}
-            options={{
-              tooltips: {
-                enabled: true
-              }
-            }}
+  var config = {
+    data: dataConverted,
+    isGroup: true,
+    xField: "class",
+    yField: "value",
+    seriesField: "name",
+    label: {
+      position: "middle",
+      layout: [
+        { type: "interval-adjust-position" },
+        { type: "interval-hide-overlap" },
+        { type: "adjust-color" },
+      ],
+    },
+  };
+  let chart;
+  const ref = useRef();
+  const downloadImage = () => {
+    chart?.downloadImage();
+    ref.current?.downloadImage();
+  };
+  useEffect(()=>{
+    ClassServices.GetDataChartClass(dispatch)
+   },[])
+  return (
+   
+    <CCard>
+      <CCardHeader>
+        <CCardHeader style={{display:'flex', alignItems:'center',justifyContent:'space-between'}}> <p>Radar Chart</p>  
+        <Button
+          type="primary"
+          style={{ margin: "10px 0" }}
+          onClick={downloadImage}
+        >
+          {" "}
+          Download{" "}
+        </Button></CCardHeader>
+       
+      </CCardHeader>
+      <CCardBody className="card-body-barchart">
+        <Column
+          {...config}
+          // onReady={chartInstance => (chart = chartInstance)}
+          // chartRef={ref}
           />
-        </CCardBody>
-      </CCard>
-    )
-}
+      </CCardBody>
+    </CCard>
+  );
+};
 export default ChartDataAttack;

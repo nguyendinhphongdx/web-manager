@@ -78,5 +78,25 @@ class HelperClass {
         let dateNow = date.getFullYear() + "-" + month + "-" + day;
         return dateNow;
       }
+    cutChartData(data){
+    const result= data.filter(item=>{
+        if(!isNaN(item.value)&&item.value!=0){
+        return {
+            ...item,value:Number(item.value)
+        }
+        }
+    })
+    return result;
+    }
+    devideCard(array){
+        const nGroup = array.length/4;
+        var newArray=[];
+        for(var i=0; i<nGroup; i++){
+          var coppyArray = [...array];
+          var newE = coppyArray.slice(i*4, i*4+4);
+          newArray.push(newE)
+        }
+        return newArray;
+      }
 }
 export default new HelperClass();

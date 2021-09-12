@@ -12,10 +12,11 @@ import {
   CProgress,
   CRow,
 } from "@coreui/react";
+import { Col } from "antd";
 import React, { lazy, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import NewsServices from "../../redux/services/NewsServices.js";
-import StatisticService from "../../redux/services/StatisticService.js";
+import ClassServices from "../../redux/services/ClassServices.js";
+import ProfessorServices from "../../redux/services/ProfessorServices.js";
 import MainChartExample from "../charts/MainChartExample.js";
 import ChartDataAttack from "./components/ChartDataAttack.js";
 import DoughNutChartData from "./components/DoughNutChartData.js";
@@ -25,32 +26,31 @@ import "./styles.scss";
 const WidgetsCountData = lazy(() => import("./components/WidgetsCountData"));
 
 const Dashboard = () => {
-  const countData = useSelector(state => state.Statistic).statistic;
-  const attackWeb = useSelector(state => state.Statistic).attackWeb;
+  const classes = useSelector(state => state.Class).classes;
   const operationSystem = useSelector(state => state.Statistic).operationSystem;
   const vulnerability = useSelector(state => state.Statistic).vulnerability;
-  const featuredNews = useSelector(state => state.News).featured;
-  console.log(featuredNews);
+  const store = useSelector(state => state);
   const dispatch = useDispatch();
   useEffect(() => {
-    StatisticService.QueryGeneralCollectedLogs(dispatch).then(data =>console.log(data))
-    StatisticService.QueryCollectedLogs(dispatch).then(data =>{})
-    NewsServices.QueryFeaturedNews(dispatch).then(data =>{})
+     Promise.all([
+      ClassServices.GetDataClass(dispatch),
+      ProfessorServices.GetDataProfessor(dispatch),
+     
+     ])
+     .then(datas => console.log(datas))
     return () => {
-      
     }
   }, [])
   return (
     <div className="page-dashboard">
-      <WidgetsCountData data={countData}/>
+      <WidgetsCountData data={classes}/>
       <CRow >
-        <CCol xs="12" xl="6">
-          <SlideCarosel data={ featuredNews }/>
-          
+        <CCol xs="8" xl="6">
+          <SlideCarosel data={ [] }/>
         </CCol>
-        <CCol xs="12" xl="6">
+        <CCol xs="8" xl="6">
           <div className="wrapper-chart">
-          <ChartDataAttack data={attackWeb}/>
+          <ChartDataAttack data={[]}/>
           </div>
         </CCol>
       </CRow>

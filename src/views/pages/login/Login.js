@@ -49,7 +49,6 @@ const Login = (props) => {
                 currentUser:result.user
               }
               login(storage, history,from);
-              SocketInstant.initiateSocket(null,result.user._id);
             }else{
               message.info('Perrmission Deny');
             }

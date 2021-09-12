@@ -13,22 +13,6 @@ import { CChartRadar } from "@coreui/react-chartjs";
 import { SERVER_NODE } from "../../../axios/configAPI";
 
 const SlideCarosel = ({ data }) => {
-  console.log("data", data);
-  const element = data.map((item, index) => {
-    return (
-      <CCarouselItem key={index}>
-        <img
-          className="d-block w-100"
-          src={SERVER_NODE + "/static" + item.image}
-          alt="slide 1"
-        />
-        <CCarouselCaption>
-          <h3 style={{ color: "white" }}>{item.title}</h3>
-          <p>{item.time}</p>
-        </CCarouselCaption>
-      </CCarouselItem>
-    );
-  });
   return (
     //   <CCard>
     //   <CCardHeader>
