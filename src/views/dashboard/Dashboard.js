@@ -12,7 +12,7 @@ import {
   CProgress,
   CRow,
 } from "@coreui/react";
-import { Col } from "antd";
+import { Col, message } from "antd";
 import React, { lazy, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ClassServices from "../../redux/services/ClassServices.js";
@@ -30,6 +30,7 @@ const Dashboard = () => {
   const operationSystem = useSelector(state => state.Statistic).operationSystem;
   const vulnerability = useSelector(state => state.Statistic).vulnerability;
   const store = useSelector(state => state);
+  console.log('STORE APP',store);
   const dispatch = useDispatch();
   useEffect(() => {
      Promise.all([
@@ -37,7 +38,7 @@ const Dashboard = () => {
       ProfessorServices.GetDataProfessor(dispatch),
      
      ])
-     .then(datas => console.log(datas))
+     .then(datas => message.destroy())
     return () => {
     }
   }, [])

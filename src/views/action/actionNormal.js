@@ -1,7 +1,6 @@
 import CIcon from '@coreui/icons-react';
 import {CButton} from '@coreui/react'
 import { useDispatch } from 'react-redux';
-import { Refresh_Resutt } from '../../redux/services/ServiceServices';
 import { openSuccessNotif, clearNotif } from '../notifications/notif/notifStore';
 export const ActionDeleteResult = () => {
     const dispatch = useDispatch();

@@ -5,7 +5,6 @@ import classActions from "../actions/classActions";
 const key='updatable'
 class ClassServices{
     async GetDataClass(dispatch){
-        message.loading({ content: 'Đang xử lý...', key });
         const request = await sendRequest('/class/classes','get')
         .then(response =>{
             if(response.status == 200){

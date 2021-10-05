@@ -259,7 +259,7 @@ const WidgetsCountData = ({ data }) => {
     //     </CRow>
     //   </CCardBody>
     // </CCard>
-    <Carousel >{elementCarousel}</Carousel>
+    <Carousel autoplay>{elementCarousel}</Carousel>
     // <CCard style={{backgroundColor:'transparent'}}>
 
     // </CCard>

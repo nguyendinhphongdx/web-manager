@@ -75,3 +75,16 @@
   ::-webkit-scrollbar-thumb:hover {
     background: #b30000; 
   }
+
+.ant-drawer-body{
+    padding: 0px !important;
+}
+.ant-table-thead > tr > td,.ant-table-tbody > tr > td {
+    border-bottom: 1px solid #ccc !important;
+}
+.c-wrapper:not(.c-wrapper-fluid) .c-body{
+    margin-bottom: 30px;
+}
+.ant-table-column-title,.ant-table-cell{
+    text-align: center;
+}

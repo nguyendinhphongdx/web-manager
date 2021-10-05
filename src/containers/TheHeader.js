@@ -25,7 +25,6 @@ import {
 import { Button, DatePicker } from "antd";
 import moment from 'moment';
 import helpers from "../helpers/helpers";
-import NewsServices from "../redux/services/NewsServices";
 import StatisticService from "../redux/services/StatisticService";
 const TheHeader = () => {
   const dispatch = useDispatch();
@@ -43,7 +42,6 @@ const TheHeader = () => {
     helpers.SetLoading(true,dispatch)
     localStorage.setItem('date',date);
     Promise.all([
-      NewsServices.QueryFeaturedNews(dispatch),
       StatisticService.QueryCollectedLogs(dispatch),
       StatisticService.QueryGeneralCollectedLogs(dispatch)
     ]).then().finally(()=>{

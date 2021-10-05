@@ -1,4 +1,9 @@
 import React from 'react';
+import DocumentPage from './views/entity/document';
+import ProfessorPage from './views/entity/professor';
+import StudentPage from './views/entity/student';
+import SubjectPage from './views/entity/subject';
+import ClassPage from './views/entity/_class';
 import ProfilePage from './views/profile';
 import Settings from './views/settings';
 
@@ -27,7 +32,6 @@ const ButtonGroups = React.lazy(() => import('./views/buttons/button-groups/Butt
 const Buttons = React.lazy(() => import('./views/buttons/buttons/Buttons'));
 const Charts = React.lazy(() => import('./views/charts/Charts'));
 const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'));
-const Services = React.lazy(() => import('./views/service/Services'));
 const CalendarPage = React.lazy(() => import('./views/Calendar/Calendar'));
 const CoreUIIcons = React.lazy(() => import('./views/icons/coreui-icons/CoreUIIcons'));
 const Flags = React.lazy(() => import('./views/icons/flags/Flags'));
@@ -44,12 +48,14 @@ const Mobile = React.lazy(() => import('./views/mobile/index.js'));
 const routes = [
   { path: '/', exact: true, name: 'Home' },
   { path: '/dashboard', name: 'Dashboard', component: Dashboard },
-  { path: '/services', name: 'Services', component: Services },
   { path: '/calendar', name: 'Calendar', component: CalendarPage },
   { path: '/profile', name: 'Profile', component: ProfilePage },
-
-
-
+  //Entity
+  { path: '/entity/class', name: 'Class', component: ClassPage },
+  { path: '/entity/student', name: 'Student', component: StudentPage },
+  { path: '/entity/professor', name: 'Professor', component: ProfessorPage },
+  { path: '/entity/subject', name: 'Subject', component: SubjectPage },
+  { path: '/entity/document', name: 'Document', component: DocumentPage },
   
   { path: '/theme', name: 'Theme', component: Colors, exact: true },
   { path: '/theme/colors', name: 'Colors', component: Colors },

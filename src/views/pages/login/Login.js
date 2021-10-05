@@ -17,12 +17,10 @@ import { Image, message } from 'antd';
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useHistory } from 'react-router-dom';
-import { TypeRoleID } from '../../../anothers/constants';
 import logo from "../../../assets/icons/grafana_icon.png";
 import { AuthContext } from '../../../contexts/auth';
 import { ValidateFormLogin } from '../../../helpers/validateForm';
 import UserService from '../../../redux/services/UserServices';
-import SocketInstant from '../../../socket.io/index';
 const Login = (props) => {
   const {from} = props.location.state || {from:{pathname:'/dashboard'}}
   const { register, handleSubmit, formState: { errors } } = useForm();
@@ -120,7 +118,7 @@ const Login = (props) => {
                     />
                   </div>
                   <div>
-                    <h3 className="title">Welcome to GateWay API SOC</h3>
+                    <h3 className="title">Welcome to Khoa Bảng Academy</h3>
                   </div>
                 </CCardBody>
               </CCard>

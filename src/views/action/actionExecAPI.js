@@ -9,8 +9,6 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import helpers from '../../helpers/helpers';
 import { ValidateFormAddService } from '../../helpers/validateForm';
-import { Set_Service_Edit } from '../../redux/actions/serviceActions';
-import { Exec_Service } from '../../redux/services/ServiceServices';
 export const ActionExec = ({service}) => {
     const dispatch = useDispatch();
     const [disabled,setDisabled]= useState(false);
