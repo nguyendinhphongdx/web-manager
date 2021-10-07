@@ -4,8 +4,9 @@
     flex-direction: column;
     justify-content: space-between;
     padding: 10px;
+    overflow-y: scroll;
     .content-message{
-        height: -webkit-fill-available;
+        height: unset;
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
@@ -36,30 +37,31 @@
     p{
         width: 100%;
     }
-    .footer-input{
-        display: flex;
-        input{
-            width: -webkit-fill-available;
-            border-radius: 10px;
-            outline: none;
-            border: none;
-            background-color: rgb(184, 216, 245);
-            padding: 8px 15px;
-        }
-        .icon{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 20px;
-            padding: 3px;
-        }
-        .icon:hover{
-            cursor: pointer;
-            background-color:rgb(184, 210, 233); 
-        }
-    }
+    
     .anticon.anticon-send{
         color:blueviolet;
         margin-left: 10px;
+    }
+}
+.footer-input{
+    display: flex;
+    input{
+        width: -webkit-fill-available;
+        border-radius: 10px;
+        outline: none;
+        border: none;
+        background-color: rgb(184, 216, 245);
+        padding: 8px 15px;
+    }
+    .icon{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 20px;
+        padding: 3px;
+    }
+    .icon:hover{
+        cursor: pointer;
+        background-color:rgb(184, 210, 233); 
     }
 }

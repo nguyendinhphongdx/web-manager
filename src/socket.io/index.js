@@ -26,16 +26,10 @@ class SocketInstant {
     });
   };
   sendNotification = message => {
-    console.log("send socket", this.socket);
-    if (this.socket) this.socket.emit("notif", { message });
+    if (this.socket) this.socket.emit("change_schedule", { message });
   };
-  EmitInterval = () => {
-    console.log("emit socket", this.socket);
-    if (this.socket)
-      setInterval(() => {
-        message.info("just emit to clients");
-        this.socket.emit("change_schedule", "data schedule");
-      }, 5000);
+  sendMessage = message => {
+    if (this.socket) this.socket.emit("send-message", { message });
   };
 }
 export default new SocketInstant();

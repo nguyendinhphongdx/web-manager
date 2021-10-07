@@ -1,5 +1,5 @@
 import { TeamOutlined, SendOutlined } from "@ant-design/icons";
-import React from "react";
+import React, { useEffect } from "react";
 import { Drawer, Image, Menu } from "antd";
 import SubMenu from "antd/lib/menu/SubMenu";
 import { useState } from "react";
@@ -9,6 +9,7 @@ import HelperClass from "../../../../helpers/helpers";
 import MessageServices from "../../../../redux/services/MessageServices";
 import ImageComponent from "../../../../common/components/image";
 import { SERVER_NODE } from "../../../../axios/configAPI";
+import socketIo from "../../../../socket.io";
 export function DrawerClass(props) {
   const { students, record, professor } = props;
   const [state, setState] = useState({
@@ -17,9 +18,9 @@ export function DrawerClass(props) {
     message: "",
   });
   const dispatch = useDispatch();
-  const idCurrentUser = JSON.parse(
-    localStorage.getItem("currentUser") || { _id: null }
-  )._id;
+  const CurrentUser = JSON.parse(
+    localStorage.getItem("currentUser") || { _id: null,name:null }
+  );
   const messages = useSelector(state => state.Message.messages);
   const studentRedux = useSelector(state => state.Student.students);
   const studentInClass = HelperClass.filterStudentInClass(
@@ -27,6 +28,12 @@ export function DrawerClass(props) {
     studentRedux
   );
   const selectChildren = student => {
+    const body = {
+      users:[
+        CurrentUser._id,student._id
+      ]
+    }
+    MessageServices.GetAllMessage(dispatch,body)
     setState({
       ...state,
       childrenDrawer: true,
@@ -35,16 +42,25 @@ export function DrawerClass(props) {
   };
   const sendMessage = () => {
     if (state.message != "") {
-      const message = {
-        idFrom: idCurrentUser,
-        timestamp: new Date().getTime(),
-        message: state.message,
+      const body = {
+        users:[
+          CurrentUser._id,state.childrenSelected._id
+       ],
+       message:{
+           userSendId:CurrentUser._id,
+           userReceiveId:state.childrenSelected._id,
+           message:state.message,
+           type:"text",
+           displayName:CurrentUser.user_name,
+           time:new Date().getTime()
+       }
       };
-      MessageServices.ChatAddMessage(dispatch, message);
+      MessageServices.ChatAddMessage(dispatch, body);
       setState({
         ...state,
         message: "",
       });
+      
     }
   };
   const element = studentInClass.map((student, index) => {
@@ -58,19 +74,19 @@ export function DrawerClass(props) {
     );
   });
   const elementsMessage = messages.map((item, index) => {
-    if (item.idFrom == idCurrentUser) {
+    if (state.childrenSelected && item.userSendId == state.childrenSelected._id) {
       return (
-        <div className="message-item me">
-          <p className="me message">{item.message}</p>
-        </div>
-      );
-    } else {
-      return (
-        <div className="group-other" style={{display:'flex'}}>
+        <div key={index} className="group-other" style={{display:'flex'}}>
            { state.childrenSelected &&  <ImageComponent size={30} url={state.childrenSelected.image} type="student" />}
           <div className="other message-item">
             <p className="other message">{item.message}</p>
           </div>
+        </div>
+      );
+    } else {
+      return (
+        <div key={index} className="message-item me">
+          <p className="me message">{item.message}</p>
         </div>
       );
     }
@@ -79,6 +95,13 @@ export function DrawerClass(props) {
   const menuSchedule1 = convertKB.convertScheduleClass(schedule1);
   const menuSchedule2 = convertKB.convertScheduleClass(schedule2);
 
+  useEffect(()=>{
+    const wrapperMessage = document.getElementById("wrapper-message");
+    if(wrapperMessage){
+      console.log("scroll");
+      wrapperMessage.scrollIntoView(false);
+    }
+  },[messages])
   return (
     <Menu theme="light" defaultOpenKeys={["students"]} mode="inline">
       <SubMenu key="students" icon={<TeamOutlined />} title=" Member">
@@ -98,9 +121,7 @@ export function DrawerClass(props) {
           closable={false}
           onClose={() => setState({ ...state, childrenDrawer: false })}
           visible={state.childrenDrawer}
-        >
-          <div className="wrapper-message">
-            <div className="content-message">{elementsMessage}</div>
+          footer={
             <div className="footer-input">
               <input
                 type="text"
@@ -114,6 +135,10 @@ export function DrawerClass(props) {
                 <SendOutlined style={{ fontSize: 25 }} />
               </div>
             </div>
+          }
+        >
+          <div className="wrapper-message" id="wrapper-message">
+            <div className="content-message">{elementsMessage}</div>
           </div>
         </Drawer>
       )}
