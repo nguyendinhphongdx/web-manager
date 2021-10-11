@@ -10,7 +10,7 @@ class ClassServices{
             if(response.status == 200){
                 const action = classActions.Get_All_Class(response.data || [])
                 dispatch(action);
-                return 'success'
+                return response.data
             }else{
                 throw new Error(response.message);
             }

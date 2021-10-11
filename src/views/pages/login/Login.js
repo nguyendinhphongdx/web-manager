@@ -11,7 +11,9 @@ import {
   CInputGroup,
   CInputGroupPrepend,
   CInputGroupText,
-  CRow
+  CLabel,
+  CRow,
+  CSelect
 } from '@coreui/react';
 import { Image, message } from 'antd';
 import React, { useContext, useState } from 'react';
@@ -28,6 +30,7 @@ const Login = (props) => {
   let history = useHistory();
   const { login, token } = useContext(AuthContext);
   const onSubmit = (data) => {
+  
     setLoading(!loading);
     const valid = ValidateFormLogin(data);
     if (valid !== true) {
@@ -37,19 +40,13 @@ const Login = (props) => {
       UserService.LoginService(data)
         .then((result) => {
           if (result) {
-            const typeUser = result.role_id;
-            // if(typeUser == TypeRoleID.ADMIN || typeUser == TypeRoleID.SUPERUSER){
-              if(true){
-              const token = result.token;
-              console.log(token);
-              const storage = {
-                token,
-                currentUser:result.user
-              }
-              login(storage, history,from);
-            }else{
-              message.info('Perrmission Deny');
+            const token = result.token;
+            console.log(token);
+            const storage = {
+              token,
+              currentUser:result.user || result.profesor
             }
+            login(storage, history,from);
           }
         })
         .finally(() => {
@@ -71,7 +68,9 @@ const Login = (props) => {
                 <CCardBody>
                   <CForm onSubmit={handleSubmit(onSubmit)} >
                     <h1 className="title">Login</h1>
+                    <div className="">
                     <p className="text-muted">Sign In to your account</p>
+                    </div>
                     <CInputGroup className="mb-3">
                       <CInputGroupPrepend>
                         <CInputGroupText>
@@ -90,6 +89,11 @@ const Login = (props) => {
                       <input type="password" className="form-control" placeholder="Mật khẩu" {...register('password', { required: true })}/>
                     </CInputGroup>
                     {errors.password && <span className="error">This field is required</span>}
+
+                    <select className="custom-select" name="sRole" {...register('role', { required: true })}>
+                      <option value="1">Admin</option>
+                      <option value="2">Prof</option>
+                    </select>
                     <CRow>
                       <CCol xs="12" className="text-right">
                         <CButton color="link" className="px-0">Forgot password?</CButton>

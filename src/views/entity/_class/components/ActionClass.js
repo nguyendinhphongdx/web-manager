@@ -8,17 +8,20 @@ import ClassServices from "../../../../redux/services/ClassServices";
 import { DrawerClass } from "./DrawerClass";
 import { UpdateClass } from "./UpdateClass";
 import { AddMemberToClass } from "./AddMember";
+import  GlobalContext  from "../../../../contexts/globalContext";
 
 export default function ActionClass(props){
     const [visible, setVisible] = useState(false);
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [isModalMemberVisible, setIsModalMemberVisible] = useState(false);
     const dispatch = useDispatch()
+    const globalContext = GlobalContext;
     const state = useSelector(state=>state);
     useEffect(()=>{
         StudentServices.GetDataStudent(dispatch).then(()=> message.destroy())
     },[]);
-    const showDrawer = () => {
+    const showDrawer = (record) => {
+      globalContext.setClassSelected(record);
       setVisible(true);
     };
 
@@ -56,7 +59,7 @@ export default function ActionClass(props){
     const {record} = props;
     return(
         <div style={rowAction}>
-            <WalletOutlined style={{fontSize: '20px' }} onClick={showDrawer}/>
+            <WalletOutlined style={{fontSize: '20px' }} onClick={()=>showDrawer(record)}/>
             <EditOutlined style={{fontSize: '20px' }} onClick={showModal}/>
               <Modal title="Edit Class" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel} footer={null}>
                   <UpdateClass state={state} record={record} callback={handleOk}/>  

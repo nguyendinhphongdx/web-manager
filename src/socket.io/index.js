@@ -20,16 +20,16 @@ class SocketInstant {
   };
   subscribeToChat = cb => {
     if (!this.socket) return true;
-    this.socket.on("chat", msg => {
-      console.log("Websocket event received!");
-      return cb(null, msg);
+    console.log("subscribeToChat");
+    this.socket.on("receive-message", msg => {
+      return cb(msg);
     });
   };
   sendNotification = message => {
     if (this.socket) this.socket.emit("change_schedule", { message });
   };
   sendMessage = message => {
-    if (this.socket) this.socket.emit("send-message", { message });
+    if (this.socket) this.socket.emit("send-message",  message );
   };
 }
 export default new SocketInstant();

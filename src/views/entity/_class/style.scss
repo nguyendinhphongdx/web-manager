@@ -4,7 +4,6 @@
     flex-direction: column;
     justify-content: space-between;
     padding: 10px;
-    overflow-y: scroll;
     .content-message{
         height: unset;
         display: flex;
@@ -31,7 +30,11 @@
         }
         .message-item.me{
             display: flex;
-            justify-content: end;
+            justify-content: flex-end;
+        }
+        .group-other{
+            display: flex;
+            align-items: center;
         }
     }
     p{

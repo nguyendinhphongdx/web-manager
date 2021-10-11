@@ -27,7 +27,6 @@ class ConvertorKB {
 export default new ConvertorKB();
 function getNameProfessorByID(id,list){
     const result =  list.find(item=>JSON.stringify(item._id) === JSON.stringify(id));
-    console.log(id,list);
     if(result){
         return result;
     }

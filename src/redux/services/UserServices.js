@@ -5,7 +5,7 @@ import { QueryAll_User } from "../actions/userActions";
 
 class UserService {
   LoginService = async body => {
-    const result = await sendRequest("/login", "post", body)
+    const result = await sendRequest(body.role==1?"/login":"/professor/login", "post", body)
       .then(result => {
         if (result && result.data) {
           return result.data[0];

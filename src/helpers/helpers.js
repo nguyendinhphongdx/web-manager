@@ -19,7 +19,6 @@ class HelperClass {
         return token;
       }
     });
-    console.log("veryfy token", result);
     return result;
   };
   CountPercent(data, Other = true) {

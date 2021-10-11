@@ -1,5 +1,5 @@
 import { TeamOutlined, SendOutlined } from "@ant-design/icons";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef,useContext } from "react";
 import { Drawer, Image, Menu } from "antd";
 import SubMenu from "antd/lib/menu/SubMenu";
 import { useState } from "react";
@@ -8,15 +8,16 @@ import convertKB from "../../../../helpers/convertKB";
 import HelperClass from "../../../../helpers/helpers";
 import MessageServices from "../../../../redux/services/MessageServices";
 import ImageComponent from "../../../../common/components/image";
-import { SERVER_NODE } from "../../../../axios/configAPI";
-import socketIo from "../../../../socket.io";
+import  GlobalContext  from "../../../../contexts/globalContext";
 export function DrawerClass(props) {
   const { students, record, professor } = props;
+  const globalContext = GlobalContext;
   const [state, setState] = useState({
     childrenDrawer: false,
     childrenSelected: null,
     message: "",
   });
+  const messagesEndRef = useRef(null);
   const dispatch = useDispatch();
   const CurrentUser = JSON.parse(
     localStorage.getItem("currentUser") || { _id: null,name:null }
@@ -33,6 +34,10 @@ export function DrawerClass(props) {
         CurrentUser._id,student._id
       ]
     }
+    globalContext.setStudentSelected(student);
+    //setSelectedMessage(null,student)
+    // MessageServices.SelecteStudentMessage(dispatch,student);
+
     MessageServices.GetAllMessage(dispatch,body)
     setState({
       ...state,
@@ -41,6 +46,7 @@ export function DrawerClass(props) {
     });
   };
   const sendMessage = () => {
+   
     if (state.message != "") {
       const body = {
         users:[
@@ -63,6 +69,11 @@ export function DrawerClass(props) {
       
     }
   };
+  const handleKeyPress = (event)=>{
+    switch(event.code){
+      case "Enter": sendMessage(); break
+    }
+  }
   const element = studentInClass.map((student, index) => {
     return (
       <Menu.Item
@@ -74,18 +85,19 @@ export function DrawerClass(props) {
     );
   });
   const elementsMessage = messages.map((item, index) => {
+    const lastMessage =index==messages.length-1?'last-message':'';
     if (state.childrenSelected && item.userSendId == state.childrenSelected._id) {
       return (
-        <div key={index} className="group-other" style={{display:'flex'}}>
+        <div key={index} id={`${lastMessage}`} className="group-other">
            { state.childrenSelected &&  <ImageComponent size={30} url={state.childrenSelected.image} type="student" />}
-          <div className="other message-item">
+          <div className="other message-item" >
             <p className="other message">{item.message}</p>
           </div>
         </div>
       );
     } else {
       return (
-        <div key={index} className="message-item me">
+        <div key={index} id={`${lastMessage}`} className="message-item me">
           <p className="me message">{item.message}</p>
         </div>
       );
@@ -94,13 +106,14 @@ export function DrawerClass(props) {
   const { schedule1, schedule2 } = record;
   const menuSchedule1 = convertKB.convertScheduleClass(schedule1);
   const menuSchedule2 = convertKB.convertScheduleClass(schedule2);
-
-  useEffect(()=>{
-    const wrapperMessage = document.getElementById("wrapper-message");
-    if(wrapperMessage){
-      console.log("scroll");
-      wrapperMessage.scrollIntoView(false);
+  const scrollBottom =()=>{
+    if(messagesEndRef.current){
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth" })
     }
+  }
+  useEffect(()=>{
+    console.log("scrolling");
+    scrollBottom();
   },[messages])
   return (
     <Menu theme="light" defaultOpenKeys={["students"]} mode="inline">
@@ -125,6 +138,8 @@ export function DrawerClass(props) {
             <div className="footer-input">
               <input
                 type="text"
+                id="input-message"
+                onKeyPress={handleKeyPress}
                 placeholder="Enter your message"
                 value={state.message}
                 onInput={mesage =>
@@ -138,7 +153,8 @@ export function DrawerClass(props) {
           }
         >
           <div className="wrapper-message" id="wrapper-message">
-            <div className="content-message">{elementsMessage}</div>
+            <div className="content-message" >{elementsMessage}</div>
+            <div className="" ref={messagesEndRef}/>
           </div>
         </Drawer>
       )}
