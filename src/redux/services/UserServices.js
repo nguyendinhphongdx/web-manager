@@ -67,5 +67,33 @@ class UserService {
       });
     return result;
   };
+  GetQrcodeOPT = async body => {
+    const result = await sendRequest("/login/opt", "post", body)
+      .then(result => {
+        if (result && result.data) {
+          return result.data;
+        } else {
+          throw new Error(result.message);
+        }
+      })
+      .catch(error => {
+        message.error(error?.response?.data?.message ||error.message);
+      });
+    return result;
+  };
+  VerifyOPT = async body => {
+    const result = await sendRequest("/login/verify", "post", body)
+      .then(result => {
+        if (result && result.data) {
+          return result.data;
+        } else {
+          throw new Error(result.message);
+        }
+      })
+      .catch(error => {
+        message.error(error?.response?.data?.message ||error.message);
+      });
+    return result;
+  };
 }
 export default new UserService();

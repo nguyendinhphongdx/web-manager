@@ -1,0 +1,55 @@
+div.input-opt input{
+    width: 60px !important;
+    height: 60px;
+    color: black;
+    font-size: 24px;
+    font-weight: 700;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    border: 1px solid white;
+}
+div.input-opt input:focus{
+    box-shadow:0px 0px 5px 5px #4d4dbb;
+}
+div.row-opt{
+    justify-content:space-around;
+    width: 100%;
+}
+.login_container .card-group{
+    padding: 10px;
+}
+.login_container .card{
+    height: 100%;
+    margin: 0;
+} 
+.row {
+    margin-right: 0; 
+     margin-left: 0;
+}
+.p-10.card .card-body{
+    padding: 40px 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.col-12,.col-md-5{
+    padding: 0;
+}
+.col-md-5 .card-body{
+    padding: 10px 0px;
+    align-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.col-md-5 .title{
+    margin-top: 20px;
+}
+.ant-image{
+    width: 300px;
+    height: 100%;
+}
+.ant-image img{
+    width: 100% !important;
+}

@@ -3,6 +3,8 @@ import { SERVER_NODE } from './configAPI';
 const cancelToken = axios.CancelToken;
 const source = cancelToken.source();
 export default async function sendRequest(endpoint, method, body) {
+
+    console.log(body);
     const token = localStorage.getItem('token') || '';
     // const date = localStorage.getItem('date') || '2021-07-15';
     // const dateParams  =  date?{date: date}:{}

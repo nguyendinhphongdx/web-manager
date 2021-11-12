@@ -6,6 +6,8 @@ export const AuthContext = createContext();
 const AuthContextProvider = ({ children }) => {
   const storeToken = helpers.VerifyToken(localStorage.getItem("token"));
   const [token, setToken] = useState(storeToken || null);
+  const [verifyOPT, setVerifyOPT] = useState(false);
+
   //context data
   const login = (storage, history, from) => {
     setToken(storage.token);
@@ -23,7 +25,13 @@ const AuthContextProvider = ({ children }) => {
     history.push("/login");
     // SocketInstant.disconnectSocket();
   };
-  const tokenContextData = { token: token, login: login, logout: logout};
+  const tokenContextData = {
+    token: token,
+    login: login,
+    logout: logout,
+    verifyOPT: verifyOPT,
+    setVerifyOPT: setVerifyOPT,
+  };
   // return provider
   return (
     <AuthContext.Provider value={tokenContextData}>
