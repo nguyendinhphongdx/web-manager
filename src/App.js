@@ -22,8 +22,8 @@ const Page404 = React.lazy(() => import('./views/pages/page404/Page404'));
 const Page500 = React.lazy(() => import('./views/pages/page500/Page500'));
 const Verify = React.lazy(() => import('./views/pages/login/Verify'));
 const App = () => {
-  const { token, verifyOPT } = useContext(AuthContext);
-    console.log({token,verifyOPT});
+  const { token, isVerified } = useContext(AuthContext);
+  console.log(token, isVerified);
   return (
       <HashRouter>
         <ReactNotification />
@@ -36,7 +36,7 @@ const App = () => {
             <Route exact path="/verify" name="Login Page" render={props => <Verify {...props}/>} />
             <Route path="/" name="Home" render={props => {
               if (token != null) {
-                if(verifyOPT){
+                if(isVerified){
                   return  <TheLayout {...props} />
                 }else{
                   return <Redirect to={{pathname:'/verify',state: { from: props.location }}} />

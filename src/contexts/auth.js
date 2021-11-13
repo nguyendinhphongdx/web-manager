@@ -6,7 +6,7 @@ export const AuthContext = createContext();
 const AuthContextProvider = ({ children }) => {
   const storeToken = helpers.VerifyToken(localStorage.getItem("token"));
   const [token, setToken] = useState(storeToken || null);
-  const [verifyOPT, setVerifyOPT] = useState(false);
+  const [isVerified, setIsVerified] = useState(false);
 
   //context data
   const login = (storage, history, from) => {
@@ -19,18 +19,23 @@ const AuthContextProvider = ({ children }) => {
   };
   const logout = history => {
     setToken(null);
+    setIsVerified(false);
     localStorage.removeItem("token");
     localStorage.removeItem("currentUser");
     localStorage.removeItem("date");
     history.push("/login");
     // SocketInstant.disconnectSocket();
   };
+  const verify = (verify,history,from) =>{
+    setIsVerified(verify);
+    history.push(from.pathname);
+  }
   const tokenContextData = {
     token: token,
     login: login,
     logout: logout,
-    verifyOPT: verifyOPT,
-    setVerifyOPT: setVerifyOPT,
+    isVerified: isVerified,
+    verify:verify
   };
   // return provider
   return (

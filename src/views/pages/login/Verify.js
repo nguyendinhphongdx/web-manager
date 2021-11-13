@@ -1,43 +1,53 @@
 import {
-    CButton,
-    CCard,
-    CCardBody,
-    CCardGroup,
-    CCol,
-    CContainer, CRow
+  CButton,
+  CCard,
+  CCardBody,
+  CCardGroup,
+  CCol,
+  CContainer,
+  CRow,
 } from "@coreui/react";
 import { Image, message } from "antd";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import logo from "../../../assets/icons/grafana_icon.png";
 import OtpInput from "../../../common/components/InputOPT";
 import { AuthContext } from "../../../contexts/auth";
 import UserService from "../../../redux/services/UserServices";
-import {ReloadOutlined} from '@ant-design/icons';
+import { ReloadOutlined } from "@ant-design/icons";
+import helpers from "../../../helpers/helpers";
+import { useDispatch } from "react-redux";
 const Verify = props => {
   const { from } = props.location.state || { from: { pathname: "/dashboard" } };
-  const [loading, setLoading] = useState(false);
   const [state, setState] = useState({ opt: "" });
   const [qrcode, setQrcode] = useState(null);
   const [expired, setExpired] = useState(false);
   const [step, setStep] = useState(30);
-  const [disable,setDisable] = useState(true);
+  const [disable, setDisable] = useState(false);
+  const [countDown, setCountDown] = useState(-1);
+  const dispatch = useDispatch();
+  const timer = useRef(0);
   let history = useHistory();
-  const { login, token } = useContext(AuthContext);
+  const { verify } = useContext(AuthContext);
   const userID = localStorage.getItem("currentUser")
-  ? JSON.parse(localStorage.getItem("currentUser"))["_id"]
-  : null;
+    ? JSON.parse(localStorage.getItem("currentUser"))["_id"]
+    : null;
   const handleChange = opt => {
     setState({ opt });
   };
-  const handleOnVerify = async() =>{
-      const body = {
-          userID,
-          token:+state.opt
-      }
-      const response = await UserService.VerifyOPT(body);
-      message.info("Verify Result: "+response.status);
-  }
+  const handleOnVerify = async () => {
+    helpers.SetLoading(true,dispatch);
+    const body = {
+      userID,
+      token: state.opt,
+    };
+    const response = await UserService.VerifyOPT(body).finally(()=>  helpers.SetLoading(false,dispatch));
+    if (response.status == true) {
+      verify(true, history, from);
+    } else {
+      message.info("Verify Result: " + response.status);
+    }
+  };
   const handleCallQrCode = async () => {
     setExpired(false);
     if (userID) {
@@ -50,8 +60,8 @@ const Verify = props => {
   };
   useEffect(async () => {
     message.destroy();
-    console.log("use effect");
     handleCallQrCode();
+    setCountDown(step);
     const setExpiredQrCode = setTimeout(() => {
       setExpired(true);
       console.log("clear timeout");
@@ -61,10 +71,31 @@ const Verify = props => {
       setExpired(false);
     };
   }, [qrcode]);
-  useEffect( () => {
-    if(state.opt.length == 6) setDisable(false)
-    else setDisable(true)
+  useEffect(() => {
+    if (state.opt.length == 6) setDisable(false);
+    else setDisable(true);
   }, [state]);
+  // const handleListener = useCallback(e => {
+  //   if (e.key === "Enter" && disable === false) {
+  //     handleOnVerify();
+  //   }
+  // },[disable]);
+  // useEffect(() => {
+  //   window.addEventListener("keypress", handleListener);
+  //   return function cleanupListener() {
+  //     window.removeEventListener("keypress", handleListener);
+  //   };
+  // }, []);
+  useEffect(() => {
+    timer.current = setInterval(() => {
+      setCountDown(pre => pre - 1);
+    }, 1000);
+    
+    if(countDown==0) clearInterval(timer.current)
+    return () => {
+      clearInterval(timer.current);
+    };
+  }, [countDown]);
   return (
     <div className="c-app c-default-layout flex-row align-items-center">
       <CContainer className="login_container">
@@ -96,7 +127,11 @@ const Verify = props => {
                         <CButton
                           color="success"
                           type="submit"
-                          style={{ width: "100%", padding: 10,cursor:disable?'not-allowed':'pointer' }}
+                          style={{
+                            width: "100%",
+                            padding: 10,
+                            cursor: disable ? "not-allowed" : "pointer",
+                          }}
                           className="px-12"
                           disabled={disable}
                           onClick={handleOnVerify}
@@ -130,15 +165,17 @@ const Verify = props => {
                             backgroundColor: "rgba(100,100,100,.8)",
                             display: "flex",
                             alignItems: "center",
-                            justifyContent:'center'
+                            justifyContent: "center",
                           }}
                         >
-                         <ReloadOutlined style={{fontSize :50,color:'red'}}/>
+                          <ReloadOutlined
+                            style={{ fontSize: 50, color: "red" }}
+                          />
                         </div>
                       )}
                     </div>
                     <div>
-                      <h3 className="title">Scan QR Code</h3>
+                      <h3 className="title">Scan QR Code {countDown}</h3>
                     </div>
                   </CCardBody>
                 </CCard>
