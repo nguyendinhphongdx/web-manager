@@ -75,17 +75,6 @@ const Verify = props => {
     if (state.opt.length == 6) setDisable(false);
     else setDisable(true);
   }, [state]);
-  // const handleListener = useCallback(e => {
-  //   if (e.key === "Enter" && disable === false) {
-  //     handleOnVerify();
-  //   }
-  // },[disable]);
-  // useEffect(() => {
-  //   window.addEventListener("keypress", handleListener);
-  //   return function cleanupListener() {
-  //     window.removeEventListener("keypress", handleListener);
-  //   };
-  // }, []);
   useEffect(() => {
     timer.current = setInterval(() => {
       setCountDown(pre => pre - 1);
